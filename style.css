@@ -4,6 +4,7 @@ body{
 
 .container{
   width:500px; 
+  margin:auto;
 }
 
 .box-1{
