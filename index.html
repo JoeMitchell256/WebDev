@@ -10,7 +10,8 @@
         <h1>Visualizing Fourier Coefficients</h1> <!-- This is the actual 'Title' of the page for the website -->
         <p>This paragraph will explain to the users how to operate this website!</p> <!-- This Paragraph will explain how to use this website -->
         <!-- Form for User's Input -->
-        <form action="process.php" method="POST">
+        <?php require_once 'process.php' ?>
+        <form action="" method="POST">
           <div>
             <label>Pulse Function</label>
             <input type="text" name="pulsefunction">
@@ -25,3 +26,13 @@
     </div>
   </body>
 </html>
+
+<?php
+
+function pre_r( $array ){
+  echo '<pre>';
+  print_r($array);
+  echo '</pre>';
+}
+
+?>
