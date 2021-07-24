@@ -13,6 +13,23 @@
       
       <!-- Beginning of graph construction -->
       
+      
+      
+      if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
+      {
+        ctx.strokeStyle = '#ff0000';
+        ctx.moveTo(100,125);
+        ctx.lineTo(100+40,125);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+        <!-- Reset Line features -->
+        ctx.strokeStyle = black;
+        ctx.lineWidth = 1;  
+      }
+      
+      
+      
+      
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");  
       
@@ -47,17 +64,7 @@
       ctx.fillText("11pi/2",50+((450*3)/4)+900,140);
       ctx.fillText("12pi/2",50+1350,140);
       
-      if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,125);
-        ctx.lineTo(100+40,125);
-        ctx.lineWidth = 10;
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = black;
-        ctx.lineWidth = 1;  
-      }
+      
       
       <!-- End of X-axis creation -->
       <!-- Y-axis line creation -->
