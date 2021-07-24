@@ -376,23 +376,23 @@
         ctx.lineWidth = 1;  
       }
       
-      if(pulsefunction[1] === '1' && pulsefunction[2] === '1')
+      if(pulsefunction[2] === '1' && pulsefunction[3] === '1')
       {
         ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+(450/2),80);
-        ctx.lineTo(100+((450*3)/4),80);
+        ctx.moveTo(100+((450*3)/4),80);
+        ctx.lineTo(100+450,80);
         ctx.lineWidth = 10;
         
         
         <!-- Period 2 -->
         
-        ctx.moveTo(100+(450/2)+450,80);
-        ctx.lineTo(100+((450*3)/4)+450,80);
+        ctx.moveTo(100+((450*3)/4)+450,80);
+        ctx.lineTo(100+450+450,80);
         
         <!-- Period 3 -->
         
-        ctx.moveTo(100+(450/2)+450+450,80);
-        ctx.lineTo(100+((450*3)/4)+450+450,80);
+        ctx.moveTo(100+((450*3)/4)+450+450,80);
+        ctx.lineTo(100+450+450+450,80);
         
         ctx.stroke();
         <!-- Reset Line features -->
