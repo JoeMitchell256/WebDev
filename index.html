@@ -400,6 +400,59 @@
         ctx.lineWidth = 1;  
       }
       
+      <!-- Wrap Around from bit 4 to bit 1 -->
+      
+      if(pulsefunction[3] === '0' && pulsefunction[1] === '1')
+      {
+        ctx.strokeStyle = '#ff0000';
+        ctx.moveTo(100+450,125);
+        ctx.lineTo(100+450,80);
+        ctx.lineWidth = 10;
+        
+        
+        <!-- Period 2 -->
+        
+        ctx.moveTo(100+450+450,125);
+        ctx.lineTo(100+450+450,80);
+        
+        <!-- Period 3 -->
+        
+        ctx.moveTo(100+450+450+450,125);
+        ctx.lineTo(100+450+450+450,80);
+        
+        ctx.stroke();
+        <!-- Reset Line features -->
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;  
+      }
+      
+      if(pulsefunction[3] === '1' && pulsefunction[1] === '0')
+      {
+        ctx.strokeStyle = '#ff0000';
+        ctx.moveTo(100+450,80);
+        ctx.lineTo(100+450,125);
+        ctx.lineWidth = 10;
+        
+        
+        
+        <!-- Period 2 -->
+        
+        ctx.moveTo(100+450+450,80);
+        ctx.lineTo(100+450+450,125);
+        
+        <!-- Period 3 -->
+        
+        ctx.moveTo(100+450+450+450,80);
+        ctx.lineTo(100+450+450+450,125);
+        
+        ctx.stroke();
+        <!-- Reset Line features -->
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;  
+      }
+      
+      
+      
       <!-- X-axis line creation -->
       
       ctx.moveTo(50,125);
