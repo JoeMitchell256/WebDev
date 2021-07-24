@@ -14,6 +14,9 @@
       <!-- Beginning of graph construction -->
       
       
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");  
+      
       
       if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
       {
@@ -27,11 +30,6 @@
         ctx.lineWidth = 1;  
       }
       
-      
-      
-      
-      var c = document.getElementById("myCanvas");
-      var ctx = c.getContext("2d");  
       
       <!-- X-axis line creation -->
       
