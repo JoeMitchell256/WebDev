@@ -2,6 +2,9 @@ var pulse_function = window.prompt("Please enter a pulse function (4 values (0 o
 var n = window.prompt("Please enter a value of n: ");
 
 var c = document.getElementById("myCanvas");
+
+c.position(300,300);
+
 var ctx = c.getContext("2d");
 
 
