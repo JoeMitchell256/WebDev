@@ -17,11 +17,6 @@
       var ctx = c.getContext("2d");  
       
       <!-- X-axis line creation -->
-      <!-- Reset the line features -->
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      
       
       ctx.moveTo(50,125);
       ctx.lineTo(1400,125); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
@@ -55,7 +50,7 @@
       <!-- Now we need to define the lines required to plot th user's square wave. We need to consider transitions from 0 to 1 and 1 to 0 -->
       if(pulsefunction[0] === '0' && pulsefunction[1] === '1'){ <!-- If the first 2 values are 0 then 1 -->
         ctx.moveTo(100,125); <!-- This point is 0,0 -->
-        ctx.lineTo(100+(450/4),125);
+        ctx.lineTo(100+40,125);
         ctx.lineWidth = 10;
         ctx.strokeStyle = '#ff0000';
         ctx.stroke();
@@ -63,7 +58,6 @@
       <!-- Reset Line features -->
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 1;
-      ctx.stroke();
       
       <!-- End of X-axis creation -->
       <!-- Y-axis line creation -->
