@@ -18,6 +18,23 @@
       var ctx = c.getContext("2d");  
       
       
+      <!-- Any state transitions will require 3 lines, not 2. -->
+      
+      if(pulsefunction[0] === '0' && pulsefunction[1] === '0')
+      {
+        ctx.strokeStyle = '#ff0000';
+        ctx.moveTo(100,125);
+        ctx.lineTo(100+(450/4),125);
+        ctx.lineWidth = 10;
+        
+        ctx.moveTo(100,125);
+        ctx.lineTo(100+(450/2),125);
+        
+        ctx.stroke();
+        <!-- Reset Line features -->
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;  
+      }
       if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
       {
         ctx.strokeStyle = '#ff0000';
@@ -36,17 +53,7 @@
         ctx.strokeStyle = '#000000';
         ctx.lineWidth = 1;  
       }
-      if(pulsefunction[0] === '0' && pulsefunction[1] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,125);
-        ctx.lineTo(100+(450/4),125);
-        ctx.lineWidth = 10;
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
+      
       
       <!-- X-axis line creation -->
       
