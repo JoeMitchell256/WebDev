@@ -48,9 +48,10 @@
       ctx.fillText("12pi/2",50+1350,140);
       
       <!-- Now we need to define the lines required to plot th user's square wave. We need to consider transitions from 0 to 1 and 1 to 0 -->
-      if(pulsefunction[0] === '0' && pulsefunction[1] === '1'){ <!-- If the first 2 values are 0 then 1 -->
+      if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
+      {
         ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,125); <!-- This point is 0,0 -->
+        ctx.moveTo(100,125);
         ctx.lineTo(100+40,125);
         ctx.lineWidth = 10;
         ctx.stroke();
