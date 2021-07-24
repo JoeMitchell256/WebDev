@@ -40,6 +40,19 @@
       ctx.fillText("7pi/2",50+((450*3)/4)+450,140);
       ctx.fillText("8pi/2",50+900,140);
       
+      <!-- From 4pi to 6pi -->
+      
+      ctx.fillText("9pi/2",50+(450/4)+900,140);
+      ctx.fillText("10pi/2",50+(450/2)+900,140);
+      ctx.fillText("11pi/2",50+((450*3)/4)+900,140);
+      ctx.fillText("12pi/2",50+1350,140);
+      
+      <!-- Now we need to define the lines required to plot th user's square wave. We need to consider transitions from 0 to 1 and 1 to 0 -->
+      if(pulsefunction[0] === '0' && pulsefunction[1] === '1'){ <!-- If the first 2 values are 0 then 1 -->
+        ctx.moveTo(100,125); <!-- This point is 0,0 -->
+      }
+      
+      
       <!-- End of X-axis creation -->
       <!-- Y-axis line creation -->
       
