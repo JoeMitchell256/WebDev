@@ -71,7 +71,21 @@
         ctx.strokeStyle = '#000000';
         ctx.lineWidth = 1;  
       }
-      
+      if(pulsefunction[0] === '1' && pulsefunction[1] === '1')
+      {
+        ctx.strokeStyle = '#ff0000';
+        ctx.moveTo(100,80);
+        ctx.lineTo(100+(450/4),80);
+        ctx.lineWidth = 10;
+        
+        ctx.moveTo(100+(450/4),80);
+        ctx.lineTo(100+(450/2),80);
+        
+        ctx.stroke();
+        <!-- Reset Line features -->
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;  
+      }
       <!-- X-axis line creation -->
       
       ctx.moveTo(50,125);
