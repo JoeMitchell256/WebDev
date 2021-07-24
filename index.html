@@ -402,7 +402,7 @@
       
       <!-- Wrap Around from bit 4 to bit 1 -->
       
-      if(pulsefunction[3] === '0' && pulsefunction[1] === '1')
+      if(pulsefunction[3] === '0' && pulsefunction[0] === '1')
       {
         ctx.strokeStyle = '#ff0000';
         ctx.moveTo(100+450,125);
@@ -426,7 +426,7 @@
         ctx.lineWidth = 1;  
       }
       
-      if(pulsefunction[3] === '1' && pulsefunction[1] === '0')
+      if(pulsefunction[3] === '1' && pulsefunction[0] === '0')
       {
         ctx.strokeStyle = '#ff0000';
         ctx.moveTo(100+450,80);
