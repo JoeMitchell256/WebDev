@@ -4,14 +4,33 @@
     <title>Visualizing Fourier Coefficients</title> <!-- Title of our website in browser -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <canvas id="myCanvas" width="1500" height="250" style="border:1px solid #000000"></canvas>
-    <script> <!-- type="text/javascript" src="script.js" --> 
+    <script> <!-- type="text/javascript" src="script.js" -->
+      
+      <!-- Prompts for the user to choose their pulse function -->
+      
       var pulsefunction = window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
       var n = window.prompt("Please enter a value of n: ");
+      
+      <!-- Beginning of graph construction -->
+      
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");  
+      
+      <!-- X-axis line creation -->
+      
       ctx.moveTo(50,125);
       ctx.lineTo(1400,125);
       ctx.stroke();
+      
+      <!-- End of X-axis creation -->
+      <!-- Y-axis line creation -->
+      
+      ctx.moveTo(100,20);
+      ctx.lineTo(100,230);
+      ctx.stroke();
+      
+      <!-- End of Y-axis creation -->
+      
     </script>
   </head>
   <body>
