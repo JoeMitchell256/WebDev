@@ -5,3 +5,6 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 
+ctx.lineWidth = 5;
+ctx.strokeStyle = 'green';
+ctx.strokeRect(100, 200, 150, 100);
