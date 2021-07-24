@@ -19,6 +19,7 @@
       
       
       <!-- Any state transitions will require 3 lines, not 2. -->
+      <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
       
       if(pulsefunction[0] === '0' && pulsefunction[1] === '0')
       {
@@ -29,6 +30,23 @@
         
         ctx.moveTo(100,125);
         ctx.lineTo(100+(450/2),125);
+        
+        <!-- Second Period -->
+        
+        ctx.moveTo(100+450,125);
+        ctx.lineTo(100+(450/4)+450,125);
+        
+        ctx.moveTo(100+(450/4)+450,125);
+        ctx.lineTo(100+(450/2)+450,125);
+        
+        <!-- Third Period -->
+        
+        ctx.moveTo(100+450+450,125);
+        ctx.lineTo(100+(450/4)+450+450,125);
+        
+        ctx.moveTo(100+(450/4)+450+450,125);
+        ctx.lineTo(100+(450/2)+450+450,125);
+        
         
         ctx.stroke();
         <!-- Reset Line features -->
