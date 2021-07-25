@@ -31,24 +31,20 @@
       
       var p = 0;
       
+      var a_n = 0;
+      
+      var b_n = 0;
+      
       for(p=0; p<30; p++){
-        ft = 1/2; <!-- Each point starts with the a_0 term -->
+        ft = 1/4; <!-- Each point starts with the a_0 term -->
         <!-- This point should be the first point of the 5 term expansion -->
-        //for(z = 0; z<50; z++){
-        //Just try the first 4 terms for now
-        var a_1 = 0; // * (z+1)) * Math.cos((z+1)*(Math.PI/5)) )
-
-        //var k = ( Math.cos( (z+1) * Math.PI ) - 1);
-
-        //var m = - ((z+1) * Math.PI);
-
-        //var o = Math.sin((z+1)*Math.PI/5);
-
-        //var b_1 = (k/m)*o; //  *  Math.sin((z+1) * (Math.PI/5))
-
-        ft += (2/Math.PI) * Math.sin(1*(p+1)*Math.PI/5) + (2/(3*Math.PI)) * Math.sin(3*(p+1)*(Math.PI/5)) + (2/(5*Math.PI)) * Math.sin(5*(p+1)*(Math.PI/5));
-
-        //}
+        for(z = 0; z<5; z++){
+          a_n = ( Math.sin( (z+1) * 3*Math.PI / 2 ) / (-(z+1) * Math.PI) );
+          
+          b_n = ( Math.cos(2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI );
+          
+          ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/5) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/5) );
+        }
       
         y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
 
