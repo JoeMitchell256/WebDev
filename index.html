@@ -82,12 +82,12 @@
           <!-- The function used to determine the point's y position is y = -57.5x + 365 -->
           y_pos = -57.5*y + 365;
           
-          x_pos += (p+1)*(450/10);
+          x_pos = 100 + (p+1)*(450/10);
           
-          ctx.strokeStyle = '#ffff00';
+          //ctx.strokeStyle = '#ffff00';
           ctx.lineWidth = 3;
           
-          ctx.fillRect(x_pos,y_pos,1,1);
+          ctx.fillRect(x_pos,y_pos,3,3);
           
           ctx.stroke();
           
