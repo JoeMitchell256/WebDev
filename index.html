@@ -569,7 +569,7 @@
         var r = 0; <!-- Radians -->
         var z = 0;
         var y = 0; <!-- function output -->
-        var x_pos = 365; <!-- Point x position at 0 -->
+        var x_pos = 100; <!-- Point x position at 0 -->
         var y_pos = 365; <!-- Point y position at 0 --> 
         <!-- I want to loop from the first term all the way to the nth term, so check to see if n is z each time! -->
         
@@ -590,8 +590,15 @@
           <!-- Whatever y is, we need to place it on the y - axis we don't expect it to be greater than 1, but just in case we need to develop a scale -->
           <!-- The total range for the y-axis is 250 -> 480 midpoint is 365, so if y is 1/2 it would be (307.5 + 365) / 2 = 336.25, now we have a line! -->
           <!-- (1,307.5) (1/2,336.25) -->
+          <!-- The function used to determine the point's y position is y = -57.5x + 365 -->
+          y_pos = -57.5*y + 365;
           
+          x_pos = (p+1)*(450/10);
           
+          ctx.strokeStyle = '#ffff00';
+          ctx.lineWidth = 3;
+          
+          ctx.fillRect(x_pos,y_pos,1,1);
           
           y = 0;  
         }
