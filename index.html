@@ -559,9 +559,27 @@
       
       <!-- To start we will only be concerned about the User input = "0001" -->
       
+      var z = 0;
+      var y_pos = 365;
+      var x_pos = 145;
       
       
       
+      for(z = 0; z < n; z++){
+        y += ( -(1/(z*Math.PI)) * Math.sin( ((3*Math.PI)/2) * z) * Math.cos(z*(Math.PI/5)) )  - ( (1 - Math.cos( (3*Math.PI)/2) * z ) ) / (z * Math.PI) *  Math.sin(z * (Math.PI/5)) );
+      }
+      
+      
+      y_pos = -57.5*y + 365;
+      
+      ctx.strokeStyle = '#ffff00';
+      ctx.lineWidth = 3;
+
+      ctx.fillRect(x_pos,y_pos,1,1);
+
+      ctx.stroke();
+      
+      /*
       if(pulsefunction === "0001"){
         <!-- We know what the Fourier Series terms are and the n that is provided by the user -->
         <!-- We may need to represent the n entered by the user as a number we are using parseInt to do this -->
@@ -598,16 +616,18 @@
           <!-- The function used to determine the point's y position is y = -57.5x + 365 -->
           y_pos = -57.5*y + 365;
           
-          x_pos = (p+1)*(450/10);
+          x_pos += (p+1)*(450/10);
           
           ctx.strokeStyle = '#ffff00';
           ctx.lineWidth = 3;
           
           ctx.fillRect(x_pos,y_pos,1,1);
           
+          ctx.stroke();
+          
           y = 0;  
         }
-        
+        */
         
       }
       
