@@ -32,9 +32,9 @@
       <!-- This point should be the first point of the 5 term expansion -->
       for(z = 0; z<5; z++){
       
-        var a_1 = ( -(1/((z+1)*Math.PI)) * Math.sin( ((3*Math.PI)/2) * (z+1)) * Math.cos((z+1)*(Math.PI/5)) );
+        var a_1 = ( -(1/((z+1)*Math.PI)) * Math.sin( ((3*Math.PI)/2) * (z+1)) * Math.cos(1*(Math.PI/5)) );
 
-        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * (z+1) ) ) / ((z+1) * Math.PI) *  Math.sin((z+1) * (Math.PI/5)) ;
+        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * (z+1) ) ) / ((z+1) * Math.PI) *  Math.sin(1 * (Math.PI/5)) ;
 
         ft += a_1 + b_1;
 
