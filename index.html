@@ -18,14 +18,14 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");  
       
+      <!-- This is where the points must be drawn!!!  -->
+      <!-- This section of the program will plot the points for the Fourier Series! -->
+      <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
       
       var z = 0;
       var y_pos = 365;
       var x_pos = 145;
       
-      //ctx.strokeStyle = '#ffff00';
-      
-      //var ft = ( -(1/(1*Math.PI)) * Math.sin( ((3*Math.PI)/2) * 1) * Math.cos(z*(Math.PI/5)) )  - ( (1 - Math.cos( (3*Math.PI)/2) * 1 ) ) / (1 * Math.PI) *  Math.sin(1 * (Math.PI/5)) );
       
       if(pulsefunction === "0001"){
       
@@ -50,17 +50,18 @@
 
           y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
 
+          ctx.strokeStyle("#fff000");
+          
           ctx.lineWidth = 10;
 
           ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
 
           ctx.stroke();
 
-          //ft = 1/4; <!-- Must reset to a_0 -->
         }
         
       }
-      <!-- This is where the points must be drawn!!!  -->
+      
       
       
       
