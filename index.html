@@ -18,7 +18,7 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");  
       
-      /*
+      
       var z = 0;
       var y_pos = 365;
       var x_pos = 145;
@@ -27,75 +27,35 @@
       
       //var ft = ( -(1/(1*Math.PI)) * Math.sin( ((3*Math.PI)/2) * 1) * Math.cos(z*(Math.PI/5)) )  - ( (1 - Math.cos( (3*Math.PI)/2) * 1 ) ) / (1 * Math.PI) *  Math.sin(1 * (Math.PI/5)) );
       
-      var a_1 = ( -(1/(1*Math.PI)) * Math.sin( ((3*Math.PI)/2) * 1) * Math.cos(1*(Math.PI/5)) );
+      var ft = 1/4;
       
-      var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * 1 ) ) / (1 * Math.PI) *  Math.sin(1 * (Math.PI/5)) ;
+      <!-- This point should be the first point of the 5 term expansion -->
+      for(z = 0; z<5; z++){
       
-      var ft = a_1 + b_1;
-      
-      y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-                              <!-- I'd expect this to be close to 0 -->
-      ctx.lineWidth = 10;
+        var a_1 = ( -(1/(z*Math.PI)) * Math.sin( ((3*Math.PI)/2) * z) * Math.cos(z*(Math.PI/5)) );
 
-      ctx.fillRect(145,y_pos,3,3);
+        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * z ) ) / (z * Math.PI) *  Math.sin(z * (Math.PI/5)) ;
 
-      ctx.stroke();
-      */
+        ft += a_1 + b_1;
+
+        y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+                                <!-- I'd expect this to be close to 0 -->
+        ctx.lineWidth = 10;
+
+        ctx.fillRect(145,y_pos,3,3);
+
+        ctx.stroke();
+        
+      }
       
       
       <!-- This is where the points must be drawn!!!  -->
       
       
-      if(pulsefunction === "0001"){
-        <!-- We know what the Fourier Series terms are and the n that is provided by the user -->
-        <!-- We may need to represent the n entered by the user as a number we are using parseInt to do this -->
       
         
         
-        <!-- Temporary variable z will be used to represent the loop of all the terms -->
-        var p = 0; <!-- Index for looping -->
-        var r = 0; <!-- Radians -->
-        var z = 0;
-        var y = 0; <!-- function output -->
-        var x_pos = 100; <!-- Point x position at 0 -->
-        var y_pos = 365; <!-- Point y position at 0 --> 
-        <!-- I want to loop from the first term all the way to the nth term, so check to see if n is z each time! -->
-        
-        <!-- From the calculations a_0 = 1/4 -->
-        var a_0 = 1/4;
-        <!-- From the calculations a_n = -(1/(n*pi)) * sin(3*pi/2 * n)        *Remember its a_n * cos(n*t)  -->
-        
-        y += a_0; <!-- Start by adding the 0th term first (I don't think we want to double count) -->
-        
-        <!-- From the calculations b_n = -(1 - cos(3*pi/2 * n)) / (n * pi)   *Remember its b_n * sin(n*t) -->
-        
-        for(p = 0; p < 30; p++){
-          r = (p+1)*(Math.PI / 5); <!-- Radians in pi / 5 ths -->
-          for(z = 0; z < n; z++){
-            y += ( -(1/(z*Math.PI)) * Math.sin( ((3*Math.PI)/2) * z) * Math.cos(z*r) )  - ( ( (1 - Math.cos( (3*Math.PI)/2) * z ) ) / (z * Math.PI) *  Math.sin(z * r) );
-          }
-          <!-- This is th place to calculate the point location on the graph and reset output y -->  
-          <!-- At this point we have our f(t) of our Fourier Series, We just learned how to plot a "point" -->
-          <!-- Whatever y is, we need to place it on the y - axis we don't expect it to be greater than 1, but just in case we need to develop a scale -->
-          <!-- The total range for the y-axis is 250 -> 480 midpoint is 365, so if y is 1/2 it would be (307.5 + 365) / 2 = 336.25, now we have a line! -->
-          <!-- (1,307.5) (1/2,336.25) -->
-          <!-- The function used to determine the point's y position is y = -57.5x + 365 -->
-          y_pos = -57.5*y + 365;
-          
-          x_pos = 100 + (p+1)*(450/10);
-          
-          //ctx.strokeStyle = '#ffff00';
-          ctx.lineWidth = 3;
-          
-          ctx.fillRect(x_pos,y_pos,3,3);
-          
-          ctx.stroke();
-          
-          y = 0;  
-        }
-        
-        
-      }
+     
       
       
       
