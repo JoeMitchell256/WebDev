@@ -27,37 +27,39 @@
       
       //var ft = ( -(1/(1*Math.PI)) * Math.sin( ((3*Math.PI)/2) * 1) * Math.cos(z*(Math.PI/5)) )  - ( (1 - Math.cos( (3*Math.PI)/2) * 1 ) ) / (1 * Math.PI) *  Math.sin(1 * (Math.PI/5)) );
       
-      var ft = 1/4;
+      if(pulsefunction === "0001"){
       
-      var p = 0;
-      
-      var a_n = 0;
-      
-      var b_n = 0;
-      
-      for(p=0; p<30; p++){
-        ft = 1/4; <!-- Each point starts with the a_0 term -->
-        <!-- This point should be the first point of the 5 term expansion -->
-        for(z = 0; z<n; z++){
-          a_n = ( Math.sin( (z+1) * 3*Math.PI / 2 ) / (-(z+1) * Math.PI) );
-          
-          b_n = ( Math.cos(2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI );
-          
-          ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/5) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/5) );
+        var ft = 1/4;
+
+        var p = 0;
+
+        var a_n = 0;
+
+        var b_n = 0;
+
+        for(p=0; p<30; p++){
+          ft = 1/4; <!-- Each point starts with the a_0 term -->
+          <!-- This point should be the first point of the 5 term expansion -->
+          for(z = 0; z<n; z++){
+            a_n = ( Math.sin( (z+1) * 3*Math.PI / 2 ) / (-(z+1) * Math.PI) );
+
+            b_n = ( Math.cos(2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI );
+
+            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/5) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/5) );
+          }
+
+          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+          ctx.lineWidth = 10;
+
+          ctx.fillRect(100 + 45*(p+1),y_pos,3,3);
+
+          ctx.stroke();
+
+          //ft = 1/4; <!-- Must reset to a_0 -->
         }
-      
-        y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-        ctx.lineWidth = 10;
-
-        ctx.fillRect(100 + 45*(p+1),y_pos,3,3);
-
-        ctx.stroke();
         
-        //ft = 1/4; <!-- Must reset to a_0 -->
       }
-        
-      
       <!-- This is where the points must be drawn!!!  -->
       
       
