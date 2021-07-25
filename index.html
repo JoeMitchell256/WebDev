@@ -29,25 +29,30 @@
       
       var ft = 1/4;
       
-      <!-- This point should be the first point of the 5 term expansion -->
-      for(z = 0; z<5; z++){
+      var p = 0;
       
-        var a_1 = ( -(1/((z+1)*Math.PI)) * Math.sin( ((3*Math.PI)/2) * (z+1)) * Math.cos(1*(Math.PI/5)) );
+      for(p=0; p<30; p++){
+        <!-- This point should be the first point of the 5 term expansion -->
+        for(z = 0; z<5; z++){
 
-        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * (z+1) ) ) / ((z+1) * Math.PI) *  Math.sin(1 * (Math.PI/5)) ;
+          var a_1 = ( -(1/((z+1)*Math.PI)) * Math.sin( ((3*Math.PI)/2) * (z+1)) * Math.cos((p+1)*(Math.PI/5)) );
 
-        ft += a_1 + b_1;
+          var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * (z+1) ) ) / ((z+1) * Math.PI) *  Math.sin((p+1) * (Math.PI/5)) ;
 
+          ft += a_1 + b_1;
+
+        }
+      
+        y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+                                  <!-- I'd expect this to be close to 0 -->
+
+        ctx.lineWidth = 10;
+
+        ctx.fillRect(100 + 45*(p+1),y_pos,3,3);
+
+        ctx.stroke();
       }
-      
-      y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-                                <!-- I'd expect this to be close to 0 -->
-      
-      ctx.lineWidth = 10;
-
-      ctx.fillRect(145,y_pos,3,3);
-
-      ctx.stroke();
+        
       
       <!-- This is where the points must be drawn!!!  -->
       
