@@ -580,10 +580,11 @@
         <!-- From the calculations a_0 = 1/4 -->
         var a_0 = 1/4;
         <!-- From the calculations a_n = -(1/(n*pi)) * sin(3*pi/2 * n)        *Remember its a_n * cos(n*t)  -->
-        /*
+        
         y += a_0; <!-- Start by adding the 0th term first (I don't think we want to double count) -->
         
         <!-- From the calculations b_n = -(1 - cos(3*pi/2 * n)) / (n * pi)   *Remember its b_n * sin(n*t) -->
+        /*
         for(p = 0; p < 30; p++){
           r = (p+1)*(Math.PI / 5); <!-- Radians in pi / 5 ths -->
           for(z = 0; z < n; z++){
