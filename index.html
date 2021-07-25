@@ -569,6 +569,8 @@
         var r = 0; <!-- Radians -->
         var z = 0;
         var y = 0; <!-- function output -->
+        var x_pos = 365; <!-- Point x position at 0 -->
+        var y_pos = 365; <!-- Point y position at 0 --> 
         <!-- I want to loop from the first term all the way to the nth term, so check to see if n is z each time! -->
         
         <!-- From the calculations a_0 = 1/4 -->
@@ -585,8 +587,12 @@
           }
           <!-- This is th place to calculate the point location on the graph and reset output y -->  
           <!-- At this point we have our f(t) of our Fourier Series, We just learned how to plot a "point" -->
-            
-            
+          <!-- Whatever y is, we need to place it on the y - axis we don't expect it to be greater than 1, but just in case we need to develop a scale -->
+          <!-- The total range for the y-axis is 250 -> 480 midpoint is 365, so if y is 1/2 it would be (307.5 + 365) / 2 = 336.25, now we have a line! -->
+          <!-- (1,307.5) (1/2,336.25) -->
+          
+          
+          
           y = 0;  
         }
       }
