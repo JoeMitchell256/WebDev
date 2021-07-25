@@ -32,14 +32,12 @@
       <!-- This point should be the first point of the 5 term expansion -->
       for(z = 0; z<5; z++){
       
-        var a_1 = ( -(1/(z*Math.PI)) * Math.sin( ((3*Math.PI)/2) * z) * Math.cos(z*(Math.PI/5)) );
+        var a_1 = ( -(1/((z+1)*Math.PI)) * Math.sin( ((3*Math.PI)/2) * (z+1)) * Math.cos((z+1)*(Math.PI/5)) );
 
-        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * z ) ) / (z * Math.PI) *  Math.sin(z * (Math.PI/5)) ;
+        var b_1 = - ( (1 - Math.cos( (3*Math.PI)/2) * (z+1) ) ) / ((z+1) * Math.PI) *  Math.sin((z+1) * (Math.PI/5)) ;
 
         ft += a_1 + b_1;
 
-        
-        
       }
       
       y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
