@@ -1,6 +1,6 @@
 body{
   font-family: "Courier New", Courier;
-  background-image: url("background4.jpg");
+  /*background-image: url("background4.jpg");*/
 }
 
 .container{
@@ -9,7 +9,7 @@ body{
 }
 
 #myCanvas{
-  background-image: url(WhiteBackground.jpg);
+  background-image: url("WhiteBackground.jpg");
 }
 
 .box-1{
