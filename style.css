@@ -8,8 +8,15 @@ body{
   margin:auto;
 }
 
+#back{
+  background-color:blue;
+  position:absolute;
+  z-index:1;
+}
+
 #myCanvas{
-  /* background-image: url("WhiteBackground.jpeg"); */
+  position:absolute;
+  z-index:1;
 }
 
 .box-1{
