@@ -9,7 +9,7 @@ body{
 }
 
 #myCanvas{
-  background-image: url("WhiteBackground.jpg");
+  background-image: url(WhiteBackground.jpg);
 }
 
 .box-1{
