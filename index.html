@@ -428,9 +428,9 @@
           <!-- This point should be the first point of the 5 term expansion -->
           for(z = 0; z<n; z++){
             
-            a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * Math.PI ) ) / ( (z+1) * Math.PI )  );
+            a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * Math.PI ) ) / ( -1 * (z+1) * Math.PI )  );
+            b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
 
             ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
             
