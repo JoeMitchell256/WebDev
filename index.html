@@ -18,13 +18,13 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       
-      
-      var background = new Image();
-      background.src = "WhiteBackground.jpg";
-      
-      background.onload = function(){
-        ctx.drawImage(background,0,0); 
+      var img = new Image();
+      img.src = "./WhiteBackground.jpg";
+      img.onload = () => {
+        ctx.drawImage(img,0,0);
       }
+      //ctx.drawImage("WhiteBackground.jpg",0,0);
+      
       
       <!-- This is where the points must be drawn!!!  -->
       <!-- This section of the program will plot the points for the Fourier Series! -->
