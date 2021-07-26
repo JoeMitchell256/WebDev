@@ -161,7 +161,7 @@
         
       }
       
-      /*
+      
       if(pulsefunction === "0101"){
       
         var p = 0;
@@ -174,11 +174,16 @@
           ft = 1/2; <!-- Each point starts with the a_0 term -->
           <!-- This point should be the first point of the 5 term expansion -->
           for(z = 0; z<n; z++){
+            /*
+            var a_n_1 = 
+            
             a_n = ( ( (Math.sin( (z+1) * Math.PI)  -  Math.sin( (z+1) * Math.PI/2) ) / ((z+1) * Math.PI) ) ) + ( ( (Math.sin( (z+1) * 2*Math.PI)  -  Math.sin( (z+1) * 3*Math.PI/2) ) / ((z+1) * Math.PI/) ) );
 
             b_n = ( ( Math.cos( Math.PI * (z+1) ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( - (z+1) * Math.PI ) ) + ( ( Math.cos( 2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI ) );
 
             ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+            
+            */
           }
 
           y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
@@ -194,7 +199,7 @@
         }
         
       }
-      */
+      
       
       <!-- Any state transitions will require 3 lines, not 2. -->
       <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
