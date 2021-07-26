@@ -18,6 +18,13 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");  
       
+      var background = new Image();
+      background.src = "background4.jpg";
+      background.onload = function(){
+        ctx.drawImage(background,0,0); 
+      }
+      
+      
       <!-- This is where the points must be drawn!!!  -->
       <!-- This section of the program will plot the points for the Fourier Series! -->
       <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
