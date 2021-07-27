@@ -23,13 +23,6 @@
       var ctx = c.getContext("2d");
         
       
-      function clearCanvas(){
-        c = document.getElementById("myCanvas");
-        ctx = c.getContext("2d"); // Try reinitializing the canvas? 
-        ctx.clearRect(0,0,1420,500); //This should clear the canvas after each button press!
-        ctx.beginPath(); //Apparently we need this line???
-      }
-      
       
       function getInputValue(){
         
@@ -1134,7 +1127,6 @@
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
         <button type="button" onclick="getInputValue();">Submit</button>
-        <button type="button" onclick="clearCanvas();">Clear</button>
       </div>
     </div>
   </body>
