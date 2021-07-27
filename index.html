@@ -3,14 +3,17 @@
   <head>
     <title>Visualizing Fourier Coefficients</title> <!-- Title of our website in browser -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <input type="submit" value="submit" onclick="return foo();"/>
     <canvas id="back" width="1420" height="500" style="border:1px solid #000000"></canvas>
     <canvas id="myCanvas" width="1420" height="500" style="border:1px solid #000000"></canvas>
     <script> <!-- type="text/javascript" src="script.js" -->
       
       <!-- Prompts for the user to choose their pulse function -->
       
-      var pulsefunction = window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
-      var n = parseInt(window.prompt("Please enter a value of n: "));
+      var pulsefunction; 
+      //= window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
+      var n; 
+      //= parseInt(window.prompt("Please enter a value of n: "));
       
       
       <!-- Beginning of graph construction -->
@@ -56,15 +59,12 @@
       <!-- Submission button end -->
       
       <!-- Get the input of the two textboxes when submit button is pressed -->
-      /*
-      function clickHandler(event){
-        pulsefunction = document.getElementById("pulsefunctionbox");
-        n = document.getElementById("nbox");
+      
+      function foo(){
+        pulsefunction = getElementId("pulsefunctionbox");
+        n = getElementId("nbox");
       }
       
-      x = document.querySelector('.x');
-      x.addEventListener('click',clickHandler);
-      */
       <!-- End of input reading -->
       
       
