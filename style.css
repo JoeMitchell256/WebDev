@@ -4,7 +4,7 @@ body{
 }
 
 #back{
-  background-color:blue;
+  background-color:white;
   position:absolute;
   z-index:1;
 }
