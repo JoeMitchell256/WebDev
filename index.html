@@ -68,16 +68,16 @@
         n = document.getElementById("nbox").value;
       */
       
-      var c = document.getElementById("myCanvas");
-      var ctx = c.getContext("2d");
+      //var c = document.getElementById("myCanvas");
+      //var ctx = c.getContext("2d");
         
       
       function clearCanvas(){
-        c = document.getElementById("myCanvas");
-        ctx = c.getContext("2d"); // Try reinitializing the canvas? 
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d"); // Try reinitializing the canvas? 
         ctx.clearRect(0,0,c.width,c.height); //This should clear the canvas after each button press!
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
+        //ctx.lineWidth = 1;
+        //ctx.strokeStyle = '#000000';
       }
       
       
@@ -95,8 +95,8 @@
 
 
 
-        
-
+        var ctx = c.getContext("2d");
+        var c = document.getElementById("myCanvas");
 
         
 
