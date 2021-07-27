@@ -9,8 +9,8 @@
       
       <!-- Prompts for the user to choose their pulse function -->
       
-      var pulsefunction = window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
-      var n = parseInt(window.prompt("Please enter a value of n: "));
+      //var pulsefunction = window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
+      //var n = parseInt(window.prompt("Please enter a value of n: "));
       
       
       <!-- Beginning of graph construction -->
@@ -56,13 +56,18 @@
       <!-- Submission button end -->
       
       <!-- Get the input of the two textboxes when submit button is pressed -->
-      /*
-      function foo(){
-        pulsefunction = getElementId("pulsefunctionbox");
-        n = getElementId("nbox");
-        alert("Submit Button Clicked!");
-      }
-      */
+      var pulsefunction;
+      var n;
+      function submit(){
+        pulsefunction = document.getElementById("pulsefunctionbox").value;
+        n = document.getElementById("nbox").value;
+        
+        
+        <!-- Place everything in here? -->
+        
+        
+      
+      
       <!-- End of input reading -->
       
       
@@ -1146,7 +1151,7 @@
       
       <!-- End of Y-axis creation -->
       
-      
+      }
       
     </script>
   </head>
