@@ -19,16 +19,14 @@
       
       
       
-      //var c = document.getElementById("myCanvas");
-      //var ctx = c.getContext("2d");
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
         
       
       function clearCanvas(){
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d"); // Try reinitializing the canvas? 
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d"); // Try reinitializing the canvas? 
         ctx.clearRect(0,0,1420,500); //This should clear the canvas after each button press!
-        //ctx.lineWidth = 1;
-        //ctx.strokeStyle = '#000000';
       }
       
       
@@ -47,8 +45,8 @@
 
 
         
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d");
         
 
 
