@@ -20,6 +20,7 @@
       var pulsefunctionbox = document.createElement("INPUT");
       pulsefunctionbox.setAttribute("type", "text");
       
+      
       pulsefunctionbox.style.position = 'absolute';
       pulsefunctionbox.style.left = '100px';
       pulsefunctionbox.style.top = '700px';
@@ -27,6 +28,19 @@
       
       document.body.appendChild(pulsefunctionbox);
       
+      
+      var nbox = document.createElement("INPUT");
+      nbox.setAttribute("type", "text");
+      
+      
+      nbox.style.position = 'absolute';
+      nbox.style.left = '100px';
+      nbox.style.top = '750px';
+      nbox.placeholder = 'Enter Pulsefunction here';
+      
+      document.body.appendChild(nbox);
+      
+      <!-- End of developing textboxes -->
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
