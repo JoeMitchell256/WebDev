@@ -73,6 +73,8 @@
         
       
       function clearCanvas(){
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d"); // Try reinitializing the canvas? 
         ctx.clearRect(0,0,c.width,c.height); //This should clear the canvas after each button press!
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
