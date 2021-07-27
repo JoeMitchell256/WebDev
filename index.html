@@ -67,6 +67,9 @@
         pulsefunction = document.getElementById("pulsefunctionbox").value;
         n = document.getElementById("nbox").value;
       */
+      
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
         
       function getInputValue(){
         
@@ -82,8 +85,7 @@
 
 
 
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+        
 
 
         ctx.clearRect(0,0,c.width,c.height); //This should clear the canvas after each button press!
