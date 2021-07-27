@@ -71,6 +71,12 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
         
+      
+      function clearCanvas(){
+        ctx.clearRect(0,0,c.width,c.height); //This should clear the canvas after each button press!
+      }
+      
+      
       function getInputValue(){
         
         var pulsefunction = document.getElementById("pulse").value;
@@ -88,7 +94,7 @@
         
 
 
-        ctx.clearRect(0,0,c.width,c.height); //This should clear the canvas after each button press!
+        
 
 
         <!-- This is where the points must be drawn!!!  -->
@@ -1175,6 +1181,7 @@
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
         <button type="button" onclick="getInputValue();">Submit</button>
+        <button type="button" onclick="clearCanvas();">Clear</button>
       </div>
     </div>
   </body>
