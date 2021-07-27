@@ -17,8 +17,10 @@
       
       <!-- Develop textboxes for user input -->
       
+      /*
+      
       var pulsefunctionbox = document.createElement("INPUT");
-      pulsefunctionbox.setAttribute("pulsefunctionbox", "text");
+      pulsefunctionbox.setAttribute("type", "text");
       
       
       pulsefunctionbox.style.position = 'absolute';
@@ -30,7 +32,7 @@
       
       
       var nbox = document.createElement("INPUT");
-      nbox.setAttribute("nbox", "text");
+      nbox.setAttribute("type", "text");
       
       
       nbox.style.position = 'absolute';
@@ -45,7 +47,7 @@
       <!-- Develop the submit button -->
       
       var x = document.createElement("INPUT");
-      x.setAttribute("submit","submit");
+      x.setAttribute("type","submit");
       
       x.style.position = 'absolute';
       x.style.left = '100px';
@@ -53,1103 +55,1111 @@
       
       document.body.appendChild(x);
       
+      */
+      
       <!-- Submission button end -->
       
       <!-- Get the input of the two textboxes when submit button is pressed -->
+      /*
       var pulsefunction;
       var n;
       function submit(){
         pulsefunction = document.getElementById("pulsefunctionbox").value;
         n = document.getElementById("nbox").value;
+      */
         
+      function getInputValue(){
         
+        var pulsefunction = document.getElementById("pulse").value;
+        var n = document.getElementById("n").value;
+      
         <!-- Place everything in here? -->
         
         
       
       
-      <!-- End of input reading -->
-      
-      
-      
-      var c = document.getElementById("myCanvas");
-      var ctx = c.getContext("2d");
-      
-      
-      
-      
-      
-      <!-- This is where the points must be drawn!!!  -->
-      <!-- This section of the program will plot the points for the Fourier Series! -->
-      <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
-      
-      var z = 0;
-      var y_pos = 365;
-      var x_pos = 145;
-      
-      var ft = 1/4;
-      
-      if(pulsefunction === "0001"){
-        var p = 0;
+        <!-- End of input reading -->
 
-        var a_n = 0;
 
-        var b_n = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            a_n = ( Math.sin( (z+1) * 3*Math.PI / 2 ) / (-(z+1) * Math.PI) );
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
 
-            b_n = ( Math.cos(2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI );
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+
+
+        <!-- This is where the points must be drawn!!!  -->
+        <!-- This section of the program will plot the points for the Fourier Series! -->
+        <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
+
+        var z = 0;
+        var y_pos = 365;
+        var x_pos = 145;
+
+        var ft = 1/4;
+
+        if(pulsefunction === "0001"){
+          var p = 0;
+
+          var a_n = 0;
+
+          var b_n = 0;
+
+          for(p=0; p<1350; p++){
+            ft = 1/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+              a_n = ( Math.sin( (z+1) * 3*Math.PI / 2 ) / (-(z+1) * Math.PI) );
+
+              b_n = ( Math.cos(2*Math.PI * (z+1) ) - Math.cos( (z+1) * 3*Math.PI/2 ) ) / ( - (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      
-      
-      if(pulsefunction === "0010"){
-      
-        var p = 0;
 
-        var a_n = 0;
 
-        var b_n = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            a_n = ( (Math.sin( (z+1) * 3*Math.PI / 2)  -  Math.sin( (z+1) * Math.PI) ) / ((z+1) * Math.PI) );
+        if(pulsefunction === "0010"){
 
-            b_n = ( Math.cos( (3*Math.PI/2) * (z+1) ) - Math.cos( (z+1) * Math.PI ) ) / ( - (z+1) * Math.PI );
+          var p = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+          var a_n = 0;
+
+          var b_n = 0;
+
+          for(p=0; p<1350; p++){
+            ft = 1/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+              a_n = ( (Math.sin( (z+1) * 3*Math.PI / 2)  -  Math.sin( (z+1) * Math.PI) ) / ((z+1) * Math.PI) );
+
+              b_n = ( Math.cos( (3*Math.PI/2) * (z+1) ) - Math.cos( (z+1) * Math.PI ) ) / ( - (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-        
-      if(pulsefunction === "0011"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "0011"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            a_n = ( (Math.sin( (z+1) * 2*Math.PI)  -  Math.sin( (z+1) * Math.PI) ) / ((z+1) * Math.PI) );
+          var a_n = 0;
 
-            b_n = ( Math.cos( 2*Math.PI * (z+1) ) - Math.cos( (z+1) * Math.PI ) ) / ( - (z+1) * Math.PI );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+              a_n = ( (Math.sin( (z+1) * 2*Math.PI)  -  Math.sin( (z+1) * Math.PI) ) / ((z+1) * Math.PI) );
+
+              b_n = ( Math.cos( 2*Math.PI * (z+1) ) - Math.cos( (z+1) * Math.PI ) ) / ( - (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "0100"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "0100"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            a_n = ( (Math.sin( (z+1) * Math.PI)  -  Math.sin( (z+1) * Math.PI/2) ) / ((z+1) * Math.PI) );
+          var a_n = 0;
 
-            b_n = ( Math.cos( Math.PI * (z+1) ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( - (z+1) * Math.PI );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+          for(p=0; p<1350; p++){
+            ft = 1/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+              a_n = ( (Math.sin( (z+1) * Math.PI)  -  Math.sin( (z+1) * Math.PI/2) ) / ((z+1) * Math.PI) );
+
+              b_n = ( Math.cos( Math.PI * (z+1) ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( - (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      
-      if(pulsefunction === "0101"){
-      
-        var p = 0;
 
-        var a_n = 0;
 
-        var b_n = 0;
+        if(pulsefunction === "0101"){
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            var a_n_1 = ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
-            var a_n_2 = ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI );
-            
-            var b_n_1 = ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
-            var b_n_2 = ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
-            
-            a_n = a_n_1 + a_n_2;
+          var p = 0;
 
-            b_n = b_n_1 + b_n_2;
+          var a_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
-            
+          var b_n = 0;
+
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              var a_n_1 = ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+              var a_n_2 = ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+
+              var b_n_1 = ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+              var b_n_2 = ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+
+              a_n = a_n_1 + a_n_2;
+
+              b_n = b_n_1 + b_n_2;
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      
-      if(pulsefunction === "0110"){
-      
-        var p = 0;
 
-        var a_n = 0;
 
-        var b_n = 0;
+        if(pulsefunction === "0110"){
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+          var p = 0;
 
-            b_n = ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+          var a_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          var b_n = 0;
+
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+
+              b_n = ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "0111"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "0111"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 3/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+          var a_n = 0;
 
-            b_n = ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 3/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * Math.PI/2 ) ) / ( (z+1) * Math.PI );
+
+              b_n = ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1000"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1000"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI );
+          var a_n = 0;
 
-            b_n = ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 1/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI );
+
+              b_n = ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1001"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1001"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1010"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1010"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * Math.PI ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * Math.PI ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * Math.PI ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * Math.PI ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1011"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1011"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 3/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * Math.PI ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * Math.PI ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 3/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * Math.PI ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * Math.PI ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1100"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1100"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1/2; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 1/2; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1101"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1101"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 3/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 3/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  ) + (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 3 * Math.PI/2 ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  ) + (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1110"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1110"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 3/4; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 3/4; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * 3 * Math.PI/2 ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * 3 * Math.PI/2 ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
-
-          ctx.strokeStyle = '#ffff00';
-          
-          ctx.lineWidth = 10;
-
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
-
-          ctx.stroke();
-
         }
-        
-      }
-      
-      if(pulsefunction === "1111"){
-      
-        var p = 0;
 
-        var a_n = 0;
+        if(pulsefunction === "1111"){
 
-        var b_n = 0;
+          var p = 0;
 
-        for(p=0; p<1350; p++){
-          ft = 1; <!-- Each point starts with the a_0 term -->
-          <!-- This point should be the first point of the 5 term expansion -->
-          for(z = 0; z<n; z++){
-            
-            a_n = (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+          var a_n = 0;
 
-            b_n = (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+          var b_n = 0;
 
-            ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
-            
+          for(p=0; p<1350; p++){
+            ft = 1; <!-- Each point starts with the a_0 term -->
+            <!-- This point should be the first point of the 5 term expansion -->
+            for(z = 0; z<n; z++){
+
+              a_n = (  ( Math.sin( (z+1) * 2 * Math.PI ) - Math.sin( (z+1) * 0 ) ) / ( (z+1) * Math.PI )  );
+
+              b_n = (  ( Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 0 ) ) / ( -1 * (z+1) * Math.PI )  );
+
+              ft += a_n * Math.cos((z+1) * (p+1) * (Math.PI/225) ) + b_n * Math.sin( (z+1) * (p+1) * (Math.PI/225) );
+
+            }
+
+            y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+
+            ctx.strokeStyle = '#ffff00';
+
+            ctx.lineWidth = 10;
+
+            ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+
+            ctx.stroke();
+
           }
 
-          y_pos = -57.5*ft + 365; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
+        }
 
-          ctx.strokeStyle = '#ffff00';
-          
+        <!-- Any state transitions will require 3 lines, not 2. -->
+        <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
+
+        if(pulsefunction[0] === '0' && pulsefunction[1] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100,125);
+          ctx.lineTo(100+(450/4),125);
           ctx.lineWidth = 10;
 
-          ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
+          ctx.moveTo(100,125);
+          ctx.lineTo(100+(450/2),125);
+
+          <!-- Second Period -->
+
+          ctx.moveTo(100+450,125);
+          ctx.lineTo(100+(450/4)+450,125);
+
+          ctx.moveTo(100+(450/4)+450,125);
+          ctx.lineTo(100+(450/2)+450,125);
+
+          <!-- Third Period -->
+
+          ctx.moveTo(100+450+450,125);
+          ctx.lineTo(100+(450/4)+450+450,125);
+
+          ctx.moveTo(100+(450/4)+450+450,125);
+          ctx.lineTo(100+(450/2)+450+450,125);
+
 
           ctx.stroke();
-
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
         }
-        
-      }
-      
-      <!-- Any state transitions will require 3 lines, not 2. -->
-      <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
-      
-      if(pulsefunction[0] === '0' && pulsefunction[1] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,125);
-        ctx.lineTo(100+(450/4),125);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100,125);
-        ctx.lineTo(100+(450/2),125);
-        
-        <!-- Second Period -->
-        
-        ctx.moveTo(100+450,125);
-        ctx.lineTo(100+(450/4)+450,125);
-        
-        ctx.moveTo(100+(450/4)+450,125);
-        ctx.lineTo(100+(450/2)+450,125);
-        
-        <!-- Third Period -->
-        
-        ctx.moveTo(100+450+450,125);
-        ctx.lineTo(100+(450/4)+450+450,125);
-        
-        ctx.moveTo(100+(450/4)+450+450,125);
-        ctx.lineTo(100+(450/2)+450+450,125);
-        
-        
+        if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100,125);
+          ctx.lineTo(100+(450/4),125);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+(450/4),125);
+          ctx.lineTo(100+(450/4),80);
+
+          ctx.moveTo(100+(450/4),80);
+          ctx.lineTo(100+(450/2),80);
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+450,125);
+          ctx.lineTo(100+(450/4)+450,125);
+
+          ctx.moveTo(100+(450/4)+450,125);
+          ctx.lineTo(100+(450/4)+450,80);
+
+          ctx.moveTo(100+(450/4)+450,80);
+          ctx.lineTo(100+(450/2)+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+450+450,125);
+          ctx.lineTo(100+(450/4)+450+450,125);
+
+          ctx.moveTo(100+(450/4)+450+450,125);
+          ctx.lineTo(100+(450/4)+450+450,80);
+
+          ctx.moveTo(100+(450/4)+450+450,80);
+          ctx.lineTo(100+(450/2)+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+        if(pulsefunction[0] === '1' && pulsefunction[1] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100,80);
+          ctx.lineTo(100+(450/4),80);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+(450/4),80);
+          ctx.lineTo(100+(450/4),125);
+
+          ctx.moveTo(100+(450/4),125);
+          ctx.lineTo(100+(450/2),125);
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+450,80);
+          ctx.lineTo(100+(450/4)+450,80);
+
+          ctx.moveTo(100+(450/4)+450,80);
+          ctx.lineTo(100+(450/4)+450,125);
+
+          ctx.moveTo(100+(450/4)+450,125);
+          ctx.lineTo(100+(450/2)+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+450+450,80);
+          ctx.lineTo(100+(450/4)+450+450,80);
+
+          ctx.moveTo(100+(450/4)+450+450,80);
+          ctx.lineTo(100+(450/4)+450+450,125);
+
+          ctx.moveTo(100+(450/4)+450+450,125);
+          ctx.lineTo(100+(450/2)+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+        if(pulsefunction[0] === '1' && pulsefunction[1] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100,80);
+          ctx.lineTo(100+(450/4),80);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+(450/4),80);
+          ctx.lineTo(100+(450/2),80);
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+450,80);
+          ctx.lineTo(100+(450/4)+450,80);
+
+          ctx.moveTo(100+(450/4)+450,80);
+          ctx.lineTo(100+(450/2)+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+450+450,80);
+          ctx.lineTo(100+(450/4)+450+450,80);
+
+          ctx.moveTo(100+(450/4)+450+450,80);
+          ctx.lineTo(100+(450/2)+450+450,80);
+
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+
+
+        <!-- Now we go from pi to 3pi/2 -->
+
+        if(pulsefunction[1] === '0' && pulsefunction[2] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+(450/2),125);
+          ctx.lineTo(100+((450*3)/4),125);
+          ctx.lineWidth = 10;
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+(450/2)+450,125);
+          ctx.lineTo(100+((450*3)/4)+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+(450/2)+450+450,125);
+          ctx.lineTo(100+((450*3)/4)+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[1] === '0' && pulsefunction[2] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+(450/2),125);
+          ctx.lineTo(100+(450/2),80);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+(450/2),80);
+          ctx.lineTo(100+((450*3)/4),80);
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+(450/2)+450,125);
+          ctx.lineTo(100+(450/2)+450,80);
+
+          ctx.moveTo(100+(450/2)+450,80);
+          ctx.lineTo(100+((450*3)/4)+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+(450/2)+450+450,125);
+          ctx.lineTo(100+(450/2)+450+450,80);
+
+          ctx.moveTo(100+(450/2)+450+450,80);
+          ctx.lineTo(100+((450*3)/4)+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[1] === '1' && pulsefunction[2] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+(450/2),80);
+          ctx.lineTo(100+(450/2),125);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+(450/2),125);
+          ctx.lineTo(100+((450*3)/4),125);
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+(450/2)+450,80);
+          ctx.lineTo(100+(450/2)+450,125);
+
+          ctx.moveTo(100+(450/2)+450,125);
+          ctx.lineTo(100+((450*3)/4)+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+(450/2)+450+450,80);
+          ctx.lineTo(100+(450/2)+450+450,125);
+
+          ctx.moveTo(100+(450/2)+450+450,125);
+          ctx.lineTo(100+((450*3)/4)+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[1] === '1' && pulsefunction[2] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+(450/2),80);
+          ctx.lineTo(100+((450*3)/4),80);
+          ctx.lineWidth = 10;
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+(450/2)+450,80);
+          ctx.lineTo(100+((450*3)/4)+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+(450/2)+450+450,80);
+          ctx.lineTo(100+((450*3)/4)+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        <!-- 0 to 2pi -->
+
+        if(pulsefunction[2] === '0' && pulsefunction[3] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+((450*3)/4),125);
+          ctx.lineTo(100+450,125);
+          ctx.lineWidth = 10;
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+((450*3)/4)+450,125);
+          ctx.lineTo(100+450+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+((450*3)/4)+450+450,125);
+          ctx.lineTo(100+450+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[2] === '0' && pulsefunction[3] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+((450*3)/4),125);
+          ctx.lineTo(100+((450*3)/4),80);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+((450*3)/4),80);
+          ctx.lineTo(100+450,80);
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+((450*3)/4)+450,125);
+          ctx.lineTo(100+((450*3)/4)+450,80);
+
+          ctx.moveTo(100+((450*3)/4)+450,80);
+          ctx.lineTo(100+450+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+((450*3)/4)+450+450,125);
+          ctx.lineTo(100+((450*3)/4)+450+450,80);
+
+          ctx.moveTo(100+((450*3)/4)+450+450,80);
+          ctx.lineTo(100+450+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[2] === '1' && pulsefunction[3] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+((450*3)/4),80);
+          ctx.lineTo(100+((450*3)/4),125);
+          ctx.lineWidth = 10;
+
+          ctx.moveTo(100+((450*3)/4),125);
+          ctx.lineTo(100+450,125);
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+((450*3)/4)+450,80);
+          ctx.lineTo(100+((450*3)/4)+450,125);
+
+          ctx.moveTo(100+((450*3)/4)+450,125);
+          ctx.lineTo(100+450+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+((450*3)/4)+450+450,80);
+          ctx.lineTo(100+((450*3)/4)+450+450,125);
+
+          ctx.moveTo(100+((450*3)/4)+450+450,125);
+          ctx.lineTo(100+450+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[2] === '1' && pulsefunction[3] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+((450*3)/4),80);
+          ctx.lineTo(100+450,80);
+          ctx.lineWidth = 10;
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+((450*3)/4)+450,80);
+          ctx.lineTo(100+450+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+((450*3)/4)+450+450,80);
+          ctx.lineTo(100+450+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        <!-- Wrap Around from bit 4 to bit 1 -->
+
+        if(pulsefunction[3] === '0' && pulsefunction[0] === '1')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+450,125);
+          ctx.lineTo(100+450,80);
+          ctx.lineWidth = 10;
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+450+450,125);
+          ctx.lineTo(100+450+450,80);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+450+450+450,125);
+          ctx.lineTo(100+450+450+450,80);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+        if(pulsefunction[3] === '1' && pulsefunction[0] === '0')
+        {
+          ctx.strokeStyle = '#ff0000';
+          ctx.moveTo(100+450,80);
+          ctx.lineTo(100+450,125);
+          ctx.lineWidth = 10;
+
+
+
+          <!-- Period 2 -->
+
+          ctx.moveTo(100+450+450,80);
+          ctx.lineTo(100+450+450,125);
+
+          <!-- Period 3 -->
+
+          ctx.moveTo(100+450+450+450,80);
+          ctx.lineTo(100+450+450+450,125);
+
+          ctx.stroke();
+          <!-- Reset Line features -->
+          ctx.strokeStyle = '#000000';
+          ctx.lineWidth = 1;  
+        }
+
+
+
+        <!-- X-axis line creation -->
+
+        ctx.moveTo(50,125);
+        ctx.lineTo(1400,125); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      if(pulsefunction[0] === '0' && pulsefunction[1] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,125);
-        ctx.lineTo(100+(450/4),125);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+(450/4),125);
-        ctx.lineTo(100+(450/4),80);
-        
-        ctx.moveTo(100+(450/4),80);
-        ctx.lineTo(100+(450/2),80);
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+450,125);
-        ctx.lineTo(100+(450/4)+450,125);
-        
-        ctx.moveTo(100+(450/4)+450,125);
-        ctx.lineTo(100+(450/4)+450,80);
-        
-        ctx.moveTo(100+(450/4)+450,80);
-        ctx.lineTo(100+(450/2)+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+450+450,125);
-        ctx.lineTo(100+(450/4)+450+450,125);
-        
-        ctx.moveTo(100+(450/4)+450+450,125);
-        ctx.lineTo(100+(450/4)+450+450,80);
-        
-        ctx.moveTo(100+(450/4)+450+450,80);
-        ctx.lineTo(100+(450/2)+450+450,80);
-        
+
+        <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
+
+        ctx.font = "15px Courier New";
+
+        <!-- From 0 to 2pi -->
+
+        ctx.fillText("pi/2",50+(450/4),140);
+        ctx.fillText("2pi/2",50+(450/2),140);
+        ctx.fillText("3pi/2",50+((450*3)/4),140);
+        ctx.fillText("4pi/2",50+450,140);
+
+        <!-- From 2pi to 4pi -->
+
+        ctx.fillText("5pi/2",50+(450/4)+450,140);
+        ctx.fillText("6pi/2",50+(450/2)+450,140);
+        ctx.fillText("7pi/2",50+((450*3)/4)+450,140);
+        ctx.fillText("8pi/2",50+900,140);
+
+        <!-- From 4pi to 6pi -->
+
+        ctx.fillText("9pi/2",50+(450/4)+900,140);
+        ctx.fillText("10pi/2",50+(450/2)+900,140);
+        ctx.fillText("11pi/2",50+((450*3)/4)+900,140);
+        ctx.fillText("12pi/2",50+1350,140);
+
+
+
+        <!-- End of X-axis creation -->
+        <!-- Y-axis line creation -->
+
+        ctx.moveTo(100,20);
+        ctx.lineTo(100,230);
         ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      if(pulsefunction[0] === '1' && pulsefunction[1] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,80);
-        ctx.lineTo(100+(450/4),80);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+(450/4),80);
-        ctx.lineTo(100+(450/4),125);
-        
-        ctx.moveTo(100+(450/4),125);
-        ctx.lineTo(100+(450/2),125);
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+450,80);
-        ctx.lineTo(100+(450/4)+450,80);
-        
-        ctx.moveTo(100+(450/4)+450,80);
-        ctx.lineTo(100+(450/4)+450,125);
-        
-        ctx.moveTo(100+(450/4)+450,125);
-        ctx.lineTo(100+(450/2)+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+450+450,80);
-        ctx.lineTo(100+(450/4)+450+450,80);
-        
-        ctx.moveTo(100+(450/4)+450+450,80);
-        ctx.lineTo(100+(450/4)+450+450,125);
-        
-        ctx.moveTo(100+(450/4)+450+450,125);
-        ctx.lineTo(100+(450/2)+450+450,125);
-        
+
+        <!-- Y-axis scale -->
+        ctx.fillText("1", 90, 80);
+        ctx.fillText("0", 90, 150);
+
+        <!-- End of Y-axis creation -->
+
+
+
+        <!-- This is the end of the Square Wave Visualization that the User Enters -->
+
+
+        <!-- This starts the Fourier Coefficient Visualization Graph -->
+
+
+        <!-- X-axis line creation -->
+
+        ctx.moveTo(50,365);
+        ctx.lineTo(1400,365); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      if(pulsefunction[0] === '1' && pulsefunction[1] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100,80);
-        ctx.lineTo(100+(450/4),80);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+(450/4),80);
-        ctx.lineTo(100+(450/2),80);
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+450,80);
-        ctx.lineTo(100+(450/4)+450,80);
-        
-        ctx.moveTo(100+(450/4)+450,80);
-        ctx.lineTo(100+(450/2)+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+450+450,80);
-        ctx.lineTo(100+(450/4)+450+450,80);
-        
-        ctx.moveTo(100+(450/4)+450+450,80);
-        ctx.lineTo(100+(450/2)+450+450,80);
-        
-        
+
+        <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
+
+        ctx.font = "15px Courier New";
+
+        <!-- From 0 to 2pi -->
+
+        ctx.fillText("pi/2",50+(450/4),400);
+        ctx.fillText("2pi/2",50+(450/2),400);
+        ctx.fillText("3pi/2",50+((450*3)/4),400);
+        ctx.fillText("4pi/2",50+450,400);
+
+        <!-- From 2pi to 4pi -->
+
+        ctx.fillText("5pi/2",50+(450/4)+450,400);
+        ctx.fillText("6pi/2",50+(450/2)+450,400);
+        ctx.fillText("7pi/2",50+((450*3)/4)+450,400);
+        ctx.fillText("8pi/2",50+900,400);
+
+        <!-- From 4pi to 6pi -->
+
+        ctx.fillText("9pi/2",50+(450/4)+900,400);
+        ctx.fillText("10pi/2",50+(450/2)+900,400);
+        ctx.fillText("11pi/2",50+((450*3)/4)+900,400);
+        ctx.fillText("12pi/2",50+1350,400);
+
+
+
+        <!-- End of X-axis creation -->
+        <!-- Y-axis line creation -->
+
+        ctx.moveTo(100,250);
+        ctx.lineTo(100,480);
         ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      
-      
-      <!-- Now we go from pi to 3pi/2 -->
-      
-      if(pulsefunction[1] === '0' && pulsefunction[2] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+(450/2),125);
-        ctx.lineTo(100+((450*3)/4),125);
-        ctx.lineWidth = 10;
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+(450/2)+450,125);
-        ctx.lineTo(100+((450*3)/4)+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+(450/2)+450+450,125);
-        ctx.lineTo(100+((450*3)/4)+450+450,125);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[1] === '0' && pulsefunction[2] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+(450/2),125);
-        ctx.lineTo(100+(450/2),80);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+(450/2),80);
-        ctx.lineTo(100+((450*3)/4),80);
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+(450/2)+450,125);
-        ctx.lineTo(100+(450/2)+450,80);
-        
-        ctx.moveTo(100+(450/2)+450,80);
-        ctx.lineTo(100+((450*3)/4)+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+(450/2)+450+450,125);
-        ctx.lineTo(100+(450/2)+450+450,80);
-        
-        ctx.moveTo(100+(450/2)+450+450,80);
-        ctx.lineTo(100+((450*3)/4)+450+450,80);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[1] === '1' && pulsefunction[2] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+(450/2),80);
-        ctx.lineTo(100+(450/2),125);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+(450/2),125);
-        ctx.lineTo(100+((450*3)/4),125);
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+(450/2)+450,80);
-        ctx.lineTo(100+(450/2)+450,125);
-        
-        ctx.moveTo(100+(450/2)+450,125);
-        ctx.lineTo(100+((450*3)/4)+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+(450/2)+450+450,80);
-        ctx.lineTo(100+(450/2)+450+450,125);
-        
-        ctx.moveTo(100+(450/2)+450+450,125);
-        ctx.lineTo(100+((450*3)/4)+450+450,125);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[1] === '1' && pulsefunction[2] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+(450/2),80);
-        ctx.lineTo(100+((450*3)/4),80);
-        ctx.lineWidth = 10;
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+(450/2)+450,80);
-        ctx.lineTo(100+((450*3)/4)+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+(450/2)+450+450,80);
-        ctx.lineTo(100+((450*3)/4)+450+450,80);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      <!-- 0 to 2pi -->
-      
-      if(pulsefunction[2] === '0' && pulsefunction[3] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+((450*3)/4),125);
-        ctx.lineTo(100+450,125);
-        ctx.lineWidth = 10;
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450,125);
-        ctx.lineTo(100+450+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,125);
-        ctx.lineTo(100+450+450+450,125);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[2] === '0' && pulsefunction[3] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+((450*3)/4),125);
-        ctx.lineTo(100+((450*3)/4),80);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+((450*3)/4),80);
-        ctx.lineTo(100+450,80);
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450,125);
-        ctx.lineTo(100+((450*3)/4)+450,80);
-        
-        ctx.moveTo(100+((450*3)/4)+450,80);
-        ctx.lineTo(100+450+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,125);
-        ctx.lineTo(100+((450*3)/4)+450+450,80);
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,80);
-        ctx.lineTo(100+450+450+450,80);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[2] === '1' && pulsefunction[3] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+((450*3)/4),80);
-        ctx.lineTo(100+((450*3)/4),125);
-        ctx.lineWidth = 10;
-        
-        ctx.moveTo(100+((450*3)/4),125);
-        ctx.lineTo(100+450,125);
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450,80);
-        ctx.lineTo(100+((450*3)/4)+450,125);
-        
-        ctx.moveTo(100+((450*3)/4)+450,125);
-        ctx.lineTo(100+450+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,80);
-        ctx.lineTo(100+((450*3)/4)+450+450,125);
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,125);
-        ctx.lineTo(100+450+450+450,125);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[2] === '1' && pulsefunction[3] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+((450*3)/4),80);
-        ctx.lineTo(100+450,80);
-        ctx.lineWidth = 10;
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450,80);
-        ctx.lineTo(100+450+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+((450*3)/4)+450+450,80);
-        ctx.lineTo(100+450+450+450,80);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      <!-- Wrap Around from bit 4 to bit 1 -->
-      
-      if(pulsefunction[3] === '0' && pulsefunction[0] === '1')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+450,125);
-        ctx.lineTo(100+450,80);
-        ctx.lineWidth = 10;
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+450+450,125);
-        ctx.lineTo(100+450+450,80);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+450+450+450,125);
-        ctx.lineTo(100+450+450+450,80);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      if(pulsefunction[3] === '1' && pulsefunction[0] === '0')
-      {
-        ctx.strokeStyle = '#ff0000';
-        ctx.moveTo(100+450,80);
-        ctx.lineTo(100+450,125);
-        ctx.lineWidth = 10;
-        
-        
-        
-        <!-- Period 2 -->
-        
-        ctx.moveTo(100+450+450,80);
-        ctx.lineTo(100+450+450,125);
-        
-        <!-- Period 3 -->
-        
-        ctx.moveTo(100+450+450+450,80);
-        ctx.lineTo(100+450+450+450,125);
-        
-        ctx.stroke();
-        <!-- Reset Line features -->
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 1;  
-      }
-      
-      
-      
-      <!-- X-axis line creation -->
-      
-      ctx.moveTo(50,125);
-      ctx.lineTo(1400,125); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
-      ctx.stroke();
-      
-      <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
-      
-      ctx.font = "15px Courier New";
-      
-      <!-- From 0 to 2pi -->
-      
-      ctx.fillText("pi/2",50+(450/4),140);
-      ctx.fillText("2pi/2",50+(450/2),140);
-      ctx.fillText("3pi/2",50+((450*3)/4),140);
-      ctx.fillText("4pi/2",50+450,140);
-      
-      <!-- From 2pi to 4pi -->
-      
-      ctx.fillText("5pi/2",50+(450/4)+450,140);
-      ctx.fillText("6pi/2",50+(450/2)+450,140);
-      ctx.fillText("7pi/2",50+((450*3)/4)+450,140);
-      ctx.fillText("8pi/2",50+900,140);
-      
-      <!-- From 4pi to 6pi -->
-      
-      ctx.fillText("9pi/2",50+(450/4)+900,140);
-      ctx.fillText("10pi/2",50+(450/2)+900,140);
-      ctx.fillText("11pi/2",50+((450*3)/4)+900,140);
-      ctx.fillText("12pi/2",50+1350,140);
-      
-      
-      
-      <!-- End of X-axis creation -->
-      <!-- Y-axis line creation -->
-      
-      ctx.moveTo(100,20);
-      ctx.lineTo(100,230);
-      ctx.stroke();
-      
-      <!-- Y-axis scale -->
-      ctx.fillText("1", 90, 80);
-      ctx.fillText("0", 90, 150);
-      
-      <!-- End of Y-axis creation -->
-      
-      
-      
-      <!-- This is the end of the Square Wave Visualization that the User Enters -->
-      
-      
-      <!-- This starts the Fourier Coefficient Visualization Graph -->
-      
-      
-      <!-- X-axis line creation -->
-      
-      ctx.moveTo(50,365);
-      ctx.lineTo(1400,365); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
-      ctx.stroke();
-      
-      <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
-      
-      ctx.font = "15px Courier New";
-      
-      <!-- From 0 to 2pi -->
-      
-      ctx.fillText("pi/2",50+(450/4),400);
-      ctx.fillText("2pi/2",50+(450/2),400);
-      ctx.fillText("3pi/2",50+((450*3)/4),400);
-      ctx.fillText("4pi/2",50+450,400);
-      
-      <!-- From 2pi to 4pi -->
-      
-      ctx.fillText("5pi/2",50+(450/4)+450,400);
-      ctx.fillText("6pi/2",50+(450/2)+450,400);
-      ctx.fillText("7pi/2",50+((450*3)/4)+450,400);
-      ctx.fillText("8pi/2",50+900,400);
-      
-      <!-- From 4pi to 6pi -->
-      
-      ctx.fillText("9pi/2",50+(450/4)+900,400);
-      ctx.fillText("10pi/2",50+(450/2)+900,400);
-      ctx.fillText("11pi/2",50+((450*3)/4)+900,400);
-      ctx.fillText("12pi/2",50+1350,400);
-      
-      
-      
-      <!-- End of X-axis creation -->
-      <!-- Y-axis line creation -->
-      
-      ctx.moveTo(100,250);
-      ctx.lineTo(100,480);
-      ctx.stroke();
-      
-      <!-- Y-axis scale -->
-      ctx.fillText("1", 90, 307.5);
-      ctx.fillText("0", 90, 400);
-      
-      <!-- End of Y-axis creation -->
+
+        <!-- Y-axis scale -->
+        ctx.fillText("1", 90, 307.5);
+        ctx.fillText("0", 90, 400);
+
+        <!-- End of Y-axis creation -->
       
       }
       
@@ -1160,6 +1170,9 @@
       <div class="box-1">
         <h1>Visualizing Fourier Coefficients</h1> <!-- This is the actual 'Title' of the page for the website -->
         <p>The top graph shows your provided square wave. And the bottom graph shows the fourier series with the provided number of coefficients.</p>
+        <input type="text" placeholder="Enter pulsefunction here" id="pulse">
+        <input type="text" placeholder="Enter a number of terms here" id="n">
+        <button type="button" onclick="getInputValue();">Submit</button>
       </div>
     </div>
   </body>
