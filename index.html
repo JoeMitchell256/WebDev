@@ -9,8 +9,10 @@
       
       <!-- Prompts for the user to choose their pulse function -->
       
-      var pulsefunction = window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
-      var n = parseInt(window.prompt("Please enter a value of n: "));
+      var pulsefunction; 
+      //= window.prompt("Please enter a pulse function (4 values (0 or 1) from 0 to 2pi): ");
+      var n; 
+      //= parseInt(window.prompt("Please enter a value of n: "));
       
       
       <!-- Beginning of graph construction -->
@@ -53,23 +55,26 @@
       
       document.body.appendChild(x);
       
+      <!-- Submission button end -->
+      
+      <!-- Get the input of the two textboxes when submit button is pressed -->
+      
+      function clickHandler(event){
+        pulsefunction = document.getElementById("pulsefunctionbox");
+        n = document.getElementById("nbox");
+      }
+      
+      x = document.querySelector('.x');
+      x.addEventListener('click',clickHandler);
+      
+      <!-- End of input reading -->
+      
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       
-      /*
-      window.onload = function() {
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        var img = new Image();
-        img.src = "WhiteBackground.jpeg";
-        img.onload = () => {
-          ctx.drawImage(img,0,0);
-        }
-      }
-      */
       
-      //ctx.drawImage("WhiteBackground.jpg",0,0);
+      
       
       
       <!-- This is where the points must be drawn!!!  -->
