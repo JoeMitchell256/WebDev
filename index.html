@@ -20,6 +20,12 @@
       var pulsefunctionbox = document.createElement("INPUT");
       pulsefunctionbox.setAttribute("type", "text");
       
+      pulsefunctionbox.style.position = 'absolute';
+      pulsefunctionbox.style.left = '500px';
+      pulsefunctionbox.style.top = '500px';
+      
+      document.body.appendChild(pulsefunctionbox);
+      
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
