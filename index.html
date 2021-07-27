@@ -27,6 +27,7 @@
         c = document.getElementById("myCanvas");
         ctx = c.getContext("2d"); // Try reinitializing the canvas? 
         ctx.clearRect(0,0,1420,500); //This should clear the canvas after each button press!
+        ctx.beginPath(); //Apparently we need this line???
       }
       
       
