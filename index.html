@@ -536,7 +536,7 @@
           return ((upper-lower)*s)/(Math.PI*n);
         }
         
-        var a_n = 0;
+        var aN = 0;
         
         //General Form for a_n  END ************************************
         
@@ -549,7 +549,7 @@
         }
         
         
-        var b_n = 0;
+        var bN = 0;
         
         
         //General Form for b_n END **************************************
@@ -563,40 +563,42 @@
         var z = 0;
         n = parseInt(n);
         
+        //var test = a_n()
+        
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               for(i = 0; i < pulsearray.length; i++){
                 
                 a0 += parseInt(pulsearray[i]); //a_0 portion
                 
-                /*
+                
                 //a_n portion
                 if(i === 0){ //From 0 to pi/2
-                  a_n += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
+                  aN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
                 }
                 if(i === 1){
-                  a_n += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
+                  aN += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
                 }
                 if(i === 2){
-                  a_n += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
+                  aN += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
                 }
                 if(i === 3){
-                  a_n += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
+                  aN += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
                 }
                 //b_n portion
                 if(i === 0){ //From 0 to pi/2
-                  b_n += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
+                  bN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
                 }
                 if(i === 1){
-                  b_n += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
+                  bN += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
                 }
                 if(i === 2){
-                  b_n += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
+                  bN += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
                 }
                 if(i === 3){
-                  b_n += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
+                  bN += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
                 }
-                */
+                
               }
             }
             
@@ -604,8 +606,8 @@
             y = a_0 + a_n*Math.cos((z+1)*(p+1)*(Math.PI/225)) + b_n*Math.sin((z+1)*(p+1)*(Math.PI/225));
             //Plot the point and reset stuff that needs to be reset
             a_0 = 0
-            a_n = 0
-            b_n = 0
+            aN = 0
+            bN = 0
 
             y = ( ( (max-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
 
