@@ -505,6 +505,31 @@
         <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
 
         
+        //We need a robust way to calculate the integrals for the fourier coefficients
+        
+        //a_0 = (1/(2*Math.PI)) * Integral {0,2*Math.PI}, we should do it seperately for each interval (pi/2 intervals)
+        // Since we know that the input must be scalar we know the integral of this function:
+        //a_0 = (1/(2*Math.PI)) * t {0,2*Math.PI} or
+        //a_0 = (1/(2*Math.PI)) * [ s*t {0,pi/2} + s*t {pi/2,pi} + s*t {pi,3pi/2} + s*t {3pi/2,2pi} 
+        
+        //Upper limit - Lower limit
+        
+        function a_0(upper,lower,s){ //s is whatever the user entered in for that upper/lower range
+          var t = upper - lower;
+          return s*t;
+        }
+        
+        var a0 = 0;
+        
+        for(i = 0; i < pulsearray.length; i++){
+          a0 += pulsearray[i];
+        }
+        
+        a0 = a0/4; //a_0 coefficient is simply the average from 0 to 2pi!
+        
+        ctx.fillText(a0, 20, 80);
+        
+        
         
         var z = 0;
         var y_pos = 250;
@@ -579,7 +604,7 @@
 
         }
 
-        if(pulsefunction === "0011"){
+        if(pulsefunction === "0011"){//Instead of "0011" how about "0023"
 
           var p = 0;
 
@@ -633,9 +658,6 @@
 
             y_pos = -57.5*ft + 250; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
 
-            //ctx.strokeStyle = '#ffff00';
-
-            //ctx.lineWidth = 10;
 
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
 
@@ -676,9 +698,6 @@
 
             y_pos = -57.5*ft + 250; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
 
-            //ctx.strokeStyle = '#ffff00';
-
-            //ctx.lineWidth = 10;
 
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
 
@@ -712,9 +731,6 @@
 
             y_pos = -57.5*ft + 250; <!-- This should give us the proper y position for our point, this may have some syntax issues -->
 
-            //ctx.strokeStyle = '#ffff00';
-
-            //ctx.lineWidth = 10;
 
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3);
 
