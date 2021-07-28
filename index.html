@@ -561,17 +561,19 @@
         var p = 0;
         var y = 0;
         var z = 0;
+        var m = 0;
         n = parseInt(n);
         
+        
         //var test = a_n()
+        for(m=0; m<pulsearray.length; m++){
+           a0 += parseInt(pulsearray[m]); //a_0 portion
+        }
+        
         
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               for(i = 0; i < pulsearray.length; i++){
-                
-                a0 += parseInt(pulsearray[i]); //a_0 portion
-                
-                
                 //a_n portion
                 if(i === 0){ //From 0 to pi/2
                   aN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
@@ -612,7 +614,7 @@
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
-            a_0 = 0
+            //a0 = 0
             aN = 0
             bN = 0
          }
