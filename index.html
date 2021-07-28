@@ -573,8 +573,9 @@
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               for(i = 0; i < pulsearray.length; i++){
-                //a_n portion
-                if(i === 0){ //From 0 to pi/2
+                
+                
+                if(i === 0){//a_n portion
                   aN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
                 }
                 if(i === 1){
@@ -586,8 +587,9 @@
                 if(i === 3){
                   aN += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
                 }
-                //b_n portion
-                if(i === 0){ //From 0 to pi/2
+                
+                
+                if(i === 0){//b_n portion
                   bN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
                 }
                 if(i === 1){
