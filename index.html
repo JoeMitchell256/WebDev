@@ -41,8 +41,8 @@
         var max = -Infinity;
         
         for(i = 0; i < pulsearray.length; i++){
-          if(Math.abs(pulsearray[i]) > max){
-            max = Math.abs(pulsearray[i]);
+          if(Math.abs(parseInt(pulsearray[i])) > max){
+            max = Math.abs(parseInt(pulsearray[i]));
           }
         }
         
@@ -523,26 +523,102 @@
         
         var a0 = 0;
         
-        for(i = 0; i < pulsearray.length; i++){
-          a0 += parseInt(pulsearray[i]);
-        }
-        
-        a0 = a0/4; //a_0 coefficient is simply the average from 0 to 2pi!
+        //a0 = a0/4; //a_0 coefficient is simply the average from 0 to 2pi!
         
         //General Form for a_0  END ************************************
         
         //General Form for a_n  START ************************************
-        /*
+        
+        //No matter what the scenario, the integral always comes out the same. I will provide my handcalculations if necessary.
         function a_n(upper,lower,s,n){
-          upper = Math.sin(upper*n);
-          return [];
+          upper = (Math.sin(upper*n));
+          lower = (Math.sin(lower*n));
+          return ((upper-lower)*s)/(Math.PI*n);
         }
-        */
+        
+        var a_n = 0;
+        
+        //General Form for a_n  END ************************************
+        
+        //General Form for b_n  START ************************************
+        
+        function b_n(upper,lower,s,n){//Same as a_n but now its cos instead of sin from handcalculations
+          upper = (Math.cos(upper*n));
+          lower = (Math.cos(lower*n));
+          return ((upper-lower)*s)/(Math.PI*n);
+        }
+        
+        
+        var b_n = 0;
+        
+        
+        //General Form for b_n END **************************************
+        
+        //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
+        //Now we can combine all three for loops into one just below this line for simplicity:
+        var p = 0;
+        var y = 0;
+        var z = 0;
+        n = parseInt(n);
+        for(p = 0; p<1350; p++){
+          for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
+            for(i = 0; i < pulsearray.length; i++){
+              a0 += parseInt(pulsearray[i]); //a_0 portion
+              //a_n portion
+              if(i === 0){ //From 0 to pi/2
+                a_n += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
+              }
+              if(i === 1){
+                a_n += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
+              }
+              if(i === 2){
+                a_n += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
+              }
+              if(i === 3){
+                a_n += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
+              }
+              //b_n portion
+              if(i === 0){ //From 0 to pi/2
+                b_n += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
+              }
+              if(i === 1){
+                b_n += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
+              }
+              if(i === 2){
+                b_n += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
+              }
+              if(i === 3){
+                b_n += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
+              }
+            }
+          }
+          //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
+          y = a_0 + a_n*Math.cos((z+1)*(p+1)*(Math.PI/225)) + b_n*Math.sin((z+1)*(p+1)*(Math.PI/225));
+          //Plot the point and reset stuff that needs to be reset
+          a_0 = 0
+          a_n = 0
+          b_n = 0
+          
+          y = ( ( (max-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
+          
+          ctx.fillRect(100 + 1*(p+1),y,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
+          ctx.stroke();
+        }
+        
+        //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
+        //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
+        //Center y coordinate: 250
+        
+        // (max,480) , (0,250)
+        //We can make a line like last time with 2 points the y intercept and the max for simplicity:
+        //y = mx + b
+        //b = 250
+        //m = (max-0)/(480-250)
+        //y = ( (max-0) )/ (480-250) * y_ + 250
         
         
         
-        
-        
+        /*
         
         var z = 0;
         var y_pos = 250;
@@ -1068,7 +1144,7 @@
 
         }
 
-        
+        */
         <!-- This is the end of the fourier series expansion section -->
         
 
