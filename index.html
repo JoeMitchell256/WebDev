@@ -556,6 +556,8 @@
         
         //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
         //Now we can combine all three for loops into one just below this line for simplicity:
+        
+        /*
         var p = 0;
         var y = 0;
         var z = 0;
@@ -604,6 +606,8 @@
           ctx.fillRect(100 + 1*(p+1),y,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
           ctx.stroke();
         }
+        
+        */
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
