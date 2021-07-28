@@ -562,7 +562,7 @@
         var y = 0;
         var z = 0;
         n = parseInt(n);
-        /*
+        
         for(p = 0; p<1350; p++){
           for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
             for(i = 0; i < pulsearray.length; i++){
@@ -594,21 +594,20 @@
                 b_n += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
               }
             }
-          }
-          //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
-          y = a_0 + a_n*Math.cos((z+1)*(p+1)*(Math.PI/225)) + b_n*Math.sin((z+1)*(p+1)*(Math.PI/225));
-          //Plot the point and reset stuff that needs to be reset
-          a_0 = 0
-          a_n = 0
-          b_n = 0
-          
-          y = ( ( (max-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
-          
-          ctx.fillRect(100 + 1*(p+1),y,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
-          ctx.stroke();
-        }
+            //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
+            y = a_0 + a_n*Math.cos((z+1)*(p+1)*(Math.PI/225)) + b_n*Math.sin((z+1)*(p+1)*(Math.PI/225));
+            //Plot the point and reset stuff that needs to be reset
+            a_0 = 0
+            a_n = 0
+            b_n = 0
+
+            y = ( ( (max-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
+
+            ctx.fillRect(100 + 1*(p+1),y,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
+            ctx.stroke();
+         }
         
-        */
+        
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
