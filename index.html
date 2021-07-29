@@ -569,45 +569,16 @@
         
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
-              for(i = 0; i < pulsearray.length; i++){
                 
-                
-                if(i === 0){//a_n portion
-                  aN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
-                }
-                if(i === 1){
-                  aN += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
-                }
-                if(i === 2){
-                  aN += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
-                }
-                if(i === 3){
-                  aN += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
-                }
-                
-                
-                if(i === 0){//b_n portion
-                  bN += a_n(Math.PI/2,0,parseInt(pulsearray[i]),(z+1)); //Z will behave like our n just like before
-                }
-                if(i === 1){
-                  bN += a_n(Math.PI,Math.PI/2,parseInt(pulsearray[i]),(z+1)); //Same for next pi/2 interval
-                }
-                if(i === 2){
-                  bN += a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[i]),(z+1));
-                }
-                if(i === 3){
-                  bN += a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[i]),(z+1));
-                }
-                
-              }
-            
+              aN = a_n(Math.PI/2,0,parseInt(pulsearray[0]),(z+1)) + a_n(Math.PI,Math.PI/2,parseInt(pulsearray[1]),(z+1)) + a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[2]),(z+1)) + a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[3]),(z+1));
+
+              bN = b_n(Math.PI/2,0,parseInt(pulsearray[0]),(z+1)) + b_n(Math.PI,Math.PI/2,parseInt(pulsearray[1]),(z+1)) + b_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[2]),(z+1)) + b_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[3]),(z+1));
             
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
               
               y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
               
-              //Plot the point and reset stuff that needs to be reset
-              
+              //Plot the point and reset stuff that needs to be reset  
             }  
 
             var y_pos = ( ( (parseInt(max)-0)/(20-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
