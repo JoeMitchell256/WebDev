@@ -515,13 +515,15 @@
         //Upper limit - Lower limit
         
         //General Form for a_0 START ************************************
-        
-        function a_0(upper,lower,s){ //s is whatever the user entered in for that upper/lower range
-          var t = upper - lower;
-          return s*t;
-        }
+        //Average of the pulses
         
         var a0 = 0;
+        
+        for(m=0; m<pulsearray.length; m++){
+           a0 += parseInt(pulsearray[m]); //a_0 portion
+        }
+        
+        a0 = a0/4;
         
         //a0 = a0/4; //a_0 coefficient is simply the average from 0 to 2pi!
         
@@ -555,16 +557,14 @@
         
         
         var p = 0;
-        var y = 0;
+        var y = a0;
         var z = 0;
         var m = 0;
         n = parseInt(n);
         
         var test2 = 0;
         
-        for(m=0; m<pulsearray.length; m++){
-           a0 += parseInt(pulsearray[m]); //a_0 portion
-        }
+        
         
         
         for(p = 0; p<1350; p++){
@@ -603,7 +603,9 @@
             
             
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
-              y = (a0/4) + aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
+              
+              
+              y += a0 + aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
               //Plot the point and reset stuff that needs to be reset
               
             }  
@@ -615,9 +617,9 @@
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
-            //a0 = 0
             aN = 0
             bN = 0
+            y = a0;
          }
         
         var test = a_n(Math.PI/2,0,parseInt(pulsearray[2]),1);
