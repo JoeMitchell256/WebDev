@@ -1194,8 +1194,12 @@
 
 
         <!-- Y-axis scale -->
-        ctx.fillText(max, 90, 20);
-        ctx.fillText("0", 90, 280);
+        //ctx.fillText(max, 90, 20);
+        ctx.fillText("0", 90, 250);
+        ctx.fillText(pulsefunction[0],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[0])) ) + 250);
+        ctx.fillText(pulsefunction[1],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[1])) ) + 250);
+        ctx.fillText(pulsefunction[2],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[2])) ) + 250);
+        ctx.fillText(pulsefunction[3],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[3])) ) + 250);
 
         <!-- End of Y-axis creation -->
         
