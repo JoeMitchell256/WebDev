@@ -49,12 +49,17 @@
         //Perform the y-axis scale and display here, that way when we want to design the square wave first, it will be easier
         
         //y scale converter: ( ( (250-20)/(0-parseInt(max)) ) * y ) + 250
-        
+        /*
         for(i = 0; i < pulsearray.length; i++){
           ctx.fillText(pulsearray[i],50,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[i])) ) + 250);
           ctx.stroke();
         }
+        */
         
+        ctx.fillText(pulsefunction[0],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[0])) ) + 250);
+        ctx.fillText(pulsefunction[1],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[1])) ) + 250);
+        ctx.fillText(pulsefunction[2],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[2])) ) + 250);
+        ctx.fillText(pulsefunction[3],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[3])) ) + 250);
         
         //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
         //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
@@ -1196,10 +1201,7 @@
         <!-- Y-axis scale -->
         //ctx.fillText(max, 90, 20);
         ctx.fillText("0", 90, 250);
-        ctx.fillText(pulsefunction[0],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[0])) ) + 250);
-        ctx.fillText(pulsefunction[1],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[1])) ) + 250);
-        ctx.fillText(pulsefunction[2],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[2])) ) + 250);
-        ctx.fillText(pulsefunction[3],90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[3])) ) + 250);
+        
 
         <!-- End of Y-axis creation -->
         
