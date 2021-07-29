@@ -604,15 +604,15 @@
             
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
               
-              
               y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
+              
               //Plot the point and reset stuff that needs to be reset
               
             }  
 
             var y_pos = ( ( (parseInt(max)-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
 
-            test2 = aN;
+            test2 = bN;
           
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
