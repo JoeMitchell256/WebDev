@@ -531,9 +531,7 @@
         
         //No matter what the scenario, the integral always comes out the same. I will provide my handcalculations if necessary.
         function a_n(upper,lower,s,n){
-          upper = (Math.sin(upper*n));
-          lower = (Math.sin(lower*n));
-          return ((upper-lower)*s)/(Math.PI*n);
+          return ((Math.sin(upper*n) - Math.sin(lower*n))*s)/(Math.PI*n);
         }
         
         var aN = 0;
@@ -543,9 +541,7 @@
         //General Form for b_n  START ************************************
         
         function b_n(upper,lower,s,n){//Same as a_n but now its cos instead of sin from handcalculations
-          upper = (Math.cos(upper*n));
-          lower = (Math.cos(lower*n));
-          return ((upper-lower)*s)/(Math.PI*n);
+          return ((Math.cos(upper*n) - Math.cos(lower*n))*s)/(Math.PI*n);
         }
         
         
