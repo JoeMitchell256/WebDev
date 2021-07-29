@@ -560,6 +560,7 @@
         var m = 0;
         n = parseInt(n);
         
+        var test2 = 0;
         
         for(m=0; m<pulsearray.length; m++){
            a0 += parseInt(pulsearray[m]); //a_0 portion
@@ -608,6 +609,8 @@
 
             var y_pos = ( ( (parseInt(max)-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
 
+            test2 = y_pos;
+          
             ctx.fillRect(100 + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
@@ -618,8 +621,10 @@
         
         var test = a_n(Math.PI/2,0,parseInt(pulsearray[2]),1);
         
+        
+        
         ctx.fillRect(100,100,5,5);
-        ctx.fillText(i,10,60);
+        ctx.fillText(y_pos,10,60);
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
