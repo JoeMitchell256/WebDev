@@ -543,7 +543,7 @@
         //General Form for b_n  START ************************************
         
         function b_n(upper,lower,s,n){//Same as a_n but now its cos instead of sin from handcalculations
-          return ((Math.cos(upper*n) - Math.cos(lower*n))*s)/(Math.PI*n);
+          return ( ( Math.cos(upper*n) - Math.cos(lower*n) ) * parseInt(s) )/(Math.PI*n);
         }
         
         
@@ -610,7 +610,7 @@
               
             }  
 
-            var y_pos = ( ( (parseInt(max)-0)/(480-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
+            var y_pos = ( ( (480-250)/(parseInt(max)-0) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
 
             test2 = bN;
           
