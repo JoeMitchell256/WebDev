@@ -55,12 +55,12 @@
           ctx.stroke();
         }
         */
-        
+        /*
         ctx.fillText(parseInt(pulsefunction[0]),90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[0])) ) + 250);
         ctx.fillText(parseInt(pulsefunction[1]),90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[1])) ) + 250);
         ctx.fillText(parseInt(pulsefunction[2]),90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[2])) ) + 250);
         ctx.fillText(parseInt(pulsefunction[3]),90,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[3])) ) + 250);
-        
+        */
         //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
         //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
         
@@ -590,14 +590,14 @@
               
               var aN_1 = 5*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_2 = 4*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
-              var aN_3 = -3*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
+              var aN_3 = -1*3*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
               var aN_4 = 1*(Math.sin( (z+1) * 2*Math.PI ) - Math.sin( (z+1) * 3*Math.PI/2 )) / ( (z+1) * Math.PI );
               
               aN = aN_1 + aN_2 + aN_3 + aN_4; //Sum all a_n terms to come up with the entire a_n coefficient.
 
               var bN_1 = 5*(Math.cos( (z+1) * Math.PI/2 ) - 1) / ( -1 * (z+1) * Math.PI );
               var bN_2 = 4*(Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
-              var bN_3 = -3*(Math.cos( (z+1) * 3*Math.PI/2 ) - Math.cos( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
+              var bN_3 = -1*3*(Math.cos( (z+1) * 3*Math.PI/2 ) - Math.cos( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
               var bN_4 = 1*(Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
               
               bN = bN_1 + bN_2 + bN_3 + bN_4; //Sum all b_n terms to come up with the entire b_n coefficient
