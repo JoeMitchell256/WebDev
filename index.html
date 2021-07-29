@@ -46,6 +46,15 @@
           }
         }
         
+        //Perform the y-axis scale and display here, that way when we want to design the square wave first, it will be easier
+        
+        //y scale converter: ( ( (250-20)/(0-parseInt(max)) ) * y ) + 250
+        
+        for(i = 0; i < pulsearray.length; i++){
+          ctx.fillText(pulsearray[i],50,( ( (250-20)/(0-parseInt(max)) ) * (parseInt(pulsearray[i])) ) + 250);
+        }
+        
+        
         //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
         //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
         
