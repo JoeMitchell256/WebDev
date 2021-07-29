@@ -555,6 +555,8 @@
         //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
         //Now we can combine all three for loops into one just below this line for simplicity:
         
+        //Test the single test input : "5 4 -3 1"
+        a0 = 7/4;
         
         var p = 0;
         var y = a0;
@@ -567,12 +569,23 @@
         
         
         
+        
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
-                
-              aN = a_n(Math.PI/2,0,parseInt(pulsearray[0]),(z+1)) + a_n(Math.PI,Math.PI/2,parseInt(pulsearray[1]),(z+1)) + a_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[2]),(z+1)) + a_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[3]),(z+1));
+              
+              var aN_1 = 5*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
+              var aN_2 = 4*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
+              var aN_3 = -3*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
+              var aN_4 = (Math.sin( (z+1) * 2*Math.PI ) - Math.sin( (z+1) * 3*Math.PI/2 )) / ( (z+1) * Math.PI );
+              
+              aN = aN_1 + aN_2 + aN_3 + aN_4; //Sum all a_n terms to come up with the entire a_n coefficient.
 
-              bN = b_n(Math.PI/2,0,parseInt(pulsearray[0]),(z+1)) + b_n(Math.PI,Math.PI/2,parseInt(pulsearray[1]),(z+1)) + b_n(3*Math.PI/2,Math.PI,parseInt(pulsearray[2]),(z+1)) + b_n(2*Math.PI,3*Math.PI/2,parseInt(pulsearray[3]),(z+1));
+              var bN_1 = 5*(Math.cos( (z+1) * Math.PI/2 ) - 1) / ( -1 * (z+1) * Math.PI );
+              var bN_2 = 4*(Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
+              var bN_3 = 3*(Math.cos( (z+1) * 3*Math.PI/2 ) - Math.cos( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
+              var bN_4 = (Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
+              
+              bN = bN_1 + bN_2 + bN_3 + bN_4; //Sum all b_n terms to come up with the entire b_n coefficient
             
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
               
@@ -581,7 +594,8 @@
               //Plot the point and reset stuff that needs to be reset  
             }  
 
-            var y_pos = ( ( (parseInt(max)-0)/(20-250) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
+          
+            var y_pos = ( ( (250-20)/(0-parseInt(max)) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
 
             test2 = bN;
           
@@ -593,7 +607,7 @@
             y = a0;
          }
         
-        var test = a_n(Math.PI/2,0,parseInt(pulsearray[2]),1);
+        //var test = a_n(Math.PI/2,0,parseInt(pulsearray[2]),1);
         
         
         
