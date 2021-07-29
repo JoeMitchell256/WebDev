@@ -590,7 +590,7 @@
               
               var aN_1 = 5*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_2 = 4*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
-              var aN_3 = 3*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
+              var aN_3 = -3*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
               var aN_4 = 1*(Math.sin( (z+1) * 2*Math.PI ) - Math.sin( (z+1) * 3*Math.PI/2 )) / ( (z+1) * Math.PI );
               
               aN = aN_1 + aN_2 + aN_3 + aN_4; //Sum all a_n terms to come up with the entire a_n coefficient.
