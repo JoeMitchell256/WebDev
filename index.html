@@ -66,15 +66,32 @@
         var pulseHeight4 = ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[3]) ) + 250;
         
         var x_shift = 100;
+        //1 Period
+        var pc = 0;
+        for(pc = 0; pc < 3; pc++){
+          ctx.moveTo(x_shift,pulseHeight1);//Start the square wave at the beginning of the x axis.
+          x_shift+=450/4;                 //Shift the line to the right pi/2
+          ctx.lineTo(x_shift,pulseHeight1);//Make a line to connect the two to complete the first pulse value
+          ctx.moveTo(x_shift,pulseHeight1);//Move the line pointer to the end point of the last pulse
+          ctx.lineTo(x_shift,pulseHeight2);//Now we need to raise/lower the wave based on the next pulse value
+          ctx.moveTo(x_shift,pulseHeight2);//Don't forget to move to that next pulse height
+          x_shift+=450/4;                 //Shift to the right pi/2
+          ctx.lineTo(x_shift,pulseHeight2);//To finish the second pulse value
+          ctx.moveTo(x_shift,pulseHeight2);//Move to the latest point in the wave
+          ctx.lineTo(x_shift,pulseHeight3);//Make a line that connects the last height to the next height
+          ctx.moveTo(x_shift,pulseHeight3);//Moving back to the latest position
+          x_shift+=450/4;                 //Shift to the right pi/2
+          ctx.lineTo(x_shift,pulseHeight3);//Make a line to the next thing
+          ctx.moveTo(x_shift,pulseHeight3);//Move to latest square wave line end point 
+          ctx.lineTo(x_shift,pulseHeight4);//Create last pulse value
+          ctx.moveTo(x_shift,pulseHeight4);//Move to the endpoint of the line
+          x_shift+=450/4;                 //shift pi/2
+          ctx.lineTo(x_shift,pulseHeight4);//Make a line that will draw the last pulse height of the period
+          ctx.moveTo(x_shift,pulseHeight4);//Bring line pointer back to the end of the line
+          ctx.lineTo(x_shift,pulseHeight1);//Bring it back full circle to complete 1 full period!
+        }
         
-        ctx.moveTo(x_shift,pulseHeight1);
-        x_shift+=450/4;
-        ctx.lineTo(x_shift,pulseHeight1);
-        ctx.moveTo(x_shift,pulseHeight1);
-        ctx.lineTo(x_shift,pulseHeight2);
-        x_shift+=450/4;
-        ctx.moveTo(x_shift,pulseHeight2);
-        ctx.lineTo(x_shift,pulseHeight2);
+        
         
         <!-- End of Square Wave drawing -->
         
@@ -143,8 +160,6 @@
         n = parseInt(n);
         
         var test2 = 0;
-        
-        
         
         
         
