@@ -121,8 +121,6 @@
         
         a0 = a0/4;
         
-        //a0 = a0/4; //a_0 coefficient is simply the average from 0 to 2pi!
-        
         //General Form for a_0  END ************************************
         
         //General Form for a_n  START ************************************
@@ -200,12 +198,6 @@
             y = a0;
          }
         
-        //var test = a_n(Math.PI/2,0,parseInt(pulsearray[2]),1);
-        
-        
-        
-        //ctx.fillRect(100,100,5,5);
-        //ctx.fillText(y_pos,10,60);
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -216,10 +208,7 @@
         //y = mx + b
         //b = 250
         //m = (max-0)/(480-250)
-        //y = ( (max-0) )/ (480-250) * y_ + 250
-        
-        
-        
+        //y = ( (250-20) )/(0-max)  * y_ + 250
         
         
         <!-- This is the end of the fourier series expansion section -->
