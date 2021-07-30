@@ -241,7 +241,6 @@
 
 
         <!-- Y-axis scale -->
-        ctx.fillText(max, 90, 20);
         ctx.fillText("0", 90, 250);
         for(i = 0; i < pulsearray.length; i++){
           ctx.fillText(pulsearray[i], 90, ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[i]) ) + 250);
