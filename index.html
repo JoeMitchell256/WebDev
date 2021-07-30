@@ -97,7 +97,7 @@
         i = 0;
         for(i = 0; i < pulsearray.length; i++){
           ctx.moveTo(x_shift,y_shift);
-          y_shift = ( ( (250-20)/(0-parseInt(max)) ) * y ) + 250;
+          y_shift = ( ( (250-20)/(0-parseInt(max)) ) * (pulsearray[i]) ) + 250;
           ctx.lineTo(x_shift,y_shift);
           ctx.moveTo(x_shift,y_shift);
           x_shift += 450/(pulsearray.length);
