@@ -56,54 +56,24 @@
         <!-- This is the start of the square wave -->
         <!-- Any state transitions will require 3 lines, not 2. -->
         <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
-
         
-        //We really only need to draw lines for 0-pi/2, pi-3pi/2, and 3pi/2-2pi
-        /*
-        var pulseHeight1 = ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[0]) ) + 250;
-        var pulseHeight2 = ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[1]) ) + 250;
-        var pulseHeight3 = ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[2]) ) + 250;
-        var pulseHeight4 = ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[3]) ) + 250;
-        */
+        <!-- Modular Square Wave for 3 periods! -->
+        
         var x_shift = 100;
         var y_shift = 250;
-        //1 Period
-        /*
+        
         var pc = 0;
-        for(pc = 0; pc < 3; pc++){
-          ctx.moveTo(x_shift,pulseHeight1);//Start the square wave at the beginning of the x axis.
-          x_shift+=450/4;                 //Shift the line to the right pi/2
-          ctx.lineTo(x_shift,pulseHeight1);//Make a line to connect the two to complete the first pulse value
-          ctx.moveTo(x_shift,pulseHeight1);//Move the line pointer to the end point of the last pulse
-          ctx.lineTo(x_shift,pulseHeight2);//Now we need to raise/lower the wave based on the next pulse value
-          ctx.moveTo(x_shift,pulseHeight2);//Don't forget to move to that next pulse height
-          x_shift+=450/4;                 //Shift to the right pi/2
-          ctx.lineTo(x_shift,pulseHeight2);//To finish the second pulse value
-          ctx.moveTo(x_shift,pulseHeight2);//Move to the latest point in the wave
-          ctx.lineTo(x_shift,pulseHeight3);//Make a line that connects the last height to the next height
-          ctx.moveTo(x_shift,pulseHeight3);//Moving back to the latest position
-          x_shift+=450/4;                 //Shift to the right pi/2
-          ctx.lineTo(x_shift,pulseHeight3);//Make a line to the next thing
-          ctx.moveTo(x_shift,pulseHeight3);//Move to latest square wave line end point 
-          ctx.lineTo(x_shift,pulseHeight4);//Create last pulse value
-          ctx.moveTo(x_shift,pulseHeight4);//Move to the endpoint of the line
-          x_shift+=450/4;                 //shift pi/2
-          ctx.lineTo(x_shift,pulseHeight4);//Make a line that will draw the last pulse height of the period
-          ctx.moveTo(x_shift,pulseHeight4);//Bring line pointer back to the end of the line
-          ctx.lineTo(x_shift,pulseHeight1);//Bring it back full circle to complete 1 full period!
-        }
-        */
-        
         i = 0;
-        for(i = 0; i < pulsearray.length; i++){
-          ctx.moveTo(x_shift,y_shift);
-          y_shift = ( ( (250-20)/(0-parseInt(max)) ) * (pulsearray[i]) ) + 250;
-          ctx.lineTo(x_shift,y_shift);
-          ctx.moveTo(x_shift,y_shift);
-          x_shift += 450/(pulsearray.length);
-          ctx.lineTo(x_shift,y_shift);
+        for(pc = 0; pc < 3; pc++){
+          for(i = 0; i < pulsearray.length; i++){
+            ctx.moveTo(x_shift,y_shift);
+            y_shift = ( ( (250-20)/(0-parseInt(max)) ) * (pulsearray[i]) ) + 250;
+            ctx.lineTo(x_shift,y_shift);
+            ctx.moveTo(x_shift,y_shift);
+            x_shift += 450/(pulsearray.length);
+            ctx.lineTo(x_shift,y_shift);
+          }
         }
-        
         
         <!-- End of Square Wave drawing -->
         
@@ -175,7 +145,7 @@
         
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
-              
+              //Now instead of having 4, we should have n, different pulses...
               var aN_1 = parseInt(pulsearray[0])*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_2 = parseInt(pulsearray[1])*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_3 = parseInt(pulsearray[2])*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
