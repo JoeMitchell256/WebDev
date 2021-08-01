@@ -167,35 +167,11 @@
                 aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
                 bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
               }
-                
-              /*
-              var aN_1 = parseInt(pulsearray[0])*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
-              var aN_2 = parseInt(pulsearray[1])*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
-              var aN_3 = parseInt(pulsearray[2])*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
-              var aN_4 = parseInt(pulsearray[3])*(Math.sin( (z+1) * 2*Math.PI ) - Math.sin( (z+1) * 3*Math.PI/2 )) / ( (z+1) * Math.PI );
-              
-              aN = aN_1 + aN_2 + aN_3 + aN_4; //Sum all a_n terms to come up with the entire a_n coefficient.
-              */
-              /*
-              var bN_1 = parseInt(pulsearray[0])*(Math.cos( (z+1) * Math.PI/2 ) - 1) / ( -1 * (z+1) * Math.PI );
-              var bN_2 = parseInt(pulsearray[1])*(Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
-              var bN_3 = parseInt(pulsearray[2])*(Math.cos( (z+1) * 3*Math.PI/2 ) - Math.cos( (z+1) * Math.PI )) / ( -1 * (z+1) * Math.PI );
-              var bN_4 = parseInt(pulsearray[3])*(Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
-              
-              bN = bN_1 + bN_2 + bN_3 + bN_4; //Sum all b_n terms to come up with the entire b_n coefficient
-              */
-              //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
-              //I think pi/225 is not modular...
-              //How did I get pi/225 again? 2pi / 450
               y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
               //Reset aN and bN in here?
               aN = 0;
               bN = 0;
-              
-              //Plot the point and reset stuff that needs to be reset  
-            }  
-
-          
+            }
             var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
 
             test2 = bN;
@@ -286,7 +262,7 @@
     <div class="container" style = "position:fixed; left:500px; top: 500px;">
       <div class="box-1">
         <h1>Visualizing Fourier Coefficients</h1> <!-- This is the actual 'Title' of the page for the website -->
-        <p>In the bottom left textbox enter a pulsefunction defined by 4 +/- scalar values seperated by a space. In the box next to it enter a number of terms for the fourier series expansion.
+        <p>In the bottom left textbox enter a pulsefunction defined by any number of +/- scalar values seperated by a space. In the box next to it enter a number of terms for the fourier series expansion.
         When ready press the submit button on the far left.</p>
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
