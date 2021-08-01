@@ -154,7 +154,11 @@
         var m = 0;
         n = parseInt(n);
         
-        var test2 = 0;
+        var coordinates = [];
+        
+        function storePointValues(xVal,yVal,array){
+          array.push({x: xVal, y: yVal});
+        }
         
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
         //We also do not know how many divisions we'll have, so we need to modulate it.
@@ -173,15 +177,26 @@
               bN = 0;
             }
             var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-
-            test2 = bN;
           
-            ctx.fillRect(xstart + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
+            storePointValues(xstart + 1*(p+1), y_pos, coordinates);
+          
+            //ctx.fillRect(xstart + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
             y = a0;
          }
         
+        ctx.moveTo(coordinates[0].x, coordinates[0].y);
+        
+        for(i=1; i<coordinates.length-2; i++){
+          var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
+          var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
+          ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
+        }
+        
+        ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+        
+        ctx.stroke();
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
