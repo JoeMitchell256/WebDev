@@ -164,8 +164,8 @@
               //Now instead of having 4, we should have n, different pulses...
               
               for(i = 0; i < pulsearray.length; i++){
-                aN += parseInt(pulsearray[i]) *  ( Math.sin( (z+1) * 2 * Math.PI/(pulsearray.length) * (i+1) ) - Math.sin( ((z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
-                bN += parseInt(pulsearray[i]) *  ( Math.cos( (z+1) * 2 * Math.PI/(pulsearray.length) * (i+1) ) - Math.cos( ((z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
+                aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
+                bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
               }
                 
               /*
