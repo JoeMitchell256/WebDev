@@ -57,17 +57,32 @@
         <!-- Any state transitions will require 3 lines, not 2. -->
         <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
         
+        <!-- Y-axis modular variables -->
+        
+        var ycenter = 250;
+        var ytop = 20;
+        var yend = 480;
+        
+        <!-- Y-axis modular variables end -->
+        
+        <!-- X-axis modular variables -->
+        
+        var xstart = 100;
+        var xend = 1400;
+        
+        <!-- X-axis modular variables end -->
+        
         <!-- Modular Square Wave for 3 periods! -->
         
-        var x_shift = 100;
-        var y_shift = 250;
+        var x_shift = xstart;
+        var y_shift = ycenter;
         
         var pc = 0;
         i = 0;
         for(pc = 0; pc < 3; pc++){
           for(i = 0; i < pulsearray.length; i++){
             ctx.moveTo(x_shift,y_shift);
-            y_shift = ( ( (250-20)/(0-parseInt(max)) ) * (pulsearray[i]) ) + 250;
+            y_shift = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * (pulsearray[i]) ) + ycenter;
             ctx.lineTo(x_shift,y_shift);
             ctx.moveTo(x_shift,y_shift);
             x_shift += 450/(pulsearray.length);
@@ -168,11 +183,11 @@
             }  
 
           
-            var y_pos = ( ( (250-20)/(0-parseInt(max)) ) * y ) + 250;//This y scale converter should provide the proper canvas point y position for the point placement 
+            var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
 
             test2 = bN;
           
-            ctx.fillRect(100 + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
+            ctx.fillRect(xstart + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
             aN = 0
@@ -202,32 +217,32 @@
 
         <!-- From 0 to 2pi -->
 
-        ctx.fillText("pi/2",50+(450/4),280);
-        ctx.fillText("2pi/2",50+(450/2),280);
-        ctx.fillText("3pi/2",50+((450*3)/4),280);
-        ctx.fillText("4pi/2",50+450,280);
+        ctx.fillText("pi/2",50+(450/4),ycenter + 30);
+        ctx.fillText("2pi/2",50+(450/2),ycenter + 30);
+        ctx.fillText("3pi/2",50+((450*3)/4),ycenter + 30);
+        ctx.fillText("4pi/2",50+450,ycenter + 30);
 
         <!-- From 2pi to 4pi -->
 
-        ctx.fillText("5pi/2",50+(450/4)+450,280);
-        ctx.fillText("6pi/2",50+(450/2)+450,280);
-        ctx.fillText("7pi/2",50+((450*3)/4)+450,280);
-        ctx.fillText("8pi/2",50+900,280);
+        ctx.fillText("5pi/2",50+(450/4)+450,ycenter + 30);
+        ctx.fillText("6pi/2",50+(450/2)+450,ycenter + 30);
+        ctx.fillText("7pi/2",50+((450*3)/4)+450,ycenter + 30);
+        ctx.fillText("8pi/2",50+900,ycenter + 30);
 
         <!-- From 4pi to 6pi -->
 
-        ctx.fillText("9pi/2",50+(450/4)+900,280);
-        ctx.fillText("10pi/2",50+(450/2)+900,280);
-        ctx.fillText("11pi/2",50+((450*3)/4)+900,280);
-        ctx.fillText("12pi/2",50+1350,280);
+        ctx.fillText("9pi/2",50+(450/4)+900,ycenter + 30);
+        ctx.fillText("10pi/2",50+(450/2)+900,ycenter + 30);
+        ctx.fillText("11pi/2",50+((450*3)/4)+900,ycenter + 30);
+        ctx.fillText("12pi/2",50+1350,ycenter + 30);
 
 
         <!-- Y-axis scale -->
-        ctx.fillText("0", 90, 250);
+        ctx.fillText("0", xstart - 10, ycenter);
         for(i = 0; i < pulsearray.length; i++){
-          ctx.fillText(pulsearray[i], 90, ( ( (250-20)/(0-parseInt(max)) ) * parseInt(pulsearray[i]) ) + 250);
+          ctx.fillText(pulsearray[i], xstart - 10, ( ( (ycenter-ytop)/(0-parseInt(max)) ) * parseInt(pulsearray[i]) ) + ycenter);
         }
-        ctx.fillText("f(t)",50,230);
+        ctx.fillText("f(t)",xstart - 50,ycenter - 20);
 
         <!-- End of Y-axis creation -->
         
@@ -235,16 +250,16 @@
         
         <!-- New x-axis -->
         
-        ctx.moveTo(50,250);
-        ctx.lineTo(1400,250); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
+        ctx.moveTo(xstart-50,ycenter);
+        ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
         
         <!-- End new x-axis -->
       
-        ctx.moveTo(100,20);
-        ctx.lineTo(100,480); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
+        ctx.moveTo(xstart,ytop);
+        ctx.lineTo(xstart,yend); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
-        ctx.fillText("time (seconds)",450/4 + 450,450);
+        ctx.fillText("time (seconds)",(xstart + xend)/2,yend + 30);
         
         <!-- End of X-axis creation -->
         
