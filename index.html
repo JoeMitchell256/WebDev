@@ -74,6 +74,11 @@
         
         <!-- Modular Square Wave for 3 periods! -->
         
+        //Style
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
         var x_shift = xstart;
         var y_shift = ycenter;
         
@@ -89,7 +94,7 @@
             ctx.lineTo(x_shift,y_shift);
           }
         }
-        
+        ctx.stroke();
         <!-- End of Square Wave drawing -->
         
         
