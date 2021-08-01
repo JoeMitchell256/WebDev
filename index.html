@@ -164,39 +164,34 @@
         //We also do not know how many divisions we'll have, so we need to modulate it.
         
         for(p = 0; p<1350; p++){//1350
-            for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
-              //Now instead of having 4, we should have n, different pulses...
-              
-              for(i = 0; i < pulsearray.length; i++){
-                aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
-                bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
-              }
-              y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));//Increment by 1/100 th instead of 1?
-              //Reset aN and bN in here?
-              aN = 0;
-              bN = 0;
+          for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
+            //Now instead of having 4, we should have n, different pulses...
+            for(i = 0; i < pulsearray.length; i++){
+              aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
+              bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
             }
-            var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-          
-            storePointValues(xstart + 1*(p+1), y_pos, coordinates);
-          
-            //ctx.fillRect(xstart + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
-            ctx.stroke();
-            
-            y = a0;
-         }
+            y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));//Increment by 1/100 th instead of 1?
+            //Reset aN and bN in here?
+            aN = 0;
+            bN = 0;
+          }
+          var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
+          storePointValues(xstart + 1*(p+1), y_pos, coordinates);  
+          y = a0;
+        }
         
         ctx.moveTo(coordinates[0].x, coordinates[0].y);
-        
+
         for(i=1; i<coordinates.length-2; i++){
           var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
           var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
           ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
         }
-        
+        ctx.strokeStyle('#ff0000');
         ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
-        
+
         ctx.stroke();
+        ctx.strokeStyle('#000000');
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -238,7 +233,6 @@
         ctx.fillText("11pi/2",50+((450*3)/4)+900,ycenter + 30);
         ctx.fillText("12pi/2",50+1350,ycenter + 30);
 
-
         <!-- Y-axis scale -->
         ctx.fillText("0", xstart - 10, ycenter);
         for(i = 0; i < pulsearray.length; i++){
@@ -264,11 +258,7 @@
         ctx.fillText("time (seconds)",(xstart + xend)/2,yend + 30);
         
         <!-- End of X-axis creation -->
-        
-        
       }
-      
-      
     </script>
   </head>
   <body>
