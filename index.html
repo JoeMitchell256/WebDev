@@ -195,7 +195,7 @@
 
         ctx.stroke();
         
-        ctx.strokeStyle = '#000000';
+        //ctx.strokeStyle = '#000000';
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -210,7 +210,10 @@
         
         
         <!-- This is the end of the fourier series expansion section -->
-        
+        //Reset the stroke style?
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
 
         <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
 
