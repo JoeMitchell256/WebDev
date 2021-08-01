@@ -105,13 +105,6 @@
         
         //We need a robust way to calculate the integrals for the fourier coefficients
         
-        //a_0 = (1/(2*Math.PI)) * Integral {0,2*Math.PI}, we should do it seperately for each interval (pi/2 intervals)
-        // Since we know that the input must be scalar we know the integral of this function:
-        //a_0 = (1/(2*Math.PI)) * t {0,2*Math.PI} or
-        //a_0 = (1/(2*Math.PI)) * [ s*t {0,pi/2} + s*t {pi/2,pi} + s*t {pi,3pi/2} + s*t {3pi/2,2pi} 
-        
-        //Upper limit - Lower limit
-        
         //General Form for a_0 START ************************************
         //Average of the pulses
         
@@ -151,8 +144,6 @@
         //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
         //Now we can combine all three for loops into one just below this line for simplicity:
         
-        //Test the single test input : "5 4 -3 1"
-        
         var p = 0;
         var y = a0;
         var z = 0;
@@ -188,6 +179,14 @@
         ctx.beginPath();
         ctx.lineWidth = 4;
         ctx.globalAlpha = 0.5; //Should make the fourier series transparent
+        
+        //If we add a button event right here, we may be able to apply the +/- function here.
+        function addFiveTerms(){
+          var fiveterms = document.getElementById("fiveterms").value;
+        }
+        function subFiveTerms(){
+          var fiveterms = document.getElementById("fiveterms").value;
+        }
         
         ctx.moveTo(coordinates[0].x, coordinates[0].y);
 
@@ -284,6 +283,8 @@
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
         <button type="button" onclick="getInputValue();">Submit</button>
+        <button type="button" onclick="addFiveTerms();">Add 5 Terms</button>
+        <button type="button" onclick="subFiveTerms();">Sub 5 Terms</button>
       </div>
     </div>
   </body>
