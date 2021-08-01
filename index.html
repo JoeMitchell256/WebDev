@@ -162,25 +162,28 @@
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               //Now instead of having 4, we should have n, different pulses...
-              /*
+              
               for(i = 0; i < pulsearray.length; i++){
-                aN += parseInt(pulsearray[i]) *  (Math.sin( (z+1) * Math.PI/(pulsearray.length) )) / ( (z+1) * Math.PI );
+                aN += parseInt(pulsearray[i]) *  ( Math.sin( (z+1) * Math.PI/(pulsearray.length) * (i+1) ) - Math.sin( (z+1) * Math.PI/(pulsearray.length) * i ) ) / ( (z+1) * Math.PI );
+                bN += parseInt(pulsearray[i])*   ( Math.cos( (z+1) * Math.PI/(pulsearray.length) * (i+1) ) - Math.cos( (z+1) * Math.PI/(pulsearray.length) * i ) ) / ( -1 * (z+1) * Math.PI );
               }
-                */
+                
+              /*
               var aN_1 = parseInt(pulsearray[0])*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_2 = parseInt(pulsearray[1])*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_3 = parseInt(pulsearray[2])*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
               var aN_4 = parseInt(pulsearray[3])*(Math.sin( (z+1) * 2*Math.PI ) - Math.sin( (z+1) * 3*Math.PI/2 )) / ( (z+1) * Math.PI );
               
               aN = aN_1 + aN_2 + aN_3 + aN_4; //Sum all a_n terms to come up with the entire a_n coefficient.
-
+              */
+              /*
               var bN_1 = parseInt(pulsearray[0])*(Math.cos( (z+1) * Math.PI/2 ) - 1) / ( -1 * (z+1) * Math.PI );
               var bN_2 = parseInt(pulsearray[1])*(Math.cos( (z+1) * Math.PI ) - Math.cos( (z+1) * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
               var bN_3 = parseInt(pulsearray[2])*(Math.cos( (z+1) * 3*Math.PI/2 ) - Math.cos( (z+1) * Math.PI )) / ( -1 * (z+1) * Math.PI );
               var bN_4 = parseInt(pulsearray[3])*(Math.cos( (z+1) * 2 * Math.PI ) - Math.cos( (z+1) * 3 * Math.PI/2 )) / ( -1 * (z+1) * Math.PI );
               
               bN = bN_1 + bN_2 + bN_3 + bN_4; //Sum all b_n terms to come up with the entire b_n coefficient
-            
+              */
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
               
               y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
@@ -196,8 +199,8 @@
             ctx.fillRect(xstart + 1*(p+1),y_pos,3,3); //Shift 1 pixel every point for 1350 total points. We need a y scale converter though...
             ctx.stroke();
             
-            aN = 0
-            bN = 0
+            aN = 0;
+            bN = 0;
             y = a0;
          }
         
