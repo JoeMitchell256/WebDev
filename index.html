@@ -201,7 +201,8 @@
 
             ctx.stroke();
         }
-        
+        //I need to save the image of the canvas before we draw the Fourier Series
+        //var imageData = ctx.getImageData(0,0)
         drawFourierSeries(z);
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
