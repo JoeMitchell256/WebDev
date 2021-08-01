@@ -156,11 +156,17 @@
         
         var test2 = 0;
         
-        
+        //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
+        //We also do not know how many divisions we'll have, so we need to modulate it.
         
         for(p = 0; p<1350; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               //Now instead of having 4, we should have n, different pulses...
+              /*
+              for(i = 0; i < pulsearray.length; i++){
+                aN += parseInt(pulsearray[i]) *  (Math.sin( (z+1) * Math.PI/(pulsearray.length) )) / ( (z+1) * Math.PI );
+              }
+                */
               var aN_1 = parseInt(pulsearray[0])*(Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_2 = parseInt(pulsearray[1])*(Math.sin( (z+1) * Math.PI ) - Math.sin( (z+1) * Math.PI/2 )) / ( (z+1) * Math.PI );
               var aN_3 = parseInt(pulsearray[2])*(Math.sin( (z+1) * 3*Math.PI/2 ) - Math.sin( (z+1) * Math.PI )) / ( (z+1) * Math.PI );
