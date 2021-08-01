@@ -187,6 +187,9 @@
               //At this very point in time we have a_0, a_n, and b_n, so for every point p, we need to calculate f(t) same as before...
               
               y += aN*Math.cos((z+1)*(p+1)*(Math.PI/225)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/225));
+              //Reset aN and bN in here?
+              aN = 0;
+              bN = 0;
               
               //Plot the point and reset stuff that needs to be reset  
             }  
