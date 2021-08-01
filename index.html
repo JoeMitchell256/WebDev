@@ -159,7 +159,7 @@
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
         //We also do not know how many divisions we'll have, so we need to modulate it.
         
-        for(p = 0; p<135000; p++){
+        for(p = 0; p<13500; p++){
             for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
               //Now instead of having 4, we should have n, different pulses...
               
@@ -167,7 +167,7 @@
                 aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
                 bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
               }
-              y += aN*Math.cos((z+1)*(p+1)*(Math.PI/22500)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/22500));
+              y += aN*Math.cos((z+1)*(p+1)*(Math.PI/2250)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/22500));
               //Reset aN and bN in here?
               aN = 0;
               bN = 0;
