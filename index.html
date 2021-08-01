@@ -167,7 +167,7 @@
                 aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
                 bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
               }
-              y += aN*Math.cos((z+1)*(p+1)*(Math.PI/2250)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/22500));
+              y += aN*Math.cos((z+1)*(p+1)*(Math.PI/2250)) + bN*Math.sin((z+1)*(p+1)*(Math.PI/2250));
               //Reset aN and bN in here?
               aN = 0;
               bN = 0;
