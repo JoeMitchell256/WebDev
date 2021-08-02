@@ -37,12 +37,7 @@
           }
         }
         
-        function addFiveTerms(){
-          //var fiveterms = document.getElementById("fiveterms").value;
-        }
-        function subFiveTerms(){
-          //var fiveterms = document.getElementById("fiveterms").value;
-        }
+        
         
         //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
         //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
@@ -202,8 +197,19 @@
             ctx.stroke();
         }
         //I need to save the image of the canvas before we draw the Fourier Series
-        //var imageData = ctx.getImageData(0,0)
+        var beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         drawFourierSeries(z);
+        
+        function addFiveTerms(){
+          z += 5;
+          ctx.putImageData(beforeFourier,0,0);
+          drawFourierSeries(z);
+        }
+        function subFiveTerms(){
+          z -= 5;
+          ctx.putImageData(beforeFourier,0,0);
+          drawFourierSeries(z);
+        }
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
