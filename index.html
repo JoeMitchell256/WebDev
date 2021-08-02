@@ -20,12 +20,14 @@
         ctx = c.getContext("2d");
         ctx.clearRect(0,0,1420,500);
         ctx.beginPath(); //Apparently we need this line???
+        ctx.putImageData(beforeFourier,0,0);
       }
       function subFiveTerms(){
         c = document.getElementById("myCanvas");
         ctx = c.getContext("2d");
         ctx.clearRect(0,0,1420,500);
         ctx.beginPath(); //Apparently we need this line???
+        ctx.putImageData(beforeFourier,0,0);
       }
       
       function getInputValue(){
