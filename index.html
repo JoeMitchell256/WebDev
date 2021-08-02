@@ -15,34 +15,22 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       var beforeFourier;
-      var z;
+      var n;
       
       function addFiveTerms(){
-        c = document.getElementById("myCanvas");
-        ctx = c.getContext("2d");
-        ctx.clearRect(0,0,1420,500);
-        ctx.beginPath(); //Apparently we need this line???
-        ctx.putImageData(beforeFourier,0,0);
-        z+=5;
-        drawFourierSeries(z);
+        
       }
       function subFiveTerms(){
-        c = document.getElementById("myCanvas");
-        ctx = c.getContext("2d");
-        ctx.clearRect(0,0,1420,500);
-        ctx.beginPath(); //Apparently we need this line???
-        ctx.putImageData(beforeFourier,0,0);
-        z-=5;
-        drawFourierSeries(z);
+        
       }
-      
-      
       
       function getInputValue(k){
         
         var pulsefunction = document.getElementById("pulse").value;
         var n = document.getElementById("n").value;
-      
+        if(k === 0){
+          k = n;
+        }
         <!-- Place everything in here? -->
         
         //Take input as an array of values split on single space
@@ -59,8 +47,6 @@
             max = Math.abs(parseInt(pulsearray[i]));
           }
         }
-        
-        
         
         //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
         //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
@@ -286,7 +272,7 @@
         //I need to save the image of the canvas before we draw the Fourier Series
         beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
-        drawFourierSeries(n);
+        drawFourierSeries(k);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
         //Center y coordinate: 250
