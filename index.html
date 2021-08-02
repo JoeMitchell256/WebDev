@@ -14,7 +14,7 @@
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
-      var beforeFourier;
+      //var beforeFourier;
       var n;
       
       
@@ -199,17 +199,14 @@
           return ( ( Math.cos(upper*n) - Math.cos(lower*n) ) * parseInt(s) )/(-1*Math.PI*n);
         }
         
-        
         var bN = 0;
-        
         
         //General Form for b_n END **************************************
         
         //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
         //Now we can combine all three for loops into one just below this line for simplicity:
         
-        
-        z = 0;
+        var z = 0;
         var m = 0;
         n = parseInt(n);
         
@@ -223,8 +220,6 @@
         //We also do not know how many divisions we'll have, so we need to modulate it.
         //We should make the below into a function, that way it wont take so long for us to display 
         function drawFourierSeries(n){
-            var i = 0;
-            var z = 0;
             var p = 0;
             var y = a0;
             var aN = 0;
@@ -265,7 +260,7 @@
         }
         
         //I need to save the image of the canvas before we draw the Fourier Series
-        beforeFourier = ctx.getImageData(0,0,c.width,c.height);
+        //beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
         drawFourierSeries(k);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
