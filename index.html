@@ -38,7 +38,7 @@
       
       
       
-      function getInputValue(){
+      function getInputValue(k){
         
         var pulsefunction = document.getElementById("pulse").value;
         var n = document.getElementById("n").value;
@@ -241,9 +241,13 @@
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
         //We also do not know how many divisions we'll have, so we need to modulate it.
         //We should make the below into a function, that way it wont take so long for us to display 
-        function drawFourierSeries(k){
+        function drawFourierSeries(n){
+            var i = 0;
+            var z = 0;
             var p = 0;
             var y = a0;
+            var aN = 0;
+            var bN = 0;
             for(p = 0; p<1350; p++){//1350
               for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
                 for(i = 0; i < pulsearray.length; i++){
@@ -282,7 +286,7 @@
         //I need to save the image of the canvas before we draw the Fourier Series
         beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
-        drawFourierSeries(z);
+        drawFourierSeries(n);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
         //Center y coordinate: 250
@@ -305,7 +309,7 @@
         When ready press the submit button on the far left.</p>
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
-        <button type="button" onclick="getInputValue();">Submit</button>
+        <button type="button" onclick="getInputValue(0);">Submit</button>
         <button type="button" onclick="addFiveTerms();">Add 5 Terms</button>
         <button type="button" onclick="subFiveTerms();">Sub 5 Terms</button>
       </div>
