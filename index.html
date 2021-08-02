@@ -225,8 +225,7 @@
         //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
         //Now we can combine all three for loops into one just below this line for simplicity:
         
-        var p = 0;
-        var y = a0;
+        
         z = 0;
         var m = 0;
         n = parseInt(n);
@@ -242,6 +241,8 @@
         //We should make the below into a function, that way it wont take so long for us to display 
         
         function drawFourierSeries(k){
+            var p = 0;
+            var y = a0;
             for(p = 0; p<1350; p++){//1350
               for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
                 for(i = 0; i < pulsearray.length; i++){
