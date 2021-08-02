@@ -200,7 +200,7 @@
         var beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
         drawFourierSeries(z);
-        
+        ctx.putImageData(beforeFourier,0,0);
         function addFiveTerms(){
           //z += 5;
           ctx.putImageData(beforeFourier,0,0);
