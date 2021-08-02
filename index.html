@@ -198,6 +198,7 @@
         }
         //I need to save the image of the canvas before we draw the Fourier Series
         var beforeFourier = ctx.getImageData(0,0,c.width,c.height);
+        ctx.stroke();
         drawFourierSeries(z);
         
         function addFiveTerms(){
