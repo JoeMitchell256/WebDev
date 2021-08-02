@@ -15,6 +15,19 @@
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       
+      function addFiveTerms(){
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d");
+        ctx.clearRect(0,0,1420,500);
+        ctx.beginPath(); //Apparently we need this line???
+      }
+      function subFiveTerms(){
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d");
+        ctx.clearRect(0,0,1420,500);
+        ctx.beginPath(); //Apparently we need this line???
+      }
+      
       function getInputValue(){
         
         var pulsefunction = document.getElementById("pulse").value;
@@ -272,18 +285,7 @@
         ctx.fillText("time (seconds)",(xstart + xend)/2,yend + 30);
         
         <!-- End of X-axis creation -->
-        function addFiveTerms(){
-          c = document.getElementById("myCanvas");
-          ctx = c.getContext("2d");
-          ctx.clearRect(0,0,1420,500);
-          ctx.beginPath(); //Apparently we need this line???
-        }
-        function subFiveTerms(){
-          c = document.getElementById("myCanvas");
-          ctx = c.getContext("2d");
-          ctx.clearRect(0,0,1420,500);
-          ctx.beginPath(); //Apparently we need this line???
-        }
+        
         
       }
     </script>
