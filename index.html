@@ -14,6 +14,7 @@
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
+      var beforeFourier;
       
       function addFiveTerms(){
         c = document.getElementById("myCanvas");
@@ -212,7 +213,7 @@
             ctx.stroke();
         }
         //I need to save the image of the canvas before we draw the Fourier Series
-        var beforeFourier = ctx.getImageData(0,0,c.width,c.height);
+        beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
         drawFourierSeries(z);
         //ctx.putImageData(beforeFourier,0,0);
