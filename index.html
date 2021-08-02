@@ -200,17 +200,8 @@
         var beforeFourier = ctx.getImageData(0,0,c.width,c.height);
         ctx.stroke();
         drawFourierSeries(z);
-        ctx.putImageData(beforeFourier,0,0);
-        function addFiveTerms(){
-          //z += 5;
-          ctx.putImageData(beforeFourier,0,0);
-          //drawFourierSeries(z);
-        }
-        function subFiveTerms(){
-          //z -= 5;
-          ctx.putImageData(beforeFourier,0,0);
-          //drawFourierSeries(z);
-        }
+        //ctx.putImageData(beforeFourier,0,0);
+        
         
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -281,6 +272,17 @@
         ctx.fillText("time (seconds)",(xstart + xend)/2,yend + 30);
         
         <!-- End of X-axis creation -->
+        function addFiveTerms(){
+          //z += 5;
+          ctx.putImageData(beforeFourier,0,0);
+          //drawFourierSeries(z);
+        }
+        function subFiveTerms(){
+          //z -= 5;
+          ctx.putImageData(beforeFourier,0,0);
+          //drawFourierSeries(z);
+        }
+        
       }
     </script>
   </head>
