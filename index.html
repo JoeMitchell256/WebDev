@@ -91,7 +91,7 @@
         var twopi = 450;
         for(p=0; p < 3; p++){//Loop for each period
           for(i=0; i < pulsearray.length; i++){//Loop for each pulse value
-            ctx.fillText( 2*(i+1)+(pulsearray.length*p)+"pi/"+pulsearray.length,75+(twopi/pulsearray.length)*((i+1)+(pulsearray.length*p)),ycenter + 30);//Should display proper x-axis for all three periods
+            ctx.fillText( 2*(i+1+p)+(pulsearray.length*p)+"pi/"+pulsearray.length,75+(twopi/pulsearray.length)*((i+1)+(pulsearray.length*p)),ycenter + 30);//Should display proper x-axis for all three periods
           }
         }
         <!-- Y-axis scale -->
