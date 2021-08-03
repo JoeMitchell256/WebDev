@@ -111,7 +111,8 @@
             if(counter%2 == 0){
               ctx.beginPath();
               ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
-            }else if(){
+            }
+            if(counter%2 != 0){
               ctx.lineWidth = 1; //Make pi line width equal to 1.
             }
             ctx.moveTo(xstart+(450/2)*counter , ytop);
