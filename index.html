@@ -81,12 +81,6 @@
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         
-        /*
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
-        ctx.globalAlpha = 1.0;
-        */
         <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
 
         ctx.font = "15px Courier New";
@@ -107,6 +101,16 @@
         }
         ctx.fillText("f(t)",xstart - 50,ycenter - 20);
 
+        <!-- Add the y-axis gridlines here -->
+        //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
+        for(p=0;p<3;p++){
+          for(i=0; i<2; i++){
+            ctx.moveTo(xstart+(450/2)*(i+1) , ytop);
+            ctx.lineTo(xstart+(450/2)*(i+1) , yend);
+            ctx.stroke();
+          }
+        }
+        
         <!-- End of Y-axis creation -->
         
         <!-- Draw new axis for both graphs -->
