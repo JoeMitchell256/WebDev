@@ -105,10 +105,12 @@
 
         <!-- Add the y-axis gridlines here -->
         //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
+        counter = 0;
         for(p=0;p<3;p++){
           for(i=0; i<2; i++){
-            ctx.moveTo(xstart+(450/2)*(i+1+p+1) , ytop);
-            ctx.lineTo(xstart+(450/2)*(i+1+p+1) , yend);
+            ctx.moveTo(xstart+(450/2)*counter , ytop);
+            ctx.lineTo(xstart+(450/2)*counter , yend);
+            counter++;
             ctx.stroke();
           }
         }
