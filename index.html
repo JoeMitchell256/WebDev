@@ -127,6 +127,7 @@
         <!-- End of X-axis creation -->
         
         <!-- Start of Square Wave creation -->
+        ctx.beginPath();
         ctx.lineWidth = 4;
         ctx.strokeStyle = '#00FF00';
         ctx.globalAlpha = 0.5;
@@ -147,6 +148,7 @@
           }
         }
         ctx.stroke();
+        ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         ctx.globalAlpha = 1.0;
