@@ -93,25 +93,33 @@
 
         <!-- From 0 to 2pi -->
 
+        //This is no longer modular! We would ideally want to see the x-axis only show the intervals for the number of terms entered by the user.
+        var twopi = 450;
+        for(p=0; p < 3; p++){//Loop for each period
+          for(i=0; i < pulsearray.length; i++){//Loop for each pulse value
+            ctx.fillText("pi/"+pulsearray.length,50+(twopi/pulsearray.length)*(i+1)*(p+1),ycenter + 30);//Should display proper x-axis for all three periods
+          }
+        }
+        /*
         ctx.fillText("pi/2",50+(450/4),ycenter + 30);
         ctx.fillText("2pi/2",50+(450/2),ycenter + 30);
         ctx.fillText("3pi/2",50+((450*3)/4),ycenter + 30);
         ctx.fillText("4pi/2",50+450,ycenter + 30);
-
+        */
         <!-- From 2pi to 4pi -->
-
+        /*
         ctx.fillText("5pi/2",50+(450/4)+450,ycenter + 30);
         ctx.fillText("6pi/2",50+(450/2)+450,ycenter + 30);
         ctx.fillText("7pi/2",50+((450*3)/4)+450,ycenter + 30);
         ctx.fillText("8pi/2",50+900,ycenter + 30);
-
+        */
         <!-- From 4pi to 6pi -->
-
+        /*
         ctx.fillText("9pi/2",50+(450/4)+900,ycenter + 30);
         ctx.fillText("10pi/2",50+(450/2)+900,ycenter + 30);
         ctx.fillText("11pi/2",50+((450*3)/4)+900,ycenter + 30);
         ctx.fillText("12pi/2",50+1350,ycenter + 30);
-
+        */
         <!-- Y-axis scale -->
         ctx.fillText("0", xstart - 10, ycenter);
         for(i = 0; i < pulsearray.length; i++){
@@ -263,7 +271,7 @@
         
       }
       
-      
+      /*
       function addFiveTerms(){
         var n = document.getElementById("n").value;
         n += 5;
@@ -274,7 +282,7 @@
         n += 5;
         this.getInputValue(n);
       }
-      
+      */
     </script>
   </head>
   <body>
