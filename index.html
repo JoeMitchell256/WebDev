@@ -230,6 +230,7 @@
         var bN = 0;
         
         var coordinates = [];
+        var points = [];
         
         function storePointValues(xVal,yVal,array){
           array.push({x: xVal, y: yVal});
@@ -249,6 +250,9 @@
                 //Reset aN and bN in here?
                 aN = 0;
                 bN = 0;
+              }
+              if(p < twopi){
+                storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
               storePointValues(xstart + 1*(p+1), y_pos, coordinates);  
@@ -280,7 +284,18 @@
         //b = 250
         //m = (max-0)/(480-250)
         //y = ( (250-20) )/(0-max)  * y_ + 250
-        
+        <!-- Calculate the average error per period -->
+        var error = 0;
+        for(p = 0; p < twopi; p++){//We need to figure out which points belong to which pulse value
+          for(i = 0; i < pulsearray.length; i++){
+            if(p < (twopi/pulsearray.length) * (i+1) && p > (twopi/pulsearray.length) * i){//If the point lies inside pulse value index i:
+              error += Math.abs(points[p].y - pulsearray[i]); //Absolute value of the difference between the approximation and actual point value.
+            }
+          }
+        }
+        //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
+        error = error / 450;
+        ctx.fillText("Average error per period: " + error,10,10);//Place average error on the top left hand corner of canvas
       }
       
       /*
