@@ -16,13 +16,8 @@
       var ctx = c.getContext("2d");
       var n;
       var pulsefunction;
-      var dataURL;
       
-      function getInputValue(){
-        
-        pulsefunction = document.getElementById("pulse").value;
-        n = document.getElementById("n").value;
-        
+      function drawGraph(pulsefunction,c,ctx,n){//We need to know what attributes need to be passed to this function
         <!-- Place everything in here? -->
         
         //Take input as an array of values split on single space
@@ -90,6 +85,7 @@
         //This is no longer modular! We would ideally want to see the x-axis only show the intervals for the number of terms entered by the user.
         var twopi = 450;
         var counter = 1;//The mathematical escape character for pi should be : \u03C0
+        var p = 0;
         for(p=0; p < 3; p++){//Loop for each period
           for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
             //ctx.fillText( 2*counter+"\u03C0/"+pulsearray.length,75+(twopi/pulsearray.length)*((i+1)+(pulsearray.length*p)),ycenter + 30);//Should display proper x-axis for all three periods
@@ -188,7 +184,7 @@
         //Average of the pulses
         
         var a0 = 0;
-        
+        var m = 0;
         for(m=0; m<pulsearray.length; m++){
            a0 += parseInt(pulsearray[m]); //a_0 portion
         }
@@ -297,6 +293,15 @@
         error = error / 450;
         ctx.fillText("Average error per period: " + error,10,10);//Place average error on the top left hand corner of canvas
         
+      }
+      
+      
+      function getInputValue(){
+        
+        pulsefunction = document.getElementById("pulse").value;
+        n = document.getElementById("n").value;
+        
+        this.drawGraph(pulsefunction,c,ctx,n);//This function should draw the graphs input by the user to the canvas
         
       }
       
