@@ -295,7 +295,6 @@
         
       }
       
-      
       function getInputValue(){
         
         pulsefunction = document.getElementById("pulse").value;
@@ -305,23 +304,13 @@
         
       }
       
-      
       function addFiveTerms(){
-        //document.getElementById('canvasImg').src = dataURL;
-        //ctx.save();
-        //ctx.beginPath();
-        //ctx.fillText("Here is the value of n: " + n,30,30);
-        //ctx.stroke();
+        n = n+5;
+        this.drawGraph(pulsefunction,c,ctx,n);//This function should draw the graphs input by the user to the canvas
       }
       function subFiveTerms(){
-        ctx.restore();//Restore the state of the canvas before Fourier Series has been drawn
-        ctx.clearRect(0,0,1420,500);
-        ctx.beginPath(); //Apparently we need this line???
-        //ctx.save();
-        //ctx.beginPath();
-        //Here we wish to subtract 5 of the terms from the Fourier Series before adding the Fourier Series
-        //ctx.fillText("Here is the value of n: " + n,30,30);
-        //ctx.stroke();
+        n = n-5;
+        this.drawGraph(pulsefunction,c,ctx,n);//This function should draw the graphs input by the user to the canvas
       }
       
     </script>
