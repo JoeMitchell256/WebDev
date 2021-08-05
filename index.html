@@ -272,6 +272,7 @@
         }
         //I need to save the image of the canvas before we draw the Fourier Series
         ctx.stroke();
+        ctx.save(); //Save the state of the canvas before the Fourier Series is drawn
         drawFourierSeries(n);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -295,20 +296,23 @@
         //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
         error = error / 450;
         ctx.fillText("Average error per period: " + error,10,10);//Place average error on the top left hand corner of canvas
+        
+        
       }
       
       
       function addFiveTerms(){
+        ctx.restore();
         ctx.beginPath();
         ctx.fillText("Here is the value of n: " + n,30,30);
         ctx.stroke();
-        ctx.beginPath();
       }
       function subFiveTerms(){
+        ctx.restore();//Restore the state of the canvas before Fourier Series has been drawn
         ctx.beginPath();
+        //Here we wish to subtract 5 of the terms from the Fourier Series before adding the Fourier Series
         ctx.fillText("Here is the value of n: " + n,30,30);
         ctx.stroke();
-        ctx.beginPath();
       }
       
     </script>
