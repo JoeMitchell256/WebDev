@@ -302,6 +302,8 @@
       
       
       function addFiveTerms(){
+        ctx.clearRect(0,0,1420,500);
+        ctx.beginPath(); //Apparently we need this line???
         ctx.restore();
         //ctx.save();
         //ctx.beginPath();
@@ -310,6 +312,8 @@
       }
       function subFiveTerms(){
         ctx.restore();//Restore the state of the canvas before Fourier Series has been drawn
+        ctx.clearRect(0,0,1420,500);
+        ctx.beginPath(); //Apparently we need this line???
         //ctx.save();
         //ctx.beginPath();
         //Here we wish to subtract 5 of the terms from the Fourier Series before adding the Fourier Series
