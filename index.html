@@ -273,7 +273,6 @@
         }
         //I need to save the image of the canvas before we draw the Fourier Series
         ctx.stroke();
-        dataURL = c.toDataURL();
         drawFourierSeries(n);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
@@ -303,7 +302,7 @@
       
       
       function addFiveTerms(){
-        document.getElementById('canvasImg').src = dataURL;
+        //document.getElementById('canvasImg').src = dataURL;
         //ctx.save();
         //ctx.beginPath();
         //ctx.fillText("Here is the value of n: " + n,30,30);
