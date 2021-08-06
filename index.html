@@ -243,10 +243,12 @@
             pulse = pulse - twopi;
           }
           var squareY = 0;
-          var i = 0;
           for(i = 0; i < pulsearray.length; i++){
-            
+            if(p < (i + 1) * twopi/pulsearray.length && p >= i * twopi/pulsearray.length){
+              squareY = pulsearray[i]; //Assign the proper pulse value based on the point index
+            }
           }
+          return squareY; //Return the proper pulse value based on the point index
         }
         
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
@@ -269,17 +271,9 @@
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
               storePointValues(xstart + 1*(p+1), y_pos, coordinates);
-              //Determine the pulse value based on the point index. If the point index is less than 
-              var squareY = 0;
-              var interval = twopi/pulsearray.length;
-              for(i=0; i < pulsearray.length; i++){//This should really plot the first period of the square wave...
-                if(p < (i+1)*interval && p >= i*interval ){
-                  squareY = pulsearray[i];
-                }else{
-                  squareY = 0;
-                }
-              }
-              var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareY ) + ycenter;
+              //Determine the pulse value based on the point index using the squareYpos function defined above
+              
+              var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
               storePointValues(xstart + 1*(p+1), square_pos, square);
               y = a0;
             }
