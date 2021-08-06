@@ -258,10 +258,12 @@
               //Determine the pulse value based on the point index. If the point index is less than 
               var squareY = 0;
               var interval = twopi/pulsearray.length;
-              if(p < interval && p >= 0){
-                squareY = pulsearray[0];
-              }else{
-                squareY = 0;
+              for(i=0; i < pulsearray.length; i++){//This should really plot the first period of the square wave...
+                if(p < i*interval && p >= (i+1)*interval ){
+                  squareY = pulsearray[i];
+                }else{
+                  squareY = 0;
+                }
               }
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareY ) + ycenter;
               storePointValues(xstart + 1*(p+1), square_pos, square);
