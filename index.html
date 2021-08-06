@@ -259,7 +259,7 @@
               var squareY = 0;
               var interval = twopi/pulsearray.length;
               for(i=0; i < pulsearray.length; i++){//This should really plot the first period of the square wave...
-                if(p < i*interval && p >= (i+1)*interval ){
+                if(p < (i+1)*interval && p >= i*interval ){
                   squareY = pulsearray[i];
                 }else{
                   squareY = 0;
