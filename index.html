@@ -261,7 +261,7 @@
             ctx.beginPath();
             ctx.lineWidth = 4;
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
-            ctx.moveTo(coordinates[0].x, coordinates[0].y);
+            ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
             for(i=1; i<coordinates.length-2; i++){
               if(i >= xMinPval && i < xMaxPval){
                 var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
@@ -278,7 +278,7 @@
             ctx.beginPath();
             ctx.lineWidth = 4;
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
-            ctx.moveTo(square[0].x, square[0].y);
+            ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
             for(i=1; i<square.length-2; i++){
               if(i >= xMinPval && i < xMaxPval){
                 var xc = (square[i].x + square[i + 1].x) / 2;
