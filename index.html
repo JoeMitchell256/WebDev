@@ -257,27 +257,12 @@
               storePointValues(xstart + 1*(p+1), y_pos, coordinates);
               //Determine the pulse value based on the point index. If the point index is less than 
               var squareY = 0;
-              var period = 0;
-              if(p < twopi){
-                for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
-                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length) ) && p > Math.ceil( (i) * (twopi/pulsearray.length) ) ){//Which pulse value is it?
-                    squareY = pulsearray[i]; //Save the square wave pulse value
-                  }
-                }
+              var interval = twopi/pulsearray.length;
+              if(p < interval){
+                squareY = pulsearray[0];
               }
-              if(p > twopi && p < 2*twopi){
-                for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
-                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length + twopi) ) && p > Math.ceil( (i) * (twopi/pulsearray.length + twopi) ) ){//Which pulse value is it?
-                    squareY = pulsearray[i]; //Save the square wave pulse value
-                  }
-                }
-              }
-              if(p > 2*twopi && p < 3*twopi){
-                for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
-                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length + 2*twopi) ) && p > Math.ceil( (i) * (twopi/pulsearray.length + 2*twopi) ) ){//Which pulse value is it?
-                    squareY = pulsearray[i]; //Save the square wave pulse value
-                  }
-                }
+              if(p >= interval){
+                squareY = 0;
               }
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareY ) + ycenter;
               storePointValues(xstart + 1*(p+1), square_pos, square);
