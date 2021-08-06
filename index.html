@@ -258,8 +258,13 @@
               //Determine the pulse value based on the point index. If the point index is less than 
               var squareY = 0;
               var interval = twopi/pulsearray.length;
-              if(p < interval){
-                squareY = pulsearray[0];
+              for(i = 0; i < pulsearray.length; i++){
+                if(p < (i+1) * interval && p >= i * interval){ //This works for the first interval, but we want this to work for all intervals for all points
+                  squareY = pulsearray[i];
+                }
+                if( !(p < (i+1) * interval && p >= i * interval) ){
+                  squareY = 0;//This should only work for 1 period now
+                }
               }
               if(p >= interval){
                 squareY = 0;
