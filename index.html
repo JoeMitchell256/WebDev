@@ -244,7 +244,7 @@
           }
           var squareY = 0;
           for(i = 0; i < pulsearray.length; i++){
-            if(p < (i + 1) * twopi/pulsearray.length && p >= i * twopi/pulsearray.length){
+            if(pulse < (i + 1) * twopi/pulsearray.length && pulse >= i * twopi/pulsearray.length){
               squareY = pulsearray[i]; //Assign the proper pulse value based on the point index
             }
           }
@@ -272,7 +272,6 @@
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
               storePointValues(xstart + 1*(p+1), y_pos, coordinates);
               //Determine the pulse value based on the point index using the squareYpos function defined above
-              
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
               storePointValues(xstart + 1*(p+1), square_pos, square);
               y = a0;
