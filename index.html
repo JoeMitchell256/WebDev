@@ -261,8 +261,7 @@
               for(i = 0; i < pulsearray.length; i++){
                 if(p < (i+1) * interval && p >= i * interval){ //This works for the first interval, but we want this to work for all intervals for all points
                   squareY = pulsearray[i];
-                }
-                if( !(p < (i+1) * interval && p >= i * interval) ){
+                }else{
                   squareY = 0;//This should only work for 1 period now
                 }
               }
