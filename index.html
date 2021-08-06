@@ -16,14 +16,19 @@
       var ctx = c.getContext("2d");
       var n;
       var pulsefunction;
+      var xMin;
+      var xMax;
       
-      function drawGraph(pulsefunction,c,ctx,n){//We need to know what attributes need to be passed to this function
+      function drawGraph(pulsefunction,c,ctx,n,xmin,xmax){//We need to know what attributes need to be passed to this function
         <!-- Place everything in here? -->
-        
-        //Take input as an array of values split on single space
-        
+        //Calculate the point value for the xmin and xmax inputs
+        var twopi = 450;
+        xmin = parseFloat(xmin);
+        xmax = parseFloat(xmax);
+        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));
+        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));
         var i = 0;
-        var pulsearray = pulsefunction.split(" ");
+        var pulsearray = pulsefunction.split(" ");//Take input as an array of values split on single space
       
         //In a for loop find the maximum/minimum value, use the absolute value so you'll only be using positive numbers as reference
         
@@ -83,12 +88,11 @@
         <!-- From 0 to 2pi -->
 
         //This is no longer modular! We would ideally want to see the x-axis only show the intervals for the number of terms entered by the user.
-        var twopi = 450;
+        
         var counter = 1;//The mathematical escape character for pi should be : \u03C0
         var p = 0;
         for(p=0; p < 3; p++){//Loop for each period
           for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
-            //ctx.fillText( 2*counter+"\u03C0/"+pulsearray.length,75+(twopi/pulsearray.length)*((i+1)+(pulsearray.length*p)),ycenter + 30);//Should display proper x-axis for all three periods
             ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),ycenter + 30); //Should label every pi only
             counter++;//Increment 2pi for x-axis
           }
@@ -145,29 +149,6 @@
         <!-- End of X-axis creation -->
         
         <!-- Start of Square Wave creation -->
-        ctx.beginPath();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = '#00FF00';
-        ctx.globalAlpha = 0.5;
-        /*
-        var x_shift = xstart;
-        var y_shift = ycenter;
-        
-        var pc = 0;
-        i = 0;
-        for(pc = 0; pc < 3; pc++){
-          for(i = 0; i < pulsearray.length; i++){
-            ctx.moveTo(x_shift,y_shift);
-            y_shift = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * (pulsearray[i]) ) + ycenter;
-            ctx.lineTo(x_shift,y_shift);
-            ctx.moveTo(x_shift,y_shift);
-            x_shift += 450/(pulsearray.length);
-            ctx.lineTo(x_shift,y_shift);
-          }
-        }
-        
-        ctx.stroke();
-        */
         ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
@@ -282,12 +263,16 @@
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(coordinates[0].x, coordinates[0].y);
             for(i=1; i<coordinates.length-2; i++){
-              var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
-              var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
-              ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
+              if(i >= xMinPval && i < xMaxPval){
+                var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
+                var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
+                ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
+              }
             }
             ctx.strokeStyle = '#775500';
-            ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+            if(i >= xMinPval && i < xMaxPval){
+              ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+            }
             ctx.stroke();
             //Square wave smooth line
             ctx.beginPath();
@@ -295,12 +280,16 @@
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(square[0].x, square[0].y);
             for(i=1; i<square.length-2; i++){
-              var xc = (square[i].x + square[i + 1].x) / 2;
-              var yc = (square[i].y + square[i + 1].y) / 2;
-              ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
+              if(i >= xMinPval && i < xMaxPval){
+                var xc = (square[i].x + square[i + 1].x) / 2;
+                var yc = (square[i].y + square[i + 1].y) / 2;
+                ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
+              }
             }
             ctx.strokeStyle = '#FFF000';//Different color for square wave
-            ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
+            if(i >= xMinPval && i < xMaxPval){
+              ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
+            }
             ctx.stroke();
         }
         //I need to save the image of the canvas before we draw the Fourier Series
@@ -335,6 +324,8 @@
         
         pulsefunction = document.getElementById("pulse").value;
         n = document.getElementById("n").value;
+        xMin = document.getElementById("xMin").value;
+        xMax = document.getElementById("xMax").value;
         
         this.drawGraph(pulsefunction,c,ctx,n);//This function should draw the graphs input by the user to the canvas
         
@@ -359,6 +350,8 @@
         When ready press the submit button on the far left.</p>
         <input type="text" placeholder="Enter pulsefunction here" id="pulse">
         <input type="text" placeholder="Enter a number of terms here" id="n">
+        <input type="text" placeholder="xMin" id="xMin">
+        <input type="text" placeholder="xMax" id="xMax">
         <button type="button" onclick="getInputValue();">Submit</button>
         <button type="button" onclick="addFiveTerms();">Add 5 Terms</button>
         <button type="button" onclick="subFiveTerms();">Sub 5 Terms</button>
@@ -366,4 +359,3 @@
     </div>
   </body>
 </html>
-
