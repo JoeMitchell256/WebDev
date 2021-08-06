@@ -267,14 +267,14 @@
               }
               if(p > twopi && p < 2*twopi){
                 for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
-                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length) ) && p > Math.ceil( (i) * (twopi/pulsearray.length) ) ){//Which pulse value is it?
+                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length + twopi) ) && p > Math.ceil( (i) * (twopi/pulsearray.length + twopi) ) ){//Which pulse value is it?
                     squareY = pulsearray[i]; //Save the square wave pulse value
                   }
                 }
               }
               if(p > 2*twopi && p < 3*twopi){
                 for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
-                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length) ) && p > Math.ceil( (i) * (twopi/pulsearray.length) ) ){//Which pulse value is it?
+                  if(p < Math.ceil( (i+1) * (twopi/pulsearray.length + 2*twopi) ) && p > Math.ceil( (i) * (twopi/pulsearray.length + 2*twopi) ) ){//Which pulse value is it?
                     squareY = pulsearray[i]; //Save the square wave pulse value
                   }
                 }
