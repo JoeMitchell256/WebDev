@@ -149,7 +149,7 @@
         ctx.lineWidth = 4;
         ctx.strokeStyle = '#00FF00';
         ctx.globalAlpha = 0.5;
-        
+        /*
         var x_shift = xstart;
         var y_shift = ycenter;
         
@@ -165,7 +165,9 @@
             ctx.lineTo(x_shift,y_shift);
           }
         }
+        
         ctx.stroke();
+        */
         ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
@@ -227,6 +229,7 @@
         
         var coordinates = [];
         var points = [];
+        var square = [];
         
         function storePointValues(xVal,yVal,array){
           array.push({x: xVal, y: yVal});
@@ -251,9 +254,22 @@
                 storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xstart + 1*(p+1), y_pos, coordinates);  
+              storePointValues(xstart + 1*(p+1), y_pos, coordinates);
+              //Determine the pulse value based on the point index. If the point index is less than 
+              var squareY = 0;
+              var period = 0;
+              for(period = 0; period < 3; period++){//This should cover all periods of the square wave
+                for(i = 0; i < pulsearray.length - 1; i++){//Also need to check to see if p is between the other periods as well.
+                  if(p < Math.ceil((i+1) * (twopi/pulsearray.length + period*twopi) ) && p > Math.ceil((i) * (twopi/pulsearray.length + period*twopi) ) ){//Which pulse value is it?
+                    squareY = pulsearray[i]; //Save the square wave pulse value
+                  }
+                }
+              }
+              var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareY ) + ycenter;
+              storePointValues(xstart + 1*(p+1), square_pos, square);
               y = a0;
             }
+            //Fourier Series smooth line
             ctx.beginPath();
             ctx.lineWidth = 4;
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
@@ -265,6 +281,19 @@
             }
             ctx.strokeStyle = '#775500';
             ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+            ctx.stroke();
+            //Square wave smooth line
+            ctx.beginPath();
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = 0.5; //Should make the fourier series transparent
+            ctx.moveTo(square[0].x, square[0].y);
+            for(i=1; i<square.length-2; i++){
+              var xc = (square[i].x + square[i + 1].x) / 2;
+              var yc = (square[i].y + square[i + 1].y) / 2;
+              ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
+            }
+            ctx.strokeStyle = '#FFF000';//Different color for square wave
+            ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
             ctx.stroke();
         }
         //I need to save the image of the canvas before we draw the Fourier Series
