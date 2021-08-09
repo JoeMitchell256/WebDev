@@ -5,27 +5,13 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <canvas id="back" width="1420" height="500" style="border:1px solid #000000"></canvas>
     <canvas id="myCanvas" width="1420" height="500" style="border:1px solid #000000"></canvas>
-    <script> <!-- type="text/javascript" src="script.js" -->
-      
-      
-      <!-- Beginning of graph construction -->
-      
-      <!-- Develop textboxes for user input -->
+    <script> 
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
       var n, pulsefunction, xMin, xMax, FourierWidth, FourierColor, SquareWidth, SquareColor;
-      /*
-      var pulsefunction;
-      var xMin;
-      var xMax;
-      var FourierWidth;
-      var FourierColor;
-      var SquareWidth;
-      var SquareColor;
-      */
+      
       function drawGraph(pulsefunction,c,ctx,n,xmin,xmax,fw,fc,sw,sc){//We need to know what attributes need to be passed to this function
-        <!-- Place everything in here? -->
         //Calculate the point value for the xmin and xmax inputs
         var twopi = 450;
         xmin = parseFloat(xmin);
