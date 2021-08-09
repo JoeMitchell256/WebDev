@@ -259,7 +259,7 @@
             }
             //Fourier Series smooth line
             ctx.beginPath();
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 10;//Line thickness of the Fourier Series
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
             for(i=1; i<coordinates.length-2; i++){
@@ -269,14 +269,14 @@
                 ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
               }
             }
-            ctx.strokeStyle = '#775500';
+            ctx.strokeStyle = '#775500';//Color of the Fourier Series line
             if(i >= xMinPval && i < xMaxPval){
               ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
             }
             ctx.stroke();
             //Square wave smooth line
             ctx.beginPath();
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 10;//Line thickness of the square wave
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
             for(i=1; i<square.length-2; i++){
@@ -286,7 +286,7 @@
                 ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
               }
             }
-            ctx.strokeStyle = '#FFF000';//Different color for square wave
+            ctx.strokeStyle = '#00FF00';//Different color for square wave
             if(i >= xMinPval && i < xMaxPval){
               ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
             }
