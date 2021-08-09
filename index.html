@@ -14,12 +14,17 @@
       
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
-      var n;
+      var n, pulsefunction, xMin, xMax, FourierWidth, FourierColor, SquareWidth, SquareColor;
+      /*
       var pulsefunction;
       var xMin;
       var xMax;
-      
-      function drawGraph(pulsefunction,c,ctx,n,xmin,xmax){//We need to know what attributes need to be passed to this function
+      var FourierWidth;
+      var FourierColor;
+      var SquareWidth;
+      var SquareColor;
+      */
+      function drawGraph(pulsefunction,c,ctx,n,xmin,xmax,fw,fc,sw,sc){//We need to know what attributes need to be passed to this function
         <!-- Place everything in here? -->
         //Calculate the point value for the xmin and xmax inputs
         var twopi = 450;
@@ -259,7 +264,7 @@
             }
             //Fourier Series smooth line
             ctx.beginPath();
-            ctx.lineWidth = 10;//Line thickness of the Fourier Series
+            ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
             for(i=1; i<coordinates.length-2; i++){
@@ -269,14 +274,14 @@
                 ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
               }
             }
-            ctx.strokeStyle = '#775500';//Color of the Fourier Series line
+            ctx.strokeStyle = fc;//Color of the Fourier Series line '#775500'
             if(i >= xMinPval && i < xMaxPval){
               ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
             }
             ctx.stroke();
             //Square wave smooth line
             ctx.beginPath();
-            ctx.lineWidth = 10;//Line thickness of the square wave
+            ctx.lineWidth = parseInt(sw);//Line thickness of the square wave
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
             for(i=1; i<square.length-2; i++){
@@ -286,7 +291,7 @@
                 ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
               }
             }
-            ctx.strokeStyle = '#00FF00';//Different color for square wave
+            ctx.strokeStyle = sc;//Different color for square wave '#00FF00'
             if(i >= xMinPval && i < xMaxPval){
               ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
             }
@@ -326,18 +331,22 @@
         n = document.getElementById("n").value;
         xMin = document.getElementById("xMin").value;
         xMax = document.getElementById("xMax").value;
+        FourierWidth = document.getElementById("FourierWidth").value;
+        FourierColor = document.getElementById("FourierColor").value;
+        SquareWidth = document.getElementById("SquareWidth").value;
+        SquareColor = document.getElementById("SquareColor").value;
         
-        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax);//This function should draw the graphs input by the user to the canvas
+        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
         
       }
       
       function addFiveTerms(){
         n = n+5;
-        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax);//This function should draw the graphs input by the user to the canvas
+        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
       function subFiveTerms(){
         n = n-5;
-        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax);//This function should draw the graphs input by the user to the canvas
+        this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
       
     </script>
@@ -353,6 +362,10 @@
         <input type="text" placeholder="Enter a number of terms here" id="n">
         <input type="text" placeholder="xMin" id="xMin">
         <input type="text" placeholder="xMax" id="xMax">
+        <input type="text" placeholder="Fourier Series line width" id="FourierWidth">
+        <input type="text" placeholder="Fourier Series color" id="FourierColor">
+        <input type="text" placeholder="Square Wave line width" id="SquareWidth">
+        <input type="text" placeholder="Square Wave color" id="SquareColor">
         <button type="button" onclick="getInputValue();">Submit</button>
         <button type="button" onclick="addFiveTerms();">Add 5 Terms</button>
         <button type="button" onclick="subFiveTerms();">Sub 5 Terms</button>
