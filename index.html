@@ -74,7 +74,7 @@
         
         <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
 
-        ctx.font = "15px Courier New";
+        ctx.font = "30px Courier New";
 
         <!-- From 0 to 2pi -->
 
@@ -88,6 +88,7 @@
             counter++;//Increment 2pi for x-axis
           }
         }
+        
         <!-- Y-axis scale -->
         //Here is where we will add the gridlines for the y-axis
         var yScalePos = 0;
@@ -100,7 +101,10 @@
           ctx.stroke();
         }
         ctx.fillText("f(t)",xstart - 50,ycenter - 20);
-
+        ctx.stroke();
+        
+        ctx.font = "15px Courier New";
+        
         <!-- Add the y-axis gridlines here -->
         //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
         counter = 1;
