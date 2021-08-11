@@ -85,9 +85,9 @@
         for(p=0; p < 3; p++){//Loop for each period
           for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
             if(counter == 1){
-              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 30); //Should label every pi only
+              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
             }else{
-              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 30); //Should label every pi only
+              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
             }
             counter++;//Increment 2pi for x-axis
           }
@@ -143,7 +143,7 @@
         ctx.moveTo(xstart,ytop);
         ctx.lineTo(xstart,yend); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
-        ctx.fillText("t/T",(xstart + xend)/2,yend + 80);
+        ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
         
         <!-- End of X-axis creation -->
         
