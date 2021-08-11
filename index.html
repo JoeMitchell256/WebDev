@@ -4,7 +4,7 @@
     <title>Visualizing Fourier Coefficients</title> <!-- Title of our website in browser -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <canvas id="back" width="1420" height="500" style="border:1px solid #000000"></canvas>
-    <canvas id="myCanvas" width="1420" height="500" style="border:1px solid #000000"></canvas>
+    <canvas id="myCanvas" width="1420" height="550" style="border:1px solid #000000"></canvas>
     <script> 
       
       var c = document.getElementById("myCanvas");
@@ -143,7 +143,7 @@
         ctx.moveTo(xstart,ytop);
         ctx.lineTo(xstart,yend); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
         ctx.stroke();
-        ctx.fillText("t/T",(xstart + xend)/2,yend + 30);
+        ctx.fillText("t/T",(xstart + xend)/2,yend + 80);
         
         <!-- End of X-axis creation -->
         
@@ -346,7 +346,7 @@
     </script>
   </head>
   <body>
-    <div class="container" style = "position:fixed; left:10px; top: 500px;">
+    <div class="container" style = "position:fixed; left:10px; top: 550px;">
       <div class="box-1">
         <h1>Visualizing Fourier Coefficients</h1> <!-- This is the actual 'Title' of the page for the website -->
         <p>In the pulsefunction textbox enter a pulsefunction defined by any number of +/- scalar values seperated by a space. In the number of terms textbox enter a number of terms for the fourier series expansion.
