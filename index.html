@@ -85,9 +85,9 @@
         for(p=0; p < 3; p++){//Loop for each period
           for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
             if(counter == 1){
-              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),ycenter + 30); //Should label every pi only
+              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 30); //Should label every pi only
             }else{
-              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),ycenter + 30); //Should label every pi only
+              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 30); //Should label every pi only
             }
             counter++;//Increment 2pi for x-axis
           }
