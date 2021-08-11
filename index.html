@@ -91,7 +91,16 @@
         
         <!-- Y-axis scale -->
         //Here is where we will add the gridlines for the y-axis
+        //Instead of this, we want to take the max value and add gridlines from that integer value all the way to the absolute value of that integer.
         var yScalePos = 0;
+        for(i = -max; i < max; i++){
+          yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
+          ctx.fillText(i, xstart - 10, yScalePos);
+          ctx.moveTo(xstart,yScalePos);
+          ctx.lineTo(xend,yScalePos);
+          ctx.stroke();
+        }
+        /*
         ctx.fillText("0", xstart - 10, ycenter);
         for(i = 0; i < pulsearray.length; i++){
           yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * parseInt(pulsearray[i]) ) + ycenter;
@@ -100,6 +109,7 @@
           ctx.lineTo(xend,yScalePos);
           ctx.stroke();
         }
+        */
         ctx.fillText("f(t)",xstart - 50,ycenter - 20);
         ctx.stroke();
         
