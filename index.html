@@ -334,12 +334,12 @@
         
       }
       
-      function addFiveTerms(){
-        n = n+5;
+      function addOneTerms(){
+        n = n+1;
         this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
-      function subFiveTerms(){
-        n = n-5;
+      function subOneTerms(){
+        n = n-1;
         this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
       
@@ -362,8 +362,8 @@
         <input type="text" placeholder="Square Wave line width" id="SquareWidth">
         <input type="text" placeholder="Square Wave color" id="SquareColor">
         <button type="button" onclick="getInputValue();">Submit</button>
-        <button type="button" onclick="addFiveTerms();">Add 5 Terms</button>
-        <button type="button" onclick="subFiveTerms();">Sub 5 Terms</button>
+        <button type="button" onclick="addOneTerms();">Add 1 Term</button>
+        <button type="button" onclick="subOneTerms();">Sub 1 Term</button>
       </div>
     </div>
   </body>
