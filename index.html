@@ -99,7 +99,7 @@
         var yScalePos = 0;
         for(i = -max; i < max+1; i++){
           yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
-          ctx.fillText(i, xstart - 10, yScalePos);
+          ctx.fillText(i, xstart - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
           ctx.moveTo(xstart,yScalePos);
           ctx.lineTo(xend,yScalePos);
           ctx.stroke();
