@@ -18,8 +18,9 @@
       }
       
       function drawYaxis(ctx,xstart,ytop,yend){
-        
-        //ctx.stroke();
+        ctx.moveTo(xstart,ytop);
+        ctx.lineTo(xstart,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
+        ctx.stroke();
       }
       
       function drawGridlines(){
@@ -163,7 +164,7 @@
         
         
         
-        //this.drawYaxis(ctx,xstart,ytop,yend);
+        this.drawYaxis(ctx,xstart,ytop,yend);
         
         /*
         ctx.moveTo(xstart,ytop);
