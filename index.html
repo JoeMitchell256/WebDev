@@ -11,23 +11,82 @@
       var ctx = c.getContext("2d");
       var n, pulsefunction, xMin, xMax, FourierWidth, FourierColor, SquareWidth, SquareColor;
       
-      
-      function drawXaxis(ctx,xstart,yend,xend){
+      //All four of the below functions are helper functions to make the x limits fully modular!
+      function drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i){ <!-- This function holds all related x axis code -->
+        
+        // X-axis Line
+        ctx.moveTo(xstart-50,ycenter);
+        ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
+        
+        // X-axis title
         ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
+        
+        // X-axis scale
+        var counter = 1;//The mathematical escape character for pi should be : \u03C0
+        var p = 0;
+        for(p=0; p < 3; p++){//Loop for each period
+          for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
+            if(counter == 1){
+              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
+            }else{
+              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
+            }
+            counter++;//Increment 2pi for x-axis
+          }
+        }
+        
         ctx.stroke();
       }
       
-      function drawYaxis(ctx,xstart,ytop,yend){
+      function drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend){ <!-- This function holds all related y axis code -->
+        
+        // Y-axis line
         ctx.moveTo(xstart,ytop);
         ctx.lineTo(xstart,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
+        
+        // Y-axis scale
+        var yScalePos = 0;
+        for(i = -max; i < max+1; i++){
+          yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
+          ctx.fillText(i, xstart - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+          ctx.moveTo(xstart,yScalePos);
+          ctx.lineTo(xend,yScalePos);
+          ctx.stroke();
+        }
+        // Y-axis title
+        ctx.fillText("f(t)",xstart - 75,ycenter - 20);
+        ctx.stroke();
+        
+        
         ctx.stroke();
       }
       
-      function drawGridlines(){
+      function drawGridlines(ctx,xstart,ytop,yend,i){ <!-- This function holds all related gridlines creation -->
+        <!-- Add the y-axis gridlines here -->
+        //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
+        counter = 1;
+        for(p=0;p<3;p++){
+          for(i=0; i<2; i++){
+            if(counter%2 == 0){
+              ctx.beginPath();
+              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+            }
+            if(counter%2 != 0){
+              ctx.lineWidth = 1; //Make pi line width equal to 1.
+            }
+            ctx.moveTo(xstart+(450/2)*counter , ytop);
+            ctx.lineTo(xstart+(450/2)*counter , yend);
+            counter++;
+            ctx.stroke();
+          }
+        }
+        ctx.lineWidth = 1;
+        
+        
         
       }
       
-      function drawFunctions(){
+      function drawFunctions(){ <!-- This function will graph the square wave and fourier series equations -->
         
       }
       
@@ -85,7 +144,6 @@
         
         <!-- X-axis modular variables end -->
         
-        <!-- Modular Square Wave for 3 periods! -->
         
         //Style
         ctx.beginPath();
@@ -99,7 +157,7 @@
         <!-- From 0 to 2pi -->
 
         //This is no longer modular! We would ideally want to see the x-axis only show the intervals for the number of terms entered by the user.
-        
+        /*
         var counter = 1;//The mathematical escape character for pi should be : \u03C0
         var p = 0;
         for(p=0; p < 3; p++){//Loop for each period
@@ -112,10 +170,11 @@
             counter++;//Increment 2pi for x-axis
           }
         }
-        
+        */
         <!-- Y-axis scale -->
         //Here is where we will add the gridlines for the y-axis
         //Instead of this, we want to take the max value and add gridlines from that integer value all the way to the absolute value of that integer.
+        /*
         var yScalePos = 0;
         for(i = -max; i < max+1; i++){
           yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
@@ -126,28 +185,11 @@
         }
         ctx.fillText("f(t)",xstart - 75,ycenter - 20);
         ctx.stroke();
-        
+        */
         ctx.font = "30px Courier New";
         
-        <!-- Add the y-axis gridlines here -->
-        //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
-        counter = 1;
-        for(p=0;p<3;p++){
-          for(i=0; i<2; i++){
-            if(counter%2 == 0){
-              ctx.beginPath();
-              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
-            }
-            if(counter%2 != 0){
-              ctx.lineWidth = 1; //Make pi line width equal to 1.
-            }
-            ctx.moveTo(xstart+(450/2)*counter , ytop);
-            ctx.lineTo(xstart+(450/2)*counter , yend);
-            counter++;
-            ctx.stroke();
-          }
-        }
-        ctx.lineWidth = 1;
+        this.drawGridlines(ctx,,xstart,ytop,yend,i);
+        
         <!-- End of Y-axis creation -->
         
         <!-- Draw new axis for both graphs -->
@@ -160,11 +202,11 @@
         
         <!-- End new x-axis -->
       
-        this.drawXaxis(ctx,xstart,yend,xend);
+        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
         
         
         
-        this.drawYaxis(ctx,xstart,ytop,yend);
+        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
         /*
         ctx.moveTo(xstart,ytop);
