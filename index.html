@@ -12,18 +12,12 @@
       var n, pulsefunction, xMin, xMax, FourierWidth, FourierColor, SquareWidth, SquareColor;
       
       
-      function drawXaxis(ctx,xstart,yend,xend){
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
+      function drawXaxis(xstart,yend,xend){
         ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
         ctx.stroke();
       }
       
-      function drawYaxis(ctx,xstart,ytop,yend){
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
+      function drawYaxis(xstart,ytop,yend){
         ctx.moveTo(xstart,ytop);
         ctx.lineTo(xstart,yend); <!-- We want to place this y-axis line according to the selected x limits -->
         ctx.stroke();
