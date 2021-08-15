@@ -87,21 +87,21 @@
         //a scroll bar
         
         counter = 1;
-        for(p=0;p<3;p++){
-          for(i=0; i<2; i++){
-            if(counter%2 == 0){
-              ctx.beginPath();
-              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
-            }
-            if(counter%2 != 0){
-              ctx.lineWidth = 1; //Make pi line width equal to 1.
-            }
-            ctx.moveTo(xbegin+interval*counter , ytop);
-            ctx.lineTo(xstart+interval*counter , yend);
-            counter++;
-            ctx.stroke();
+        //for(p=0;p<3;p++){
+        for(i=0; i<numVertical; i++){
+          if(counter%2 == 0){
+            ctx.beginPath();
+            ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
+          if(counter%2 != 0){
+            ctx.lineWidth = 1; //Make pi line width equal to 1.
+          }
+          ctx.moveTo(xbegin+interval*counter , ytop);
+          ctx.lineTo(xbegin+interval*counter , yend);
+          counter++;
+          ctx.stroke();
         }
+        //}
         ctx.lineWidth = 1;
         
         // x-axis gridlines
