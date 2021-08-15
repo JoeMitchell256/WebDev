@@ -87,6 +87,7 @@
         }
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
         //a scroll bar
+        ctx.beginPath();
         var count;
         counter = 1;
         for(i=0; i<numVertical; i++){
@@ -97,6 +98,7 @@
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
           if( (count % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+            ctx.beginPath();
             ctx.lineWidth = 1; //Make pi line width equal to 1.
           }
           ctx.moveTo(xbegin+interval*counter , ytop);
