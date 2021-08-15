@@ -72,6 +72,8 @@
         var numVertical = Math.abs(xMax - xMin); //This should be the total number of lines that are required for the modular graph creation.
         var xbegin = xstart - 50;
         
+        var min = xMin;
+        var max = xMax;
         //Now that we have the total number of vertical gridlines, we need to determine how to place the lines on the x axis
         
         var xSize = xend - 50;
@@ -85,10 +87,10 @@
         }
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
         //a scroll bar
-        
+        var count;
         counter = 1;
         for(i=0; i<numVertical; i++){
-          var count = i + xMin;
+          count = i + min;
           if( count % 2 == 0){
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
