@@ -94,7 +94,7 @@
         counter = 1;
         for(i=0; i<numVertical; i++){
           count = i + min;
-          if( (count % 2) === 0){
+          if( (count % 2) == 0){
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
@@ -102,8 +102,8 @@
             ctx.beginPath();
             ctx.lineWidth = 1; //Make pi line width equal to 1.
           }
-          ctx.beginPath();
-          ctx.lineWidth = 8;
+          //ctx.beginPath();
+          //ctx.lineWidth = 8;
           ctx.moveTo(xbegin+interval*counter , ytop);
           ctx.lineTo(xbegin+interval*counter , yend);
           counter++;
