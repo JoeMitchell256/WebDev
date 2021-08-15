@@ -87,13 +87,13 @@
         //a scroll bar
         
         counter = 1;
-        //for(p=0;p<3;p++){
         for(i=0; i<numVertical; i++){
-          if((i + xMin)%2 == 0){
+          var count = i + xMin;
+          if( count % 2 == 0){
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
-          if((i + xMin)%2 != 0){//This modification should place the proper 2pi vertical gridlines!
+          if( count % 2 != 0){//This modification should place the proper 2pi vertical gridlines!
             ctx.lineWidth = 1; //Make pi line width equal to 1.
           }
           ctx.moveTo(xbegin+interval*counter , ytop);
@@ -101,7 +101,6 @@
           counter++;
           ctx.stroke();
         }
-        //}
         ctx.lineWidth = 1;
         
         // x-axis gridlines
