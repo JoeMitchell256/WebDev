@@ -91,7 +91,7 @@
         counter = 1;
         for(i=0; i<numVertical; i++){
           count = i + min;
-          //ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+          ctx.lineWidth = 18; //For 2 pi make the gridline thickness larger
           if( (count % 2) === 0){
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
@@ -104,7 +104,6 @@
           counter++;
           ctx.stroke();
         }
-        //ctx.lineWidth = 1;
         
         // x-axis gridlines
       }
@@ -195,11 +194,9 @@
       
         this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
         
-        ctx.stroke();
         
         this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
-        ctx.stroke();
         
         ctx.beginPath();
         ctx.lineWidth = 1;
