@@ -91,13 +91,13 @@
         //ctx.lineWidth = 8;//This should change the width of the line to 8...
         
         var count = 0;
-        counter = 1;
-        for(i=0; i<numVertical; i++){
-          if( ((i + xMin) % 2) == 0){//Why is this never executing?
+        counter = xMin;
+        for(i=0; i<(xMax+1); i++){
+          if( (counter % 2) == 0){//Why is this never executing?
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
-          if( ((i + xMax) % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+          if( (counter % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
             ctx.beginPath();
             ctx.lineWidth = 1; //Make pi line width equal to 1.
           }
