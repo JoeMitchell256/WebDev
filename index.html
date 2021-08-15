@@ -90,20 +90,17 @@
         //ctx.beginPath();
         //ctx.lineWidth = 8;//This should change the width of the line to 8...
         
-        var count = 0;
-        counter = xMin;
-        for(i=0; i<(xMax+1); i++){
-          if( (counter % 2) == 0){//Why is this never executing?
+        for(i=xMin; i<(xMax+1); i++){
+          if( (i % 2) == 0){//Why is this never executing?
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
           }
-          if( (counter % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+          if( (i % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
             ctx.beginPath();
             ctx.lineWidth = 1; //Make pi line width equal to 1.
           }
-          ctx.moveTo(xbegin+interval*counter , ytop);
-          ctx.lineTo(xbegin+interval*counter , yend);
-          counter++;
+          ctx.moveTo(xbegin+interval*(i-1) , ytop);
+          ctx.lineTo(xbegin+interval*(i-1) , yend);
           ctx.stroke();
         }
         // x-axis gridlines
