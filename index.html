@@ -44,11 +44,15 @@
         ctx.moveTo(xstart,ytop);
         ctx.lineTo(xstart,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
         
-        // Y-axis scale
+        // Y-axis scale and y-axis gridlines...
         var yScalePos = 0;
         for(i = -max; i < max+1; i++){
           yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
-          ctx.fillText(i, xstart - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+          if(i >= 0){//This shift should be modulated based on the x limits
+            ctx.fillText(i, xstart - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+          }else{
+            ctx.fillText(i, xstart - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+          }
           ctx.moveTo(xstart,yScalePos);
           ctx.lineTo(xend,yScalePos);
           ctx.stroke();
@@ -61,9 +65,26 @@
         ctx.stroke();
       }
       
-      function drawGridlines(ctx,xstart,ytop,yend,i){ <!-- This function holds all related gridlines creation -->
+      function drawGridlines(ctx,xstart,xend,ytop,yend,i){ <!-- This function holds all related gridlines creation -->
         <!-- Add the y-axis gridlines here -->
-        //Every 2pi is 450 pixels from x-start. So In a loop we will add gridlines from period 1 to period 3
+        //This should be modular based on the limits provided by the user. So, whatever our x axis range is, should determine the placement of the axis
+        
+        var numVertical = xMax - xMin; //This should be the total number of lines that are required for the modular graph creation.
+        var xbegin = xstart + 50;
+        
+        //Now that we have the total number of vertical gridlines, we need to determine how to place the lines on the x axis
+        
+        var xSize = xbegin + xend;
+        var interval = 0;
+        if(xMax < 0 && xMin < 0){
+        
+          interval = xSize / (numVertical + 1); //Interval between each of the vertical axis
+        
+        }
+        
+        //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
+        //a scroll bar
+        
         counter = 1;
         for(p=0;p<3;p++){
           for(i=0; i<2; i++){
@@ -74,16 +95,15 @@
             if(counter%2 != 0){
               ctx.lineWidth = 1; //Make pi line width equal to 1.
             }
-            ctx.moveTo(xstart+(450/2)*counter , ytop);
-            ctx.lineTo(xstart+(450/2)*counter , yend);
+            ctx.moveTo(xbegin+interval*counter , ytop);
+            ctx.lineTo(xstart+interval*counter , yend);
             counter++;
             ctx.stroke();
           }
         }
         ctx.lineWidth = 1;
         
-        
-        
+        // x-axis gridlines
       }
       
       function drawFunctions(){ <!-- This function will graph the square wave and fourier series equations -->
@@ -154,41 +174,9 @@
 
         ctx.font = "30px Courier New";
 
-        <!-- From 0 to 2pi -->
-
-        //This is no longer modular! We would ideally want to see the x-axis only show the intervals for the number of terms entered by the user.
-        /*
-        var counter = 1;//The mathematical escape character for pi should be : \u03C0
-        var p = 0;
-        for(p=0; p < 3; p++){//Loop for each period
-          for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
-            if(counter == 1){
-              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
-            }else{
-              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
-            }
-            counter++;//Increment 2pi for x-axis
-          }
-        }
-        */
-        <!-- Y-axis scale -->
-        //Here is where we will add the gridlines for the y-axis
-        //Instead of this, we want to take the max value and add gridlines from that integer value all the way to the absolute value of that integer.
-        /*
-        var yScalePos = 0;
-        for(i = -max; i < max+1; i++){
-          yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
-          ctx.fillText(i, xstart - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
-          ctx.moveTo(xstart,yScalePos);
-          ctx.lineTo(xend,yScalePos);
-          ctx.stroke();
-        }
-        ctx.fillText("f(t)",xstart - 75,ycenter - 20);
-        ctx.stroke();
-        */
         ctx.font = "30px Courier New";
         
-        this.drawGridlines(ctx,xstart,ytop,yend,i);
+        this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
         
         <!-- End of Y-axis creation -->
         
@@ -208,23 +196,10 @@
         
         this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
-        /*
-        ctx.moveTo(xstart,ytop);
-        ctx.lineTo(xstart,yend); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
-        ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
-        ctx.stroke();
-        */
-        
-        <!-- End of X-axis creation -->
-        
-        <!-- Start of Square Wave creation -->
         ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         ctx.globalAlpha = 1.0;
-        <!-- End of Square Wave drawing -->
-        
-        
         <!-- This is where the points must be drawn!!!  -->
         <!-- This section of the program will plot the points for the Fourier Series! -->
         <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
