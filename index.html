@@ -69,7 +69,7 @@
         <!-- Add the y-axis gridlines here -->
         //This should be modular based on the limits provided by the user. So, whatever our x axis range is, should determine the placement of the axis
         
-        var numVertical = Math.abs(Math.floor(xMax) - Math.floor(xMin)); //This should be the total number of lines that are required for the modular graph creation.
+        var numVertical = Math.abs(Math.ceil(xMax) - Math.ceil(xMin)); //This should be the total number of lines that are required for the modular graph creation.
         
         var min = xMin;
         var max = xMax;
