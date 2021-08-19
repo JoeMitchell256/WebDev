@@ -90,18 +90,35 @@
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
         //a scroll bar
         
-        for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
-          if( (i % 2) == 0){//Why is this never executing?
-            ctx.beginPath();
-            ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+        if (min < 0 && max < 0){
+          for(i=Math.abs(min); i>=(Math.abs(max)); i--){
+            if( (i % 2) == 0){
+              ctx.beginPath();
+              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+            }
+            if( (i % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+              ctx.beginPath();
+              ctx.lineWidth = 1; //Make pi line width equal to 1.
+            }
+            ctx.moveTo(xstart+interval*(i) , ytop);
+            ctx.lineTo(xstart+interval*(i) , yend);
+            ctx.stroke();
           }
-          if( (i % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
-            ctx.beginPath();
-            ctx.lineWidth = 1; //Make pi line width equal to 1.
+        }
+        if(min > 0 && max > 0){
+          for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
+            if( (i % 2) == 0){//Why is this never executing?
+              ctx.beginPath();
+              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+            }
+            if( (i % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+              ctx.beginPath();
+              ctx.lineWidth = 1; //Make pi line width equal to 1.
+            }
+            ctx.moveTo(xstart+interval*(i) , ytop);
+            ctx.lineTo(xstart+interval*(i) , yend);
+            ctx.stroke();
           }
-          ctx.moveTo(xstart+interval*(i) , ytop);
-          ctx.lineTo(xstart+interval*(i) , yend);
-          ctx.stroke();
         }
         ctx.lineWidth = 1;
         // x-axis gridlines
