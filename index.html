@@ -56,6 +56,9 @@
         ctx.moveTo(xpos,ytop);
         ctx.lineTo(xpos,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
         
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
         // Y-axis scale and y-axis gridlines...
         var yScalePos = 0;
         for(i = -max; i < max+1; i++){
