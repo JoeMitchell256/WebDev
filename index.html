@@ -77,19 +77,20 @@
         
         var xSize = xend - xstart;
         var interval = 0;
+        
+        interval = xSize / numVertical;
+        
         if(min <= -1 && max <= -1){//Y-axis right justified   Case #1
           interval = xSize / (numVertical + 1); //Interval between each of the vertical axis
         }
         if(min >= 1 && max >= 1){//Y-axis left justified    Case #2
           interval = xSize / (numVertical + 1); //Interval between each of the vertical axis
         }
-        if(min <= 0 && max >= 0){//Y-axis in the middle   Case #3
-          
-        }
+        
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
         //a scroll bar
         
-        for(i=min; i<(max+1); i++){
+        for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
           if( (i % 2) == 0){//Why is this never executing?
             ctx.beginPath();
             ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
