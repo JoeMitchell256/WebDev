@@ -216,11 +216,14 @@
 
         ctx.font = "30px Courier New";
 
-        ctx.font = "30px Courier New";
+        //ctx.font = "30px Courier New";
         
         this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
         
         ctx.stroke();
+        
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
         
         <!-- End of Y-axis creation -->
         
