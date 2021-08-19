@@ -14,6 +14,9 @@
       //All four of the below functions are helper functions to make the x limits fully modular!
       function drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i){ <!-- This function holds all related x axis code -->
         
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
         // X-axis Line
         ctx.moveTo(xstart-50,ycenter);
         ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
