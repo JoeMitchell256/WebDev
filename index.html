@@ -44,9 +44,9 @@
       function drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend){ <!-- This function holds all related y axis code -->
         
         // Y-axis line
-        ctx.lineWidth = 15;
-        ctx.strokeStyle = '#00FF00';
-        
+        //ctx.lineWidth = 15;
+        //ctx.strokeStyle = '#00FF00';
+        /*
         var xpos = 0;
         
         if(xMin >= 1 && xMax >= 1){
@@ -55,15 +55,15 @@
         if(xMin <= -1 && xMax <= -1){
           xpos = xend;
         }
-        
+        */
         ctx.moveTo(xpos,ytop);
         ctx.lineTo(xpos,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
         
         ctx.stroke();//I just want to color the line that is the y axis...
         
         //ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
+        //ctx.lineWidth = 1;
+        //ctx.strokeStyle = '#000000';
         
         // Y-axis scale and y-axis gridlines...
         var yScalePos = 0;
@@ -218,7 +218,16 @@
 
         //ctx.font = "30px Courier New";
         
-        this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
+        var xpos = 0;
+        
+        if(xMin >= 1 && xMax >= 1){
+          xpos = xstart;
+        }
+        if(xMin <= -1 && xMax <= -1){
+          xpos = xend;
+        }
+        
+        this.drawGridlines(ctx,xpos,xend,ytop,yend,i);
         
         ctx.stroke();
         
@@ -237,10 +246,10 @@
         
         <!-- End new x-axis -->
       
-        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
+        this.drawXaxis(ctx,xpos,yend,xend,twopi,ycenter,i);
         
         
-        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
+        this.drawYaxis(ctx,xpos,ytop,yend,ycenter,max,i,xend);
         
         
         ctx.beginPath();
