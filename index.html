@@ -25,6 +25,7 @@
         ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
         
         // X-axis scale
+        /*
         var counter = 1;//The mathematical escape character for pi should be : \u03C0
         var p = 0;
         for(p=0; p < 3; p++){//Loop for each period
@@ -37,7 +38,7 @@
             counter++;//Increment 2pi for x-axis
           }
         }
-        
+        */
         ctx.stroke();
       }
       
@@ -138,6 +139,14 @@
             }
             ctx.moveTo(xstart+interval*(counter) , ytop);
             ctx.lineTo(xstart+interval*(counter) , yend);
+            
+            if(counter == 1){
+              ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }else{
+              ctx.fillText( counter+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }
+            
+            
             counter++;
             ctx.stroke();
           }
@@ -154,6 +163,13 @@
             }
             ctx.moveTo(xstart+interval*(counter + 1) , ytop);
             ctx.lineTo(xstart+interval*(counter + 1) , yend);
+            
+            if(counter == 1){
+              ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }else{
+              ctx.fillText( counter+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }
+            
             counter++;
             ctx.stroke();
           }
