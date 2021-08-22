@@ -24,21 +24,6 @@
         // X-axis title
         ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
         
-        // X-axis scale
-        /*
-        var counter = 1;//The mathematical escape character for pi should be : \u03C0
-        var p = 0;
-        for(p=0; p < 3; p++){//Loop for each period
-          for(i=0; i < 2; i++){//Loop for each pulse value (i < pulsearray.length)
-            if(counter == 1){
-              ctx.fillText( "\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
-            }else{
-              ctx.fillText( counter+"\u03C0",xstart+(twopi/2)*(counter),yend + 60); //Should label every pi only
-            }
-            counter++;//Increment 2pi for x-axis
-          }
-        }
-        */
         ctx.stroke();
       }
       
@@ -76,12 +61,17 @@
             }else{
               ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
             }
-          }
-          if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+          }else if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
             if(i >= 0){//This shift should be modulated based on the x limits
               ctx.fillText(i, xpos + 15, yScalePos);//Further shift the y scale off of the y axis for visibility
             }else{
               ctx.fillText(i, xpos + 25, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
+          }else{//In case of case 3, draw the y scale on the right side of the graph
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
             }
           }
           ctx.moveTo(xstart,yScalePos);
@@ -155,7 +145,7 @@
             ctx.stroke();
           }
         }
-        if (min > 0 && max > 0){
+        else if (min > 0 && max > 0){
           for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
             if( (i % 2) == 0){//Why is this never executing?
               ctx.beginPath();
@@ -174,6 +164,31 @@
               ctx.fillText( "-\u03C0",xstart+interval*(counter+1),yend + 20); //Should label every pi only
             }else{
               ctx.fillText( count+"\u03C0",xstart+interval*(counter+1),yend + 20); //Should label every pi only
+            }
+            
+            counter++;
+            count++;
+            ctx.stroke();
+          }
+        } else{ //x limits run through 0 not necessarily on one side of the y axis
+          for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
+            if( (i % 2) == 0){//Why is this never executing?
+              ctx.beginPath();
+              ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
+            }
+            if( (i % 2) != 0){//This modification should place the proper 2pi vertical gridlines!
+              ctx.beginPath();
+              ctx.lineWidth = 1; //Make pi line width equal to 1.
+            }
+            ctx.moveTo(xstart+interval*(counter) , ytop); //The first vertical gridline should start where counter is 0. But if count is 0, then we need to emphasis that as the y axis
+            ctx.lineTo(xstart+interval*(counter) , yend);
+            
+            if(count == 1){
+              ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }else if(count == -1){
+              ctx.fillText( "-\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+            }else{
+              ctx.fillText( count+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }
             
             counter++;
