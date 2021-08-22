@@ -276,9 +276,10 @@
         
         if(xMin >= 1 && xMax >= 1){
           xpos = xstart;
-        }
-        if(xMin <= -1 && xMax <= -1){
+        }else if(xMin <= -1 && xMax <= -1){
           xpos = xend;
+        }else{
+          xpos = xstart;
         }
         
         this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
