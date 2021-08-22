@@ -67,12 +67,21 @@
         
         // Y-axis scale and y-axis gridlines...
         var yScalePos = 0;
-        for(i = -max; i < max+1; i++){
+        for(i = -max; i < max+1; i++){ //Can I draw the x-scale here as well?
           yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
-          if(i >= 0){//This shift should be modulated based on the x limits
-            ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
-          }else{
-            ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+          if(xMin >= 1 && xMax >= 1){
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
+          }
+          if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos + 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos + 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
           }
           ctx.moveTo(xstart,yScalePos);
           ctx.lineTo(xend,yScalePos);
@@ -128,7 +137,7 @@
             ctx.stroke();
           }
         }
-        if(min > 0 && max > 0){
+        if (min > 0 && max > 0){
           for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
             if( (i % 2) == 0){//Why is this never executing?
               ctx.beginPath();
