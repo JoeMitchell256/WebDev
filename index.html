@@ -227,7 +227,7 @@
           xpos = xend;
         }
         
-        this.drawGridlines(ctx,xpos,xend,ytop,yend,i);
+        this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
         
         ctx.stroke();
         
@@ -246,7 +246,7 @@
         
         <!-- End new x-axis -->
       
-        this.drawXaxis(ctx,xpos,yend,xend,twopi,ycenter,i);
+        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
         
         
         this.drawYaxis(ctx,xpos,ytop,yend,ycenter,max,i,xend);
