@@ -144,7 +144,7 @@
             if(count == 1 || count = -1){
               ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }else{
-              ctx.fillText( counter+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+              ctx.fillText( count+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }
             
             
@@ -166,13 +166,14 @@
             ctx.moveTo(xstart+interval*(counter + 1) , ytop);
             ctx.lineTo(xstart+interval*(counter + 1) , yend);
             
-            if(counter == 1){
+            if(count == 1 || count == -1){
               ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }else{
-              ctx.fillText( counter+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
+              ctx.fillText( count+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }
             
             counter++;
+            count++;
             ctx.stroke();
           }
         }
