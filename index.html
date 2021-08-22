@@ -78,9 +78,9 @@
           }
           if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
             if(i >= 0){//This shift should be modulated based on the x limits
-              ctx.fillText(i, xpos + 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+              ctx.fillText(i, xpos + 15, yScalePos);//Further shift the y scale off of the y axis for visibility
             }else{
-              ctx.fillText(i, xpos + 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+              ctx.fillText(i, xpos + 25, yScalePos);//Further shift the y scale off of the y axis for visibility
             }
           }
           ctx.moveTo(xstart,yScalePos);
@@ -88,7 +88,12 @@
           ctx.stroke();
         }
         // Y-axis title
-        ctx.fillText("f(t)",xpos - 75,ycenter - 20);
+        if(xMin >= 1 && xMax >= 1){
+          ctx.fillText("f(t)",xpos - 75,ycenter - 20);
+        }
+        if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+          ctx.fillText("f(t)",xpos + 35,ycenter - 20);
+        }
         ctx.stroke();
         
         ctx.beginPath();
