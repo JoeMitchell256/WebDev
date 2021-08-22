@@ -69,9 +69,9 @@
             }
           }else{//In case of case 3, draw the y scale on the right side of the graph
             if(i >= 0){//This shift should be modulated based on the x limits
-              ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+              ctx.fillText(i, xpos + 15, yScalePos);//Further shift the y scale off of the y axis for visibility
             }else{
-              ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+              ctx.fillText(i, xpos + 25, yScalePos);//Further shift the y scale off of the y axis for visibility
             }
           }
           ctx.moveTo(xstart,yScalePos);
@@ -81,8 +81,9 @@
         // Y-axis title
         if(xMin >= 1 && xMax >= 1){
           ctx.fillText("f(t)",xpos - 75,ycenter - 20);
-        }
-        if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+        }else if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+          ctx.fillText("f(t)",xpos + 35,ycenter - 20);
+        }else{
           ctx.fillText("f(t)",xpos + 35,ycenter - 20);
         }
         ctx.stroke();
@@ -110,9 +111,10 @@
         
         if(min <= -1 && max <= -1){//Y-axis right justified   Case #1
           interval = xSize / (numVertical + 1); //Interval between each of the vertical axis
-        }
-        if(min >= 1 && max >= 1){//Y-axis left justified    Case #2
+        }else if(min >= 1 && max >= 1){//Y-axis left justified    Case #2
           interval = xSize / (numVertical + 1); //Interval between each of the vertical axis
+        }else{
+          interval = xSize / numVertical;//Have the interval be exact now that it cuts through 0.
         }
         
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
