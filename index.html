@@ -113,7 +113,8 @@
         
         var xSize = xend - xstart;
         var interval = 0;
-        var counter = min;
+        var counter = 0;
+        var count = xMin;
         
         interval = xSize / numVertical;
         
@@ -140,7 +141,7 @@
             ctx.moveTo(xstart+interval*(counter) , ytop);
             ctx.lineTo(xstart+interval*(counter) , yend);
             
-            if(counter == 1 || counter = -1){
+            if(count == 1 || count = -1){
               ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }else{
               ctx.fillText( counter+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
@@ -148,6 +149,7 @@
             
             
             counter++;
+            count++;
             ctx.stroke();
           }
         }
