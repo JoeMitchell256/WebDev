@@ -46,7 +46,7 @@
         // Y-axis line
         //ctx.lineWidth = 15;
         //ctx.strokeStyle = '#00FF00';
-        /*
+        
         var xpos = 0;
         
         if(xMin >= 1 && xMax >= 1){
@@ -55,7 +55,7 @@
         if(xMin <= -1 && xMax <= -1){
           xpos = xend;
         }
-        */
+        
         ctx.moveTo(xpos,ytop);
         ctx.lineTo(xpos,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
         
@@ -249,7 +249,7 @@
         this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
         
         
-        this.drawYaxis(ctx,xpos,ytop,yend,ycenter,max,i,xend);
+        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
         
         ctx.beginPath();
