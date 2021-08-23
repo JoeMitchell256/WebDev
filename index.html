@@ -147,8 +147,8 @@
             count++;
             ctx.stroke();
           }
-        }else if (min >= 1 && max >= 1){
-          for(i=Math.abs(min); i<(Math.abs(max)+1); i++){
+        }else if (min >= 1 && max >= 1){//This should start the first vertical gridline shifted to the right 1 interval to account for separation from the y axis
+          for(i=min; i<(max+1); i++){
             if( (i % 2) == 0){//Why is this never executing?
               ctx.beginPath();
               ctx.lineWidth = 8; //For 2 pi make the gridline thickness larger
