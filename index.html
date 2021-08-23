@@ -93,7 +93,7 @@
         //ctx.stroke();
       }
       
-      function drawGridlines(ctx,xstart,xend,ytop,yend,i){ <!-- This function holds all related gridlines creation -->
+      function drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop){ <!-- This function holds all related gridlines creation -->
         <!-- Add the y-axis gridlines here -->
         //This should be modular based on the limits provided by the user. So, whatever our x axis range is, should determine the placement of the axis
         
@@ -121,7 +121,100 @@
         //The ultimate goal of this is to make sure that all of the vertical axis can be fit in a way that the user can see the entire graph without the need for
         //a scroll bar
         
+        //We need a robust way to calculate the integrals for the fourier coefficients
+        
+        //General Form for a_0 START ************************************
+        //Average of the pulses
+        
+        var a0 = 0;
+        var m = 0;
+        for(m=0; m<pulsearray.length; m++){
+           a0 += parseInt(pulsearray[m]); //a_0 portion
+        }
+        
+        a0 = a0/(pulsearray.length); //division by 4 was not modular
+        
+        //General Form for a_0  END ************************************
+        
+        //General Form for a_n  START ************************************
+        
+        //No matter what the scenario, the integral always comes out the same. I will provide my handcalculations if necessary.
+        function a_n(upper,lower,s,n){
+          return ( ( Math.sin(upper*n) - Math.sin(lower*n) ) * parseInt(s) )/(Math.PI*n);
+        }
+        
+        var aN = 0;
+        
+        //General Form for a_n  END ************************************
+        
+        //General Form for b_n  START ************************************
+        
+        function b_n(upper,lower,s,n){//Same as a_n but now its cos instead of sin from handcalculations
+          return ( ( Math.cos(upper*n) - Math.cos(lower*n) ) * parseInt(s) )/(-1*Math.PI*n);
+        }
+        
+        var bN = 0;
+        
+        //General Form for b_n END **************************************
+        
+        //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
+        //Now we can combine all three for loops into one just below this line for simplicity:
+        
+        var z = 0;
+        var m = 0;
+        n = parseInt(n);
+        var p = 0;
+        var y = a0;
+        var aN = 0;
+        var bN = 0;
+        var maxP = 0;//This should change based on the case we are in
+        var minP = 0;//This should change based on the case we are in
+        
+        var coordinates = [];
+        var points = [];
+        var square = [];
+        
+        function storePointValues(xVal,yVal,array){
+          array.push({x: xVal, y: yVal});
+        }
+        
+        //Now that we have setup the fourier coefficients we can now enter in the proper for loop in order to come up with the points to plot the curves
+        
+        function squareYpos(p){//Based on the point value this function will return the y pulse value
+          return pulsearray[(p/interval)]; //Return the proper pulse value based on the point index
+        }//So between start and interval - 1 the pulse value will be for that interval
+        
         if (min <= -1 && max <= -1){//When min is -3 and max is -1, I expect that there will be vertical gridlines drawn from current y-axis position to the 
+          //Lets try to draw the square wave and fourier series for this scenario first
+          minP = xstart;//minP should be xstart since the y axis is shoved the right side of the graph
+          maxP = Math.abs(interval * (xMin+1)); //multiply by xMin + 1 because its guarenteed to have the highest absolute value and there is 1 less interval involved
+          for(i=minP; i<=maxP; i++){//Loop through all of the points for each pixel in the requested interval
+            for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
+                for(i = 0; i < pulsearray.length; i++){
+                  aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
+                  bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
+                }
+                y += aN*Math.cos((z+1)*(p+1)*(2*Math.PI/(2*interval))) + bN*Math.sin((z+1)*(p+1)*(2*Math.PI/(2*interval)));//Increment by 1/100 th instead of 1?
+                //Reset aN and bN in here?
+                aN = 0;
+                bN = 0;
+            }
+            if(i-xstart < interval*2){
+              storePointValues(i-xstart,y,points);//store 2pi worth of points
+            }
+            var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
+            storePointValues(i, y_pos, coordinates);
+            //Determine the pulse value based on the point index using the squareYpos function defined above
+            var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p) ) + ycenter;
+            storePointValues(i, square_pos, square);
+            y = a0;
+          }
+          
+          //Here is where we left off in our reconfiguring of the square wave and fourier series x limits modulation. I need to rewrite the code I already have working...
+          //This could take a few hours to get working properly
+          
+          
+          
           for(i=Math.abs(min); i>=(Math.abs(max)); i--){//second to last position.
             if( (i % 2) == 0){
               ctx.beginPath();
@@ -132,7 +225,7 @@
               ctx.lineWidth = 1; //Make pi line width equal to 1.
             }
             ctx.moveTo(xstart+interval*(counter) , ytop);
-            ctx.lineTo(xstart+interval*(counter) , yend);
+            ctx.lineTo(xstart+interval*(counter) , yend);//Since the first gridline covers from xstart to xstart + interval we want to fill in all of the points between these two gridlines
             
             if(count == 1){
               ctx.fillText( "\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
@@ -141,7 +234,6 @@
             }else{
               ctx.fillText( count+"\u03C0",xstart+interval*(counter),yend + 20); //Should label every pi only
             }
-            
             
             counter++;
             count++;
@@ -212,8 +304,8 @@
         var twopi = 450;
         xmin = parseFloat(xmin);
         xmax = parseFloat(xmax);
-        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));
-        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));
+        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));//Used to find the proper point index for the plot   ; We don't need this anymore... we know where the plot will start and end!
+        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));//Used to find the proper point index for the plot
         var i = 0;
         var pulsearray = pulsefunction.split(" ");//Take input as an array of values split on single space
       
@@ -283,7 +375,7 @@
           xpos = xstart;
         }
         
-        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
+        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop);
         twopi = interval*2; //Two pi should be defined by the interval calculated in drawGridlines
         
         ctx.stroke();
