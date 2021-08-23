@@ -470,7 +470,7 @@
         <!-- This section of the program will plot the points for the Fourier Series! -->
         <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
 
-        /*
+        
         //We need a robust way to calculate the integrals for the fourier coefficients
         
         //General Form for a_0 START ************************************
@@ -627,10 +627,10 @@
         //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
         error = error / 450;
         ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
-        */
         
-        this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
-        ctx.stroke();
+        
+        //this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
+        //ctx.stroke();
       }
       
       function getInputValue(){
