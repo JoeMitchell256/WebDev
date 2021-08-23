@@ -203,6 +203,118 @@
       }
       
       function drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop){ <!-- This function will graph the square wave and fourier series equations -->
+        
+      }
+      
+      function drawGraph(pulsefunction,c,ctx,n,xmin,xmax,fw,fc,sw,sc){//We need to know what attributes need to be passed to this function
+        //Calculate the point value for the xmin and xmax inputs
+        var twopi = 450;
+        xmin = parseFloat(xmin);
+        xmax = parseFloat(xmax);
+        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));
+        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));
+        var i = 0;
+        var pulsearray = pulsefunction.split(" ");//Take input as an array of values split on single space
+      
+        //In a for loop find the maximum/minimum value, use the absolute value so you'll only be using positive numbers as reference
+        
+        var max = -Infinity;
+        
+        for(i = 0; i < pulsearray.length; i++){
+          if(Math.abs(parseInt(pulsearray[i])) > max){
+            max = Math.abs(parseInt(pulsearray[i]));
+          }
+        }
+        
+        //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
+        //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
+        
+      
+        <!-- End of input reading -->
+        
+        c = document.getElementById("myCanvas");
+        ctx = c.getContext("2d");
+        
+        ctx.clearRect(0,0,1420,500);
+        ctx.beginPath(); //Apparently we need this line???
+        
+        //We should probably draw the y and x axis here, so that we can properly scale the graph first...
+        // I'd love to do this, but javascript wont let me...
+        
+        <!-- This is the start of the square wave -->
+        <!-- Any state transitions will require 3 lines, not 2. -->
+        <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
+        
+        <!-- Y-axis modular variables -->
+        
+        var ycenter = 250;
+        var ytop = 50;
+        var yend = 450;
+        
+        <!-- Y-axis modular variables end -->
+        
+        <!-- X-axis modular variables -->
+        
+        var xstart = 100;
+        var xend = 1300;
+        
+        <!-- X-axis modular variables end -->
+        
+        
+        //Style
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
+        <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
+
+        ctx.font = "30px Courier New";
+
+        //ctx.font = "30px Courier New";
+        
+        var xpos = 0;
+        
+        if(xMin >= 1 && xMax >= 1){
+          xpos = xstart;
+        }else if(xMin <= -1 && xMax <= -1){
+          xpos = xend;
+        }else{
+          xpos = xstart;
+        }
+        
+        this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
+        
+        ctx.stroke();
+        
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
+        <!-- End of Y-axis creation -->
+        
+        <!-- Draw new axis for both graphs -->
+        
+        <!-- New x-axis -->
+        
+        ctx.moveTo(xstart-50,ycenter);
+        ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
+        ctx.stroke();
+        
+        <!-- End new x-axis -->
+      
+        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
+        
+        
+        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
+        
+        
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        ctx.globalAlpha = 1.0;
+        <!-- This is where the points must be drawn!!!  -->
+        <!-- This section of the program will plot the points for the Fourier Series! -->
+        <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
+
         //We need a robust way to calculate the integrals for the fourier coefficients
         
         //General Form for a_0 START ************************************
@@ -359,117 +471,7 @@
         //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
         error = error / 450;
         ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
-      }
-      
-      function drawGraph(pulsefunction,c,ctx,n,xmin,xmax,fw,fc,sw,sc){//We need to know what attributes need to be passed to this function
-        //Calculate the point value for the xmin and xmax inputs
-        var twopi = 450;
-        xmin = parseFloat(xmin);
-        xmax = parseFloat(xmax);
-        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));
-        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));
-        var i = 0;
-        var pulsearray = pulsefunction.split(" ");//Take input as an array of values split on single space
-      
-        //In a for loop find the maximum/minimum value, use the absolute value so you'll only be using positive numbers as reference
         
-        var max = -Infinity;
-        
-        for(i = 0; i < pulsearray.length; i++){
-          if(Math.abs(parseInt(pulsearray[i])) > max){
-            max = Math.abs(parseInt(pulsearray[i]));
-          }
-        }
-        
-        //By this point we should know our y scale. Whatever our max value is we should have that be our max positive/negative range. 
-        //This might not work as I am expecting it to work, however thats alright we'll do it now, then change it later if so.
-        
-      
-        <!-- End of input reading -->
-        
-        c = document.getElementById("myCanvas");
-        ctx = c.getContext("2d");
-        
-        ctx.clearRect(0,0,1420,500);
-        ctx.beginPath(); //Apparently we need this line???
-        
-        //We should probably draw the y and x axis here, so that we can properly scale the graph first...
-        // I'd love to do this, but javascript wont let me...
-        
-        <!-- This is the start of the square wave -->
-        <!-- Any state transitions will require 3 lines, not 2. -->
-        <!-- pi/2 and 2pi/2 are tied to 5pi/2 and 6pi/2, and 9pi/2 and 10pi/2 -->
-        
-        <!-- Y-axis modular variables -->
-        
-        var ycenter = 250;
-        var ytop = 50;
-        var yend = 450;
-        
-        <!-- Y-axis modular variables end -->
-        
-        <!-- X-axis modular variables -->
-        
-        var xstart = 100;
-        var xend = 1300;
-        
-        <!-- X-axis modular variables end -->
-        
-        
-        //Style
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
-        
-        <!-- So this means that each interval is in 450 pixels, so the text will look like pi/2 , 2pi/2, 3pi/2, ... until 12pi/2 -->
-
-        ctx.font = "30px Courier New";
-
-        //ctx.font = "30px Courier New";
-        
-        var xpos = 0;
-        
-        if(xMin >= 1 && xMax >= 1){
-          xpos = xstart;
-        }else if(xMin <= -1 && xMax <= -1){
-          xpos = xend;
-        }else{
-          xpos = xstart;
-        }
-        
-        this.drawGridlines(ctx,xstart,xend,ytop,yend,i);
-        
-        ctx.stroke();
-        
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
-        
-        <!-- End of Y-axis creation -->
-        
-        <!-- Draw new axis for both graphs -->
-        
-        <!-- New x-axis -->
-        
-        ctx.moveTo(xstart-50,ycenter);
-        ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
-        ctx.stroke();
-        
-        <!-- End new x-axis -->
-      
-        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
-        
-        
-        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
-        
-        
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = '#000000';
-        ctx.globalAlpha = 1.0;
-        <!-- This is where the points must be drawn!!!  -->
-        <!-- This section of the program will plot the points for the Fourier Series! -->
-        <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
-
         
         this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
         
