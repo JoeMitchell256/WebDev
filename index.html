@@ -202,7 +202,7 @@
         // x-axis gridlines
       }
       
-      function drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend){ <!-- This function will graph the square wave and fourier series equations -->
+      function drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop){ <!-- This function will graph the square wave and fourier series equations -->
         //We need a robust way to calculate the integrals for the fourier coefficients
         
         //General Form for a_0 START ************************************
@@ -471,7 +471,7 @@
         <!-- For sake of simplicity I'm going to hold off on the "0000" and "1111" waves -->
 
         
-        this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend);//This should draw the functions the same way, but now condensed into a seperate function!
+        this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
         
       }
       
