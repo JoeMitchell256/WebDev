@@ -638,11 +638,11 @@
       }
       
       function addOneTerms(){
-        n = n+1;
+        n = parseInt(n)+1;
         this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
       function subOneTerms(){
-        n = n-1;
+        n = parseInt(n)-1;
         this.drawGraph(pulsefunction,c,ctx,n,xMin,xMax,FourierWidth,FourierColor,SquareWidth,SquareColor);//This function should draw the graphs input by the user to the canvas
       }
       
