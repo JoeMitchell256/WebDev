@@ -93,7 +93,7 @@
         //ctx.stroke();
       }
       
-      function drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop,fw,xMinPval,xMaxPval,sw,fc,sc){ <!-- This function holds all related gridlines creation -->
+      function drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop){ <!-- This function holds all related gridlines creation -->
         <!-- Add the y-axis gridlines here -->
         //This should be modular based on the limits provided by the user. So, whatever our x axis range is, should determine the placement of the axis
         
@@ -212,11 +212,7 @@
       
       function drawGraph(pulsefunction,c,ctx,n,xmin,xmax,fw,fc,sw,sc){//We need to know what attributes need to be passed to this function
         //Calculate the point value for the xmin and xmax inputs
-        var twopi = 450;
-        xmin = parseFloat(xmin);
-        xmax = parseFloat(xmax);
-        var xMinPval = Math.ceil(twopi/2 * parseFloat(xmin));//Used to find the proper point index for the plot   ; We don't need this anymore... we know where the plot will start and end!
-        var xMaxPval = Math.ceil(twopi/2 * parseFloat(xmax));//Used to find the proper point index for the plot
+        
         var i = 0;
         var pulsearray = pulsefunction.split(" ");//Take input as an array of values split on single space
       
@@ -286,8 +282,8 @@
           xpos = xstart;
         }
         
-        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop,fw,xMinPval,xMaxPval,sw,fc,sc);
-        twopi = interval*2; //Two pi should be defined by the interval calculated in drawGridlines
+        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop);
+        //twopi = interval*2; //Two pi should be defined by the interval calculated in drawGridlines
         
         ctx.stroke();
         
@@ -306,6 +302,9 @@
         
         <!-- End new x-axis -->
       
+        var twopi = interval*2;
+        
+        
         this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
         
         
@@ -323,11 +322,26 @@
         
         
         <!-- Function Code --------------------------------------------------==============================================================================>
+        //Theoretically the xmin should be the same for all 3 cases... It should be [xmin - floor(xmin)] * interval
+        
+        var xminPval = interval * Math.abs(parseFloat(xmin) - parseInt(xmin));//If parseInt works the way I think it does this should leave the decimal portion of the xmin value
+        var xmaxPval = interval * Math.abs(parseInt(xmin) - parseFloat(xmax));//Max should do the same but with 1 less interval (provided the -10,-1 example with only 9) Take the min and subtract from the max
+        
+        
+        var xMinPval = Math.ceil(xminPval);//Used to find the proper point index for the plot   ; We don't need this anymore... we know where the plot will start and end!
+        var xMaxPval = Math.ceil(xmaxPval);//Used to find the proper point index for the plot
+        
+        //Now xMinPval and xMaxPval should have the exact point value range to plot the points for all three conditions
+        
+        //******************************************************* x Limit modularity should be updated upto here *******************************************
+        
         
         //We need a robust way to calculate the integrals for the fourier coefficients
         
         //General Form for a_0 START ************************************
         //Average of the pulses
+        
+        //I need to sift through all of this code and figure out what needs changing!
         
         var a0 = 0;
         var m = 0;
@@ -357,6 +371,8 @@
         }
         
         var bN = 0;
+        
+        //******************** Nothing above needs changing right now ************************
         
         //General Form for b_n END **************************************
         
