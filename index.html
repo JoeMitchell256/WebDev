@@ -93,9 +93,11 @@
         //ctx.stroke();
       }
       
-      function drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop){ <!-- This function holds all related gridlines creation -->
+      function drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop,fw,xMinPval,xMaxPval,sw,fc,sc){ <!-- This function holds all related gridlines creation -->
         <!-- Add the y-axis gridlines here -->
         //This should be modular based on the limits provided by the user. So, whatever our x axis range is, should determine the placement of the axis
+        
+        ctx.fillText("n: "+n,1000,20);//This should display the current value of n to the screen
         
         var numVertical = Math.abs(Math.ceil(xMax) - Math.floor(xMin)); //This should be the total number of lines that are required for the modular graph creation.
         
@@ -213,7 +215,52 @@
           //Here is where we left off in our reconfiguring of the square wave and fourier series x limits modulation. I need to rewrite the code I already have working...
           //This could take a few hours to get working properly
           
+          //Fourier Series smooth line
+          ctx.beginPath();
+          ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
+          ctx.globalAlpha = 0.5; //Should make the fourier series transparent
+          ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
+          for(i=1; i<coordinates.length-2; i++){
+            if(i >= xMinPval && i < xMaxPval){
+              var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
+              var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
+              ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
+            }
+          }
+          ctx.strokeStyle = fc;//Color of the Fourier Series line '#775500'
+          if(i >= xMinPval && i < xMaxPval){
+            ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+          }
+          ctx.stroke();
+          //Square wave smooth line
+          ctx.beginPath();
+          ctx.lineWidth = parseInt(sw);//Line thickness of the square wave
+          ctx.globalAlpha = 0.5; //Should make the fourier series transparent
+          ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
+          for(i=1; i<square.length-2; i++){
+            if(i >= xMinPval && i < xMaxPval){
+              var xc = (square[i].x + square[i + 1].x) / 2;
+              var yc = (square[i].y + square[i + 1].y) / 2;
+              ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
+            }
+          }
+          ctx.strokeStyle = sc;//Different color for square wave '#00FF00'
+          if(i >= xMinPval && i < xMaxPval){
+            ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
+          }
+          ctx.stroke();
           
+          var error = 0;
+          for(p = 0; p < interval*2; p++){//We need to figure out which points belong to which pulse value
+            for(i = 0; i < pulsearray.length; i++){
+              if(p < (interval*2/pulsearray.length) * (i+1) && p > (interval*2/pulsearray.length) * i){//If the point lies inside pulse value index i:
+                error += Math.abs(points[p].y - pulsearray[i]); //Absolute value of the difference between the approximation and actual point value.
+              }
+            }
+          }
+          //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
+          error = error / interval*2;
+          ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
           
           for(i=Math.abs(min); i>=(Math.abs(max)); i--){//second to last position.
             if( (i % 2) == 0){
@@ -375,7 +422,7 @@
           xpos = xstart;
         }
         
-        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop);
+        var interval = this.drawGridlines(ctx,xstart,xend,ytop,yend,i,pulsearray,n,ycenter,ytop,fw,xMinPval,xMaxPval,sw,fc,sc);
         twopi = interval*2; //Two pi should be defined by the interval calculated in drawGridlines
         
         ctx.stroke();
@@ -411,7 +458,7 @@
 
         
         //We need a robust way to calculate the integrals for the fourier coefficients
-        
+        /*
         //General Form for a_0 START ************************************
         //Average of the pulses
         
@@ -540,10 +587,12 @@
               ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
             }
             ctx.stroke();
+            
         }
+        */
         //I need to save the image of the canvas before we draw the Fourier Series
         ctx.stroke();
-        drawFourierSeries(n);
+        //drawFourierSeries(n);
         //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
         //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
         //Center y coordinate: 250
@@ -555,6 +604,7 @@
         //m = (max-0)/(480-250)
         //y = ( (250-20) )/(0-max)  * y_ + 250
         <!-- Calculate the average error per period -->
+        /*
         var error = 0;
         for(p = 0; p < twopi; p++){//We need to figure out which points belong to which pulse value
           for(i = 0; i < pulsearray.length; i++){
@@ -566,7 +616,7 @@
         //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
         error = error / twopi;
         ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
-        
+        */
         
         //this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
         //ctx.stroke();
