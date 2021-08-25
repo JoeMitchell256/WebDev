@@ -388,7 +388,7 @@
         var bN = 0;
         var numPoints = 
         
-        var coordinates = [];
+        var coord = [];
         var points = [];
         var square = [];
         
@@ -431,7 +431,7 @@
                 storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xstart + 1*(p+1), y_pos, coordinates);
+              storePointValues(xstart + 1*(p+1), y_pos, coord);
               //Determine the pulse value based on the point index using the squareYpos function defined above
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
               storePointValues(xstart + 1*(p+1), square_pos, square);
@@ -441,17 +441,17 @@
             ctx.beginPath();
             ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
-            ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
-            for(i=1; i<coordinates.length-2; i++){
+            ctx.moveTo(coord[xMinPval].x, coord[xMinPval].y);//This moveTo is now robust
+            for(i=1; i<coord.length-2; i++){
               if(i >= xMinPval && i < xMaxPval){
-                var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
-                var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
-                ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
+                var xc = (coord[i].x + coord[i + 1].x) / 2;
+                var yc = (coord[i].y + coord[i + 1].y) / 2;
+                ctx.quadraticCurveTo(coord[i].x,coord[i].y,xc,yc);
               }
             }
             ctx.strokeStyle = fc;//Color of the Fourier Series line '#775500'
             if(i >= xMinPval && i < xMaxPval){
-              ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
+              ctx.quadraticCurveTo(coord[i].x,coord[i].y,coord[i+1].x,coord[i+1].y);
             }
             ctx.stroke();
             //Square wave smooth line
