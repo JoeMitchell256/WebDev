@@ -322,7 +322,7 @@
 
         
         
-        <!-- Function Code ------------------------------------------------->
+        <!-- Function Code --------------------------------------------------==============================================================================>
         
         //We need a robust way to calculate the integrals for the fourier coefficients
         
@@ -370,6 +370,7 @@
         var y = a0;
         var aN = 0;
         var bN = 0;
+        var numPoints = 
         
         var coordinates = [];
         var points = [];
@@ -484,7 +485,7 @@
         error = error / twopi;
         ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
         
-        <!-- Function Code END ------------------------------------------------------->
+        <!-- Function Code END -------------------------------------------------------================================================================>
         
         this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
         ctx.stroke();
