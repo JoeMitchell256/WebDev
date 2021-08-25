@@ -124,162 +124,6 @@
         //a scroll bar
         
         
-        var a0 = 0;
-        var m = 0;
-        for(m=0; m<pulsearray.length; m++){
-           a0 += parseInt(pulsearray[m]); //a_0 portion
-        }
-        
-        a0 = a0/(pulsearray.length); //division by 4 was not modular
-        
-        //General Form for a_0  END ************************************
-        
-        //General Form for a_n  START ************************************
-        
-        //No matter what the scenario, the integral always comes out the same. I will provide my handcalculations if necessary.
-        function a_n(upper,lower,s,n){
-          return ( ( Math.sin(upper*n) - Math.sin(lower*n) ) * parseInt(s) )/(Math.PI*n);
-        }
-        
-        var aN = 0;
-        
-        //General Form for a_n  END ************************************
-        
-        //General Form for b_n  START ************************************
-        
-        function b_n(upper,lower,s,n){//Same as a_n but now its cos instead of sin from handcalculations
-          return ( ( Math.cos(upper*n) - Math.cos(lower*n) ) * parseInt(s) )/(-1*Math.PI*n);
-        }
-        
-        var bN = 0;
-        
-        //General Form for b_n END **************************************
-        
-        //Overall f(t) = a_0 + a_n*cos(n*t) + b_n*sin(n*t)
-        //Now we can combine all three for loops into one just below this line for simplicity:
-        
-        var z = 0;
-        var m = 0;
-        n = parseInt(n);
-        var p = 0;
-        var y = a0;
-        var aN = 0;
-        var bN = 0;
-        
-        var coordinates = [];
-        var points = [];
-        var square = [];
-        
-        function storePointValues(xVal,yVal,array){
-          array.push({x: xVal, y: yVal});
-        }
-        
-        function squareYpos(p,twopi){//Based on the point value this function will return the y pulse value
-          //Take the point value and place the value in the range from 0 to twopi (450)
-          //Then determine if the point belongs to the particular pulsevalue
-          var pulse = p;
-          while(pulse > twopi){
-            pulse = pulse - twopi;
-          }
-          var squareY = 0;
-          for(i = 0; i < pulsearray.length; i++){
-            if(pulse < (i + 1) * twopi/pulsearray.length && pulse >= i * twopi/pulsearray.length){
-              squareY = pulsearray[i]; //Assign the proper pulse value based on the point index
-            }
-          }
-          return squareY; //Return the proper pulse value based on the point index
-        }
-        
-        //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
-        //We also do not know how many divisions we'll have, so we need to modulate it.
-        //We should make the below into a function, that way it wont take so long for us to display 
-        function drawFourierSeries(n){
-            for(p = 0; p<1350; p++){//1350
-              for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
-                for(i = 0; i < pulsearray.length; i++){
-                  aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
-                  bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
-                }
-                y += aN*Math.cos((z+1)*(p+1)*(2*Math.PI/twopi)) + bN*Math.sin((z+1)*(p+1)*(2*Math.PI/twopi));//Increment by 1/100 th instead of 1?
-                //Reset aN and bN in here?
-                aN = 0;
-                bN = 0;
-              }
-              if(p < twopi){
-                storePointValues(p,y,points);//store 2pi worth of points
-              }
-              var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xstart + 1*(p+1), y_pos, coordinates);
-              //Determine the pulse value based on the point index using the squareYpos function defined above
-              var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
-              storePointValues(xstart + 1*(p+1), square_pos, square);
-              y = a0;
-            }
-            //Fourier Series smooth line
-            ctx.beginPath();
-            ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
-            ctx.globalAlpha = 0.5; //Should make the fourier series transparent
-            ctx.moveTo(coordinates[xMinPval].x, coordinates[xMinPval].y);//This moveTo is now robust
-            for(i=1; i<coordinates.length-2; i++){
-              if(i >= xMinPval && i < xMaxPval){
-                var xc = (coordinates[i].x + coordinates[i + 1].x) / 2;
-                var yc = (coordinates[i].y + coordinates[i + 1].y) / 2;
-                ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,xc,yc);
-              }
-            }
-            ctx.strokeStyle = fc;//Color of the Fourier Series line '#775500'
-            if(i >= xMinPval && i < xMaxPval){
-              ctx.quadraticCurveTo(coordinates[i].x,coordinates[i].y,coordinates[i+1].x,coordinates[i+1].y);
-            }
-            ctx.stroke();
-            //Square wave smooth line
-            ctx.beginPath();
-            ctx.lineWidth = parseInt(sw);//Line thickness of the square wave
-            ctx.globalAlpha = 0.5; //Should make the fourier series transparent
-            ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
-            for(i=1; i<square.length-2; i++){
-              if(i >= xMinPval && i < xMaxPval){
-                var xc = (square[i].x + square[i + 1].x) / 2;
-                var yc = (square[i].y + square[i + 1].y) / 2;
-                ctx.quadraticCurveTo(square[i].x,square[i].y,xc,yc);
-              }
-            }
-            ctx.strokeStyle = sc;//Different color for square wave '#00FF00'
-            if(i >= xMinPval && i < xMaxPval){
-              ctx.quadraticCurveTo(square[i].x,square[i].y,square[i+1].x,square[i+1].y);
-            }
-            ctx.stroke();
-            
-        }
-        
-        //I need to save the image of the canvas before we draw the Fourier Series
-        ctx.stroke();
-        drawFourierSeries(n);
-        //To develop the y scale converter we need to know the position of the Max/Min element (This should be at the very top and/or very bottom of the y axis)
-        //Max y coordinate: 20  Min y coordinate: 480, so we should have 3 points really, Max, Min, center
-        //Center y coordinate: 250
-        
-        // (max,480) , (0,250)
-        //We can make a line like last time with 2 points the y intercept and the max for simplicity:
-        //y = mx + b
-        //b = 250
-        //m = (max-0)/(480-250)
-        //y = ( (250-20) )/(0-max)  * y_ + 250
-        <!-- Calculate the average error per period -->
-        
-        var error = 0;
-        for(p = 0; p < twopi; p++){//We need to figure out which points belong to which pulse value
-          for(i = 0; i < pulsearray.length; i++){
-            if(p < (twopi/pulsearray.length) * (i+1) && p > (twopi/pulsearray.length) * i){//If the point lies inside pulse value index i:
-              error += Math.abs(points[p].y - pulsearray[i]); //Absolute value of the difference between the approximation and actual point value.
-            }
-          }
-        }
-        //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
-        error = error / twopi;
-        ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
-        
-        
         
         if (min <= -1 && max <= -1){//When min is -3 and max is -1, I expect that there will be vertical gridlines drawn from current y-axis position to the 
           for(i=Math.abs(min); i>=(Math.abs(max)); i--){//second to last position.
@@ -478,7 +322,7 @@
 
         
         //We need a robust way to calculate the integrals for the fourier coefficients
-        /*
+        
         //General Form for a_0 START ************************************
         //Average of the pulses
         
@@ -636,7 +480,7 @@
         //Now to get the average we need to take the error and divide it by 450 because there are 450 points per period.
         error = error / twopi;
         ctx.fillText("Average error: " + error.toFixed(3),10,yend+60);//Place average error on the top left hand corner of canvas
-        */
+        
         
         //this.drawFunctions(ctx,n,pulsearray,i,twopi,xstart,xMinPval,xMaxPval,fw,sw,fc,sc,yend,ycenter,ytop);//This should draw the functions the same way, but now condensed into a seperate function!
         //ctx.stroke();
