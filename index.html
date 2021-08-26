@@ -410,7 +410,7 @@
         
         var xShift = 0;
         if(xmin >= 1 && xmax >= 1){
-          xShift = xstart + interval;
+          xShift = interval;
         }
         
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
@@ -432,10 +432,10 @@
                 storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xShift + 1*(p+1), y_pos, coord);
+              storePointValues(xShift + xstart + 1*(p+1), y_pos, coord);
               //Determine the pulse value based on the point index using the squareYpos function defined above
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
-              storePointValues(xShift + 1*(p+1), square_pos, square);
+              storePointValues(xShift + xstart + 1*(p+1), square_pos, square);
               y = a0;
             }
             //Fourier Series smooth line
