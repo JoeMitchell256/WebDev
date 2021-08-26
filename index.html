@@ -408,8 +408,9 @@
           return squareY; //Return the proper pulse value based on the point index
         }
         
-        if(xMin >= 1 && xMax >= 1){//This should account for the first case
+        if(parseInt(xmin) >= 1 && parseInt(xmax) >= 1){//This should account for the first case
           xMinPval = xMinPval + interval + xstart;// Add an interval to shift the functions to the right to account for the shift.
+          xMaxPval = xMaxPval + interval + xstart;
         }
         
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
