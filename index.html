@@ -392,17 +392,27 @@
         
         //******************************************************* x Limit modularity should be updated upto here *******************************************
         
-        function squareYpos(p){//Based on the point value this function will return the y pulse value
+        function squareYpos(p,twopi){//Based on the point value this function will return the y pulse value
           //Take the point value and place the value in the range from 0 to twopi (450)
           //Then determine if the point belongs to the particular pulsevalue
-          return pulsearray[p/interval]; //Return the proper pulse value based on the point index
+          var pulse = p;
+          while(pulse > twopi){
+            pulse = pulse - twopi;
+          }
+          var squareY = 0;
+          for(i = 0; i < pulsearray.length; i++){
+            if(pulse < (i + 1) * twopi/pulsearray.length && pulse >= i * twopi/pulsearray.length){
+              squareY = pulsearray[i]; //Assign the proper pulse value based on the point index
+            }
+          }
+          return squareY; //Return the proper pulse value based on the point index
         }
         
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
         //We also do not know how many divisions we'll have, so we need to modulate it.
         //We should make the below into a function, that way it wont take so long for us to display 
         function drawFourierSeries(n){
-            for(p = 0; p<1350; p++){//1350
+            for(p = xMinPval; p<xMaxPval; p++){//1350
               for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
                 for(i = 0; i < pulsearray.length; i++){
                   aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
@@ -417,10 +427,10 @@
                 storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xstart + 1*(p+1), y_pos, coord);
+              storePointValues(1*(p+1), y_pos, coord);
               //Determine the pulse value based on the point index using the squareYpos function defined above
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
-              storePointValues(xstart + 1*(p+1), square_pos, square);
+              storePointValues(1*(p+1), square_pos, square);
               y = a0;
             }
             //Fourier Series smooth line
