@@ -408,7 +408,7 @@
           return squareY; //Return the proper pulse value based on the point index
         }
         
-        if(xMin > 1 && xMax > 1){//This should account for the first case
+        if(xMin >= 1 && xMax >= 1){//This should account for the first case
           xMinPval = xMinPval + interval + xstart;// Add an interval to shift the functions to the right to account for the shift.
         }
         
