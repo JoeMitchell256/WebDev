@@ -432,10 +432,10 @@
                 storePointValues(p,y,points);//store 2pi worth of points
               }
               var y_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * y ) + ycenter;//This y scale converter should provide the proper canvas point y position for the point placement 
-              storePointValues(xstart + 1*(p+1), y_pos, coord);
+              storePointValues(xMinPval + 1*(p+1), y_pos, coord);
               //Determine the pulse value based on the point index using the squareYpos function defined above
               var square_pos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * squareYpos(p,twopi) ) + ycenter;
-              storePointValues(xstart + 1*(p+1), square_pos, square);
+              storePointValues(xMinPval + 1*(p+1), square_pos, square);
               y = a0;
             }
             //Fourier Series smooth line
