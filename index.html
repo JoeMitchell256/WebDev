@@ -48,9 +48,9 @@
         
         ctx.stroke();//I just want to color the line that is the y axis...
         
-        //ctx.beginPath();
-        //ctx.lineWidth = 1;
-        //ctx.strokeStyle = '#000000';
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
         
         // Y-axis scale and y-axis gridlines...
         var yScalePos = 0;
@@ -89,7 +89,7 @@
         }
         ctx.stroke();
         
-        //ctx.beginPath();
+        ctx.beginPath();
         //ctx.stroke();
       }
       
@@ -262,7 +262,7 @@
         
         
         //Style
-        //ctx.beginPath();
+        ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         
@@ -311,7 +311,7 @@
         this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
         
-        //ctx.beginPath();
+        ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         ctx.globalAlpha = 1.0;
@@ -439,7 +439,7 @@
               y = a0;
             }
             //Fourier Series smooth line
-            //ctx.beginPath();
+            ctx.beginPath();
             ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(coord[xMinPval].x, coord[xMinPval].y);//This moveTo is now robust
@@ -456,7 +456,7 @@
             }
             ctx.stroke();
             //Square wave smooth line
-            //ctx.beginPath();
+            ctx.beginPath();
             ctx.lineWidth = parseInt(sw);//Line thickness of the square wave
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
