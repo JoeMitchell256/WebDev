@@ -262,7 +262,7 @@
         
         
         //Style
-        ctx.beginPath();
+        //ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         
@@ -439,7 +439,7 @@
               y = a0;
             }
             //Fourier Series smooth line
-            ctx.beginPath();
+            //ctx.beginPath();
             ctx.lineWidth = parseInt(fw);//Line thickness of the Fourier Series
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(coord[xMinPval].x, coord[xMinPval].y);//This moveTo is now robust
@@ -456,7 +456,7 @@
             }
             ctx.stroke();
             //Square wave smooth line
-            ctx.beginPath();
+            //ctx.beginPath();
             ctx.lineWidth = parseInt(sw);//Line thickness of the square wave
             ctx.globalAlpha = 0.5; //Should make the fourier series transparent
             ctx.moveTo(square[xMinPval].x, square[xMinPval].y);
