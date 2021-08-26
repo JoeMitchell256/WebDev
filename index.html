@@ -311,7 +311,7 @@
         this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
         
         
-        ctx.beginPath();
+        //ctx.beginPath();
         ctx.lineWidth = 1;
         ctx.strokeStyle = '#000000';
         ctx.globalAlpha = 1.0;
@@ -490,7 +490,6 @@
         //y = ( (250-20) )/(0-max)  * y_ + 250
         <!-- Calculate the average error per period -->
         
-        ctx.beginPath();
         
         var error = 0;
         for(p = 0; p < twopi; p++){//We need to figure out which points belong to which pulse value
