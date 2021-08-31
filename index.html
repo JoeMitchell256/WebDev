@@ -413,18 +413,27 @@
           xShift = interval;
         }
         
+        p = parseFloat(xmin);
+        while(p > 2){
+          p = p - 2;
+        }
+        
+        p = p * interval; //This should fix the starting position for odd valued intervals
+        
+        var start = p;
+        
         //We need to make this modular. If we have 3 pulses, then we need to divide 2pi by 3, so instead of pi/2 we'll have pi/3's
         //We also do not know how many divisions we'll have, so we need to modulate it.
         //We should make the below into a function, that way it wont take so long for us to display 
         function drawFourierSeries(n){//This draws the Fourier Series as well as the Square Wave
-            for(p = xMinPval; p<xMaxPval; p++){//1350.  The minimum point value should represent t = xmin, then in increments of 1 / interval
+            for(p = start; p < start + (xMaxPval - xMinPval); p++){//1350.  The minimum point value should represent t = xmin, then in increments of 1 / interval
               for(z = 0; z<n; z++){ //Include n number of terms in the fourier series expansion
                 for(i = 0; i < pulsearray.length; i++){
                   aN += parseInt(pulsearray[i]) *  ( Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.sin( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( (z+1) * Math.PI );
                   bN += parseInt(pulsearray[i]) *  ( Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * (i+1) ) - Math.cos( ( (z+1) * 2 * Math.PI/(pulsearray.length) ) * i ) ) / ( -1 * (z+1) * Math.PI );
                 }
                 y += aN*Math.cos((z+1)*(p+1)*(2*Math.PI/twopi)) + bN*Math.sin((z+1)*(p+1)*(2*Math.PI/twopi));//Increment by 1/100 th instead of 1?
-                //Reset aN and bN in here?
+                //The value for p is wrong, it needs to start at
                 aN = 0;
                 bN = 0;
               }
