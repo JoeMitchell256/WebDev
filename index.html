@@ -307,10 +307,83 @@
         var twopi = interval*2;
         
         
-        this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
+        // X-axis Line
+        ctx.moveTo(xstart-50,ycenter);
+        ctx.lineTo(xend,ycenter); <!-- The total x-axis distance is from 1400-50 = 1350. If we want 3 periods we want to to take intervals of 1350/3 = 450 -->
+        
+        // X-axis title
+        ctx.fillText("t/T",(xstart + xend)/2,yend + 100);
+        
+        ctx.stroke();
         
         
-        this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
+        
+        //this.drawXaxis(ctx,xstart,yend,xend,twopi,ycenter,i);
+        
+        
+        //this.drawYaxis(ctx,xstart,ytop,yend,ycenter,max,i,xend);
+        
+        
+        var xpos = 0;
+        
+        if(xMin >= 1 && xMax >= 1){
+          xpos = xstart;
+        }else if(xMin <= -1 && xMax <= -1){
+          xpos = xend;
+        }else{
+          xpos = xstart;
+        }
+        
+        ctx.moveTo(xpos,ytop);
+        ctx.lineTo(xpos,yend); <!-- This needs to be placed based on the x limits provided by the user... -->
+        
+        ctx.stroke();//I just want to color the line that is the y axis...
+        
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        
+        // Y-axis scale and y-axis gridlines...
+        var yScalePos = 0;
+        for(i = -max; i < max+1; i++){ //Can I draw the x-scale here as well?
+          yScalePos = ( ( (ycenter-ytop)/(0-parseInt(max)) ) * i ) + ycenter;
+          if(xMin >= 1 && xMax >= 1){
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
+          }else if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos + 15, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos + 25, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
+          }else{//In case of case 3, draw the y scale on the right side of the graph
+            if(i >= 0){//This shift should be modulated based on the x limits
+              ctx.fillText(i, xpos - 30, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }else{
+              ctx.fillText(i, xpos - 50, yScalePos);//Further shift the y scale off of the y axis for visibility
+            }
+          }
+          ctx.moveTo(xstart,yScalePos);
+          ctx.lineTo(xend,yScalePos);
+          ctx.stroke();
+        }
+        // Y-axis title
+        if(xMin >= 1 && xMax >= 1){
+          ctx.fillText("f(t)",xpos - 75,ycenter - 20);
+        }else if(xMin <= -1 && xMax <= -1){//Shift y scale to the right
+          ctx.fillText("f(t)",xpos + 35,ycenter - 20);
+        }else{
+          ctx.fillText("f(t)",xpos - 75,ycenter - 20);
+        }
+        ctx.stroke();
+        
+        ctx.beginPath();
         
         
         ctx.beginPath();
