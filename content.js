@@ -7,7 +7,7 @@ var n, pulsefunction, xMin, xMax, FourierWidth, FourierColor, SquareWidth, Squar
 
 
 //Function 1: Will define the x axis of the graph only
-function drawGridlines(){
+function drawGridlines(ytop,yend,xstart,xend){
       //We should probably draw the y and x axis here, so that we can properly scale the graph first...
         // I'd love to do this, but javascript wont let me...
 
